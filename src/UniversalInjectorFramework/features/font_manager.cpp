@@ -295,8 +295,8 @@ void uif::features::font_manager::initialize()
 			}
 		}
 
-		hooks::hook_import(this, "EnumFontFamiliesExA", EnumFontFamiliesExAHook);
-		hooks::hook_import(this, "EnumFontFamiliesExW", EnumFontFamiliesExWHook);
+		hooks::hook_import(this, "EnumFontFamiliesExA", reinterpret_cast<void*>(EnumFontFamiliesExAHook));
+		hooks::hook_import(this, "EnumFontFamiliesExW", reinterpret_cast<void*>(EnumFontFamiliesExWHook));
 	}
 
 	if(config().value("/spoof_creation/enable"_json_pointer, false))
@@ -324,12 +324,12 @@ void uif::features::font_manager::initialize()
 			}
 		}
 
-		hooks::hook_import(this, "CreateFontA", CreateFontAHook);
-		hooks::hook_import(this, "CreateFontW", CreateFontWHook);
-		hooks::hook_import(this, "CreateFontIndirectA", CreateFontIndirectAHook);
-		hooks::hook_import(this, "CreateFontIndirectW", CreateFontIndirectWHook);
-		hooks::hook_import(this, "CreateFontIndirectExA", CreateFontIndirectExAHook);
-		hooks::hook_import(this, "CreateFontIndirectExW", CreateFontIndirectExWHook);
+		hooks::hook_import(this, "CreateFontA", reinterpret_cast<void*>(CreateFontAHook));
+		hooks::hook_import(this, "CreateFontW", reinterpret_cast<void*>(CreateFontWHook));
+		hooks::hook_import(this, "CreateFontIndirectA", reinterpret_cast<void*>(CreateFontIndirectAHook));
+		hooks::hook_import(this, "CreateFontIndirectW", reinterpret_cast<void*>(CreateFontIndirectWHook));
+		hooks::hook_import(this, "CreateFontIndirectExA", reinterpret_cast<void*>(CreateFontIndirectExAHook));
+		hooks::hook_import(this, "CreateFontIndirectExW", reinterpret_cast<void*>(CreateFontIndirectExWHook));
 	}
 }
 
@@ -337,17 +337,17 @@ void uif::features::font_manager::finalize()
 {
 	if(spoof_enumeration)
 	{
-		hooks::unhook_import(this, "EnumFontFamiliesExA", EnumFontFamiliesExAHook);
-		hooks::unhook_import(this, "EnumFontFamiliesExW", EnumFontFamiliesExWHook);
+		hooks::unhook_import(this, "EnumFontFamiliesExA", reinterpret_cast<void*>(EnumFontFamiliesExAHook));
+		hooks::unhook_import(this, "EnumFontFamiliesExW", reinterpret_cast<void*>(EnumFontFamiliesExWHook));
 	}
 
 	if(spoof_creation)
 	{
-		hooks::unhook_import(this, "CreateFontA", CreateFontAHook);
-		hooks::unhook_import(this, "CreateFontW", CreateFontWHook);
-		hooks::unhook_import(this, "CreateFontIndirectA", CreateFontIndirectAHook);
-		hooks::unhook_import(this, "CreateFontIndirectW", CreateFontIndirectWHook);
-		hooks::unhook_import(this, "CreateFontIndirectExA", CreateFontIndirectExAHook);
-		hooks::unhook_import(this, "CreateFontIndirectExW", CreateFontIndirectExWHook);
+		hooks::unhook_import(this, "CreateFontA", reinterpret_cast<void*>(CreateFontAHook));
+		hooks::unhook_import(this, "CreateFontW", reinterpret_cast<void*>(CreateFontWHook));
+		hooks::unhook_import(this, "CreateFontIndirectA", reinterpret_cast<void*>(CreateFontIndirectAHook));
+		hooks::unhook_import(this, "CreateFontIndirectW", reinterpret_cast<void*>(CreateFontIndirectWHook));
+		hooks::unhook_import(this, "CreateFontIndirectExA", reinterpret_cast<void*>(CreateFontIndirectExAHook));
+		hooks::unhook_import(this, "CreateFontIndirectExW", reinterpret_cast<void*>(CreateFontIndirectExWHook));
 	}
 }

@@ -85,18 +85,18 @@ void uif::features::character_substitution::initialize()
 
 	std::cout << *this << " Loaded " << substCount << " substitution characters\n";
 
-	hooks::hook_import(this, "TextOutA", TextOutAHook);
-	hooks::hook_import(this, "TextOutW", TextOutWHook);
-	hooks::hook_import(this, "GetGlyphOutlineA", GetGlyphOutlineAHook);
-	hooks::hook_import(this, "GetGlyphOutlineW", GetGlyphOutlineWHook);
+	hooks::hook_import(this, "TextOutA", reinterpret_cast<void*>(TextOutAHook));
+	hooks::hook_import(this, "TextOutW", reinterpret_cast<void*>(TextOutWHook));
+	hooks::hook_import(this, "GetGlyphOutlineA", reinterpret_cast<void*>(GetGlyphOutlineAHook));
+	hooks::hook_import(this, "GetGlyphOutlineW", reinterpret_cast<void*>(GetGlyphOutlineWHook));
 }
 
 void uif::features::character_substitution::finalize()
 {
-	hooks::unhook_import(this, "TextOutA", TextOutAHook);
-	hooks::unhook_import(this, "TextOutW", TextOutWHook);
-	hooks::unhook_import(this, "GetGlyphOutlineA", GetGlyphOutlineAHook);
-	hooks::unhook_import(this, "GetGlyphOutlineW", GetGlyphOutlineWHook);
+	hooks::unhook_import(this, "TextOutA", reinterpret_cast<void*>(TextOutAHook));
+	hooks::unhook_import(this, "TextOutW", reinterpret_cast<void*>(TextOutWHook));
+	hooks::unhook_import(this, "GetGlyphOutlineA", reinterpret_cast<void*>(GetGlyphOutlineAHook));
+	hooks::unhook_import(this, "GetGlyphOutlineW", reinterpret_cast<void*>(GetGlyphOutlineWHook));
 }
 
 void uif::features::character_substitution::substitute(wchar_t* text, int length) const

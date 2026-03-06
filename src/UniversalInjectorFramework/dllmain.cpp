@@ -15,7 +15,7 @@ extern "C" {
 		{
 			uif::utils::debug_log("Attach: unhook");
 			DetourTransactionBegin();
-			DetourDetach(&EntryPoint, EntryPointHook);
+			DetourDetach(&EntryPoint, reinterpret_cast<PVOID>(EntryPointHook));
 			DetourTransactionCommit();
 		}
 		uif::injector::instance().attach();
@@ -57,7 +57,7 @@ void InstallDelayedAttachHook()
 	uif::utils::debug_log("InstallDelayedAttachHook: transaction");
 	IsHooked = true;
 	DetourTransactionBegin();
-	DetourAttach(&EntryPoint, EntryPointHook);
+	DetourAttach(&EntryPoint, reinterpret_cast<PVOID>(EntryPointHook));
 	DetourTransactionCommit();
 	uif::utils::debug_log("InstallDelayedAttachHook: end");
 }

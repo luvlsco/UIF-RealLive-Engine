@@ -111,14 +111,14 @@ void uif::features::window_manager::initialize()
 		}
 	}
 
-	hooks::hook_import(this, "DefWindowProcA", DefWindowProcAHook);
-	hooks::hook_import(this, "DefWindowProcW", DefWindowProcWHook);
+	hooks::hook_import(this, "DefWindowProcA", reinterpret_cast<void*>(DefWindowProcAHook));
+	hooks::hook_import(this, "DefWindowProcW", reinterpret_cast<void*>(DefWindowProcWHook));
 }
 
 void uif::features::window_manager::finalize()
 {
-	hooks::unhook_import(this, "DefWindowProcA", DefWindowProcAHook);
-	hooks::unhook_import(this, "DefWindowProcW", DefWindowProcWHook);
+	hooks::unhook_import(this, "DefWindowProcA", reinterpret_cast<void*>(DefWindowProcAHook));
+	hooks::unhook_import(this, "DefWindowProcW", reinterpret_cast<void*>(DefWindowProcWHook));
 }
 
 std::wstring uif::features::window_manager::process_title(const std::string& title) const

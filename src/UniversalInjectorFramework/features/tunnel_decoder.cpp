@@ -60,18 +60,18 @@ void uif::features::tunnel_decoder::initialize()
 	mapping = encoding::utf8_to_utf16(config()["mapping"].get<std::string>());
 	std::cout << *this << " Loaded " << mapping.length() << " mapping characters\n";
 
-	hooks::hook_import(this, "TextOutA", TextOutAHook);
-	hooks::hook_import(this, "MultiByteToWideChar", MultiByteToWideCharHook);
-	hooks::hook_import(this, "GetTextExtentPoint32A", GetTextExtentPoint32AHook);
-	hooks::hook_import(this, "IsDBCSLeadByteEx", IsDBCSLeadByteExHook);
-	hooks::hook_import(this, "IsDBCSLeadByte", IsDBCSLeadByteHook);
+	hooks::hook_import(this, "TextOutA", reinterpret_cast<void*>(TextOutAHook));
+	hooks::hook_import(this, "MultiByteToWideChar", reinterpret_cast<void*>(MultiByteToWideCharHook));
+	hooks::hook_import(this, "GetTextExtentPoint32A", reinterpret_cast<void*>(GetTextExtentPoint32AHook));
+	hooks::hook_import(this, "IsDBCSLeadByteEx", reinterpret_cast<void*>(IsDBCSLeadByteExHook));
+	hooks::hook_import(this, "IsDBCSLeadByte", reinterpret_cast<void*>(IsDBCSLeadByteHook));
 }
 
 void uif::features::tunnel_decoder::finalize()
 {
-	hooks::unhook_import(this, "TextOutA", TextOutAHook);
-	hooks::unhook_import(this, "MultiByteToWideChar", MultiByteToWideCharHook);
-	hooks::unhook_import(this, "GetTextExtentPoint32A", GetTextExtentPoint32AHook);
-	hooks::unhook_import(this, "IsDBCSLeadByteEx", IsDBCSLeadByteExHook);
-	hooks::unhook_import(this, "IsDBCSLeadByte", IsDBCSLeadByteHook);
+	hooks::unhook_import(this, "TextOutA", reinterpret_cast<void*>(TextOutAHook));
+	hooks::unhook_import(this, "MultiByteToWideChar", reinterpret_cast<void*>(MultiByteToWideCharHook));
+	hooks::unhook_import(this, "GetTextExtentPoint32A", reinterpret_cast<void*>(GetTextExtentPoint32AHook));
+	hooks::unhook_import(this, "IsDBCSLeadByteEx", reinterpret_cast<void*>(IsDBCSLeadByteExHook));
+	hooks::unhook_import(this, "IsDBCSLeadByte", reinterpret_cast<void*>(IsDBCSLeadByteHook));
 }

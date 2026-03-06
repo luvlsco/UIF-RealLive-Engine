@@ -47,12 +47,12 @@ void uif::features::custom_feature::initialize()
 		exit_code = config()["exit_code"].get<int>();
 	}
 
-	hooks::hook_import(this, "ExitProcess", ExitProcessHook);
+	hooks::hook_import(this, "ExitProcess", reinterpret_cast<void*>(ExitProcessHook));
 }
 
 void uif::features::custom_feature::finalize()
 {
 	// Uninstall all of your hooks in here
 
-	hooks::unhook_import(this, "ExitProcess", ExitProcessHook);
+	hooks::unhook_import(this, "ExitProcess", reinterpret_cast<void*>(ExitProcessHook));
 }

@@ -164,14 +164,14 @@ void uif::features::file_monitor::initialize()
 		return;
 	}
 
-	hooks::hook_import(this, "CreateFileA", CreateFileAHook);
-	hooks::hook_import(this, "CreateFileW", CreateFileWHook);
+	hooks::hook_import(this, "CreateFileA", reinterpret_cast<void*>(CreateFileAHook));
+	hooks::hook_import(this, "CreateFileW", reinterpret_cast<void*>(CreateFileWHook));
 }
 
 void uif::features::file_monitor::finalize()
 {
-	hooks::unhook_import(this, "CreateFileA", CreateFileAHook);
-	hooks::unhook_import(this, "CreateFileW", CreateFileWHook);
+	hooks::unhook_import(this, "CreateFileA", reinterpret_cast<void*>(CreateFileAHook));
+	hooks::unhook_import(this, "CreateFileW", reinterpret_cast<void*>(CreateFileWHook));
 }
 
 std::wregex uif::features::file_monitor::build_path_pattern(const std::wstring& path)

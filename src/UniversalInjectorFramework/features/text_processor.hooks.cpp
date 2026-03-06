@@ -681,7 +681,7 @@ namespace uif::features
 #pragma endregion
 	}
 
-#define DEFINE_API_FUNC(func, ...) { api::func, #func, hook_##func, 0, __VA_ARGS__ }
+#define DEFINE_API_FUNC(func, ...) { api::func, #func, reinterpret_cast<void*>(hook_##func), 0, __VA_ARGS__ }
 #define DEFINE_API_MSG(msg, ...) { api::msg, #msg, nullptr, WM_##msg, __VA_ARGS__ }
 #define DEFINE_API_SET(name, ...) { name, create_mask({ __VA_ARGS__ }) }
 
