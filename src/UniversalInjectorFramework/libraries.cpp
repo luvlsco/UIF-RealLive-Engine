@@ -6,6 +6,7 @@
 #include "proxies/d3dcompiler_43.h"
 #include "proxies/d3dcompiler_47.h"
 #include "proxies/d3dx9_43.h"
+#include "proxies/dsound.h"
 #include "proxies/dxgi.h"
 #include "proxies/iphlpapi.h"
 #include "proxies/opengl32.h"
@@ -24,6 +25,7 @@ namespace uif::libraries
 		loaded += load_library_d3dcompiler_43();
 		loaded += load_library_d3dcompiler_47();
 		loaded += load_library_d3dx9_43();
+		loaded += load_library_dsound();
 		loaded += load_library_dxgi();
 		loaded += load_library_iphlpapi();
 		loaded += load_library_opengl32();
@@ -46,6 +48,7 @@ namespace uif::libraries
 		loaded += unload_library_d3dcompiler_43();
 		loaded += unload_library_d3dcompiler_47();
 		loaded += unload_library_d3dx9_43();
+		loaded += unload_library_dsound();
 		loaded += unload_library_dxgi();
 		loaded += unload_library_iphlpapi();
 		loaded += unload_library_opengl32();

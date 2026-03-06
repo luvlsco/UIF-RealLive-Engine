@@ -49,6 +49,14 @@
       <Configuration>d3dx9_43</Configuration>
       <Platform>x64</Platform>
     </ProjectConfiguration>
+    <ProjectConfiguration Include="dsound|Win32">
+      <Configuration>dsound</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="dsound|x64">
+      <Configuration>dsound</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
     <ProjectConfiguration Include="dxgi|Win32">
       <Configuration>dxgi</Configuration>
       <Platform>Win32</Platform>
@@ -196,6 +204,14 @@
       <ModuleDefinitionFile>proxies\d3dx9_43.def</ModuleDefinitionFile>
     </Link>
   </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)'=='dsound'">
+    <ClCompile>
+      <PreprocessorDefinitions>UIF_LIB_DSOUND;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <ModuleDefinitionFile>proxies\dsound.def</ModuleDefinitionFile>
+    </Link>
+  </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)'=='dxgi'">
     <ClCompile>
       <PreprocessorDefinitions>UIF_LIB_DXGI;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -268,6 +284,7 @@
     <ClInclude Include="proxies\d3dcompiler_43.h" />
     <ClInclude Include="proxies\d3dcompiler_47.h" />
     <ClInclude Include="proxies\d3dx9_43.h" />
+    <ClInclude Include="proxies\dsound.h" />
     <ClInclude Include="proxies\dxgi.h" />
     <ClInclude Include="proxies\iphlpapi.h" />
     <ClInclude Include="proxies\opengl32.h" />
@@ -305,6 +322,7 @@
     <ClCompile Include="proxies\d3dcompiler_43.cpp" />
     <ClCompile Include="proxies\d3dcompiler_47.cpp" />
     <ClCompile Include="proxies\d3dx9_43.cpp" />
+    <ClCompile Include="proxies\dsound.cpp" />
     <ClCompile Include="proxies\dxgi.cpp" />
     <ClCompile Include="proxies\iphlpapi.cpp" />
     <ClCompile Include="proxies\opengl32.cpp" />
@@ -323,6 +341,7 @@
     <None Include="proxies\d3dcompiler_43.def" />
     <None Include="proxies\d3dcompiler_47.def" />
     <None Include="proxies\d3dx9_43.def" />
+    <None Include="proxies\dsound.def" />
     <None Include="proxies\dxgi.def" />
     <None Include="proxies\iphlpapi.def" />
     <None Include="proxies\opengl32.def" />
