@@ -25,23 +25,25 @@ struct {
 	FARPROC VerQueryValueW;
 } version;
 
-void lib_version_GetFileVersionInfoA() { version.GetFileVersionInfoA(); }
-void lib_version_GetFileVersionInfoByHandle() { version.GetFileVersionInfoByHandle(); }
-void lib_version_GetFileVersionInfoExA() { version.GetFileVersionInfoExA(); }
-void lib_version_GetFileVersionInfoExW() { version.GetFileVersionInfoExW(); }
-void lib_version_GetFileVersionInfoSizeA() { version.GetFileVersionInfoSizeA(); }
-void lib_version_GetFileVersionInfoSizeExA() { version.GetFileVersionInfoSizeExA(); }
-void lib_version_GetFileVersionInfoSizeExW() { version.GetFileVersionInfoSizeExW(); }
-void lib_version_GetFileVersionInfoSizeW() { version.GetFileVersionInfoSizeW(); }
-void lib_version_GetFileVersionInfoW() { version.GetFileVersionInfoW(); }
-void lib_version_VerFindFileA() { version.VerFindFileA(); }
-void lib_version_VerFindFileW() { version.VerFindFileW(); }
-void lib_version_VerInstallFileA() { version.VerInstallFileA(); }
-void lib_version_VerInstallFileW() { version.VerInstallFileW(); }
-void lib_version_VerLanguageNameA() { version.VerLanguageNameA(); }
-void lib_version_VerLanguageNameW() { version.VerLanguageNameW(); }
-void lib_version_VerQueryValueA() { version.VerQueryValueA(); }
-void lib_version_VerQueryValueW() { version.VerQueryValueW(); }
+extern "C" {
+	void lib_version_GetFileVersionInfoA() { version.GetFileVersionInfoA(); }
+	void lib_version_GetFileVersionInfoByHandle() { version.GetFileVersionInfoByHandle(); }
+	void lib_version_GetFileVersionInfoExA() { version.GetFileVersionInfoExA(); }
+	void lib_version_GetFileVersionInfoExW() { version.GetFileVersionInfoExW(); }
+	void lib_version_GetFileVersionInfoSizeA() { version.GetFileVersionInfoSizeA(); }
+	void lib_version_GetFileVersionInfoSizeExA() { version.GetFileVersionInfoSizeExA(); }
+	void lib_version_GetFileVersionInfoSizeExW() { version.GetFileVersionInfoSizeExW(); }
+	void lib_version_GetFileVersionInfoSizeW() { version.GetFileVersionInfoSizeW(); }
+	void lib_version_GetFileVersionInfoW() { version.GetFileVersionInfoW(); }
+	void lib_version_VerFindFileA() { version.VerFindFileA(); }
+	void lib_version_VerFindFileW() { version.VerFindFileW(); }
+	void lib_version_VerInstallFileA() { version.VerInstallFileA(); }
+	void lib_version_VerInstallFileW() { version.VerInstallFileW(); }
+	void lib_version_VerLanguageNameA() { version.VerLanguageNameA(); }
+	void lib_version_VerLanguageNameW() { version.VerLanguageNameW(); }
+	void lib_version_VerQueryValueA() { version.VerQueryValueA(); }
+	void lib_version_VerQueryValueW() { version.VerQueryValueW(); }
+}
 
 bool load_library_version() {
 	version.dll = uif::injector::instance().load_real_library("version.dll");

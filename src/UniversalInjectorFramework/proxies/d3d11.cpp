@@ -59,57 +59,59 @@ struct {
 	FARPROC D3DPerformance_SetMarker;
 } d3d11;
 
-void lib_d3d11_D3D11CreateDeviceForD3D12() { d3d11.D3D11CreateDeviceForD3D12(); }
-void lib_d3d11_D3DKMTCloseAdapter() { d3d11.D3DKMTCloseAdapter(); }
-void lib_d3d11_D3DKMTDestroyAllocation() { d3d11.D3DKMTDestroyAllocation(); }
-void lib_d3d11_D3DKMTDestroyContext() { d3d11.D3DKMTDestroyContext(); }
-void lib_d3d11_D3DKMTDestroyDevice() { d3d11.D3DKMTDestroyDevice(); }
-void lib_d3d11_D3DKMTDestroySynchronizationObject() { d3d11.D3DKMTDestroySynchronizationObject(); }
-void lib_d3d11_D3DKMTPresent() { d3d11.D3DKMTPresent(); }
-void lib_d3d11_D3DKMTQueryAdapterInfo() { d3d11.D3DKMTQueryAdapterInfo(); }
-void lib_d3d11_D3DKMTSetDisplayPrivateDriverFormat() { d3d11.D3DKMTSetDisplayPrivateDriverFormat(); }
-void lib_d3d11_D3DKMTSignalSynchronizationObject() { d3d11.D3DKMTSignalSynchronizationObject(); }
-void lib_d3d11_D3DKMTUnlock() { d3d11.D3DKMTUnlock(); }
-void lib_d3d11_D3DKMTWaitForSynchronizationObject() { d3d11.D3DKMTWaitForSynchronizationObject(); }
-void lib_d3d11_EnableFeatureLevelUpgrade() { d3d11.EnableFeatureLevelUpgrade(); }
-void lib_d3d11_OpenAdapter10() { d3d11.OpenAdapter10(); }
-void lib_d3d11_OpenAdapter10_2() { d3d11.OpenAdapter10_2(); }
-void lib_d3d11_CreateDirect3D11DeviceFromDXGIDevice() { d3d11.CreateDirect3D11DeviceFromDXGIDevice(); }
-void lib_d3d11_CreateDirect3D11SurfaceFromDXGISurface() { d3d11.CreateDirect3D11SurfaceFromDXGISurface(); }
-void lib_d3d11_D3D11CoreCreateDevice() { d3d11.D3D11CoreCreateDevice(); }
-void lib_d3d11_D3D11CoreCreateLayeredDevice() { d3d11.D3D11CoreCreateLayeredDevice(); }
-void lib_d3d11_D3D11CoreGetLayeredDeviceSize() { d3d11.D3D11CoreGetLayeredDeviceSize(); }
-void lib_d3d11_D3D11CoreRegisterLayers() { d3d11.D3D11CoreRegisterLayers(); }
-void lib_d3d11_D3D11CreateDevice() { d3d11.D3D11CreateDevice(); }
-void lib_d3d11_D3D11CreateDeviceAndSwapChain() { d3d11.D3D11CreateDeviceAndSwapChain(); }
-void lib_d3d11_D3D11On12CreateDevice() { d3d11.D3D11On12CreateDevice(); }
-void lib_d3d11_D3DKMTCreateAllocation() { d3d11.D3DKMTCreateAllocation(); }
-void lib_d3d11_D3DKMTCreateContext() { d3d11.D3DKMTCreateContext(); }
-void lib_d3d11_D3DKMTCreateDevice() { d3d11.D3DKMTCreateDevice(); }
-void lib_d3d11_D3DKMTCreateSynchronizationObject() { d3d11.D3DKMTCreateSynchronizationObject(); }
-void lib_d3d11_D3DKMTEscape() { d3d11.D3DKMTEscape(); }
-void lib_d3d11_D3DKMTGetContextSchedulingPriority() { d3d11.D3DKMTGetContextSchedulingPriority(); }
-void lib_d3d11_D3DKMTGetDeviceState() { d3d11.D3DKMTGetDeviceState(); }
-void lib_d3d11_D3DKMTGetDisplayModeList() { d3d11.D3DKMTGetDisplayModeList(); }
-void lib_d3d11_D3DKMTGetMultisampleMethodList() { d3d11.D3DKMTGetMultisampleMethodList(); }
-void lib_d3d11_D3DKMTGetRuntimeData() { d3d11.D3DKMTGetRuntimeData(); }
-void lib_d3d11_D3DKMTGetSharedPrimaryHandle() { d3d11.D3DKMTGetSharedPrimaryHandle(); }
-void lib_d3d11_D3DKMTLock() { d3d11.D3DKMTLock(); }
-void lib_d3d11_D3DKMTOpenAdapterFromHdc() { d3d11.D3DKMTOpenAdapterFromHdc(); }
-void lib_d3d11_D3DKMTOpenResource() { d3d11.D3DKMTOpenResource(); }
-void lib_d3d11_D3DKMTQueryAllocationResidency() { d3d11.D3DKMTQueryAllocationResidency(); }
-void lib_d3d11_D3DKMTQueryResourceInfo() { d3d11.D3DKMTQueryResourceInfo(); }
-void lib_d3d11_D3DKMTRender() { d3d11.D3DKMTRender(); }
-void lib_d3d11_D3DKMTSetAllocationPriority() { d3d11.D3DKMTSetAllocationPriority(); }
-void lib_d3d11_D3DKMTSetContextSchedulingPriority() { d3d11.D3DKMTSetContextSchedulingPriority(); }
-void lib_d3d11_D3DKMTSetDisplayMode() { d3d11.D3DKMTSetDisplayMode(); }
-void lib_d3d11_D3DKMTSetGammaRamp() { d3d11.D3DKMTSetGammaRamp(); }
-void lib_d3d11_D3DKMTSetVidPnSourceOwner() { d3d11.D3DKMTSetVidPnSourceOwner(); }
-void lib_d3d11_D3DKMTWaitForVerticalBlankEvent() { d3d11.D3DKMTWaitForVerticalBlankEvent(); }
-void lib_d3d11_D3DPerformance_BeginEvent() { d3d11.D3DPerformance_BeginEvent(); }
-void lib_d3d11_D3DPerformance_EndEvent() { d3d11.D3DPerformance_EndEvent(); }
-void lib_d3d11_D3DPerformance_GetStatus() { d3d11.D3DPerformance_GetStatus(); }
-void lib_d3d11_D3DPerformance_SetMarker() { d3d11.D3DPerformance_SetMarker(); }
+extern "C" {
+	void lib_d3d11_D3D11CreateDeviceForD3D12() { d3d11.D3D11CreateDeviceForD3D12(); }
+	void lib_d3d11_D3DKMTCloseAdapter() { d3d11.D3DKMTCloseAdapter(); }
+	void lib_d3d11_D3DKMTDestroyAllocation() { d3d11.D3DKMTDestroyAllocation(); }
+	void lib_d3d11_D3DKMTDestroyContext() { d3d11.D3DKMTDestroyContext(); }
+	void lib_d3d11_D3DKMTDestroyDevice() { d3d11.D3DKMTDestroyDevice(); }
+	void lib_d3d11_D3DKMTDestroySynchronizationObject() { d3d11.D3DKMTDestroySynchronizationObject(); }
+	void lib_d3d11_D3DKMTPresent() { d3d11.D3DKMTPresent(); }
+	void lib_d3d11_D3DKMTQueryAdapterInfo() { d3d11.D3DKMTQueryAdapterInfo(); }
+	void lib_d3d11_D3DKMTSetDisplayPrivateDriverFormat() { d3d11.D3DKMTSetDisplayPrivateDriverFormat(); }
+	void lib_d3d11_D3DKMTSignalSynchronizationObject() { d3d11.D3DKMTSignalSynchronizationObject(); }
+	void lib_d3d11_D3DKMTUnlock() { d3d11.D3DKMTUnlock(); }
+	void lib_d3d11_D3DKMTWaitForSynchronizationObject() { d3d11.D3DKMTWaitForSynchronizationObject(); }
+	void lib_d3d11_EnableFeatureLevelUpgrade() { d3d11.EnableFeatureLevelUpgrade(); }
+	void lib_d3d11_OpenAdapter10() { d3d11.OpenAdapter10(); }
+	void lib_d3d11_OpenAdapter10_2() { d3d11.OpenAdapter10_2(); }
+	void lib_d3d11_CreateDirect3D11DeviceFromDXGIDevice() { d3d11.CreateDirect3D11DeviceFromDXGIDevice(); }
+	void lib_d3d11_CreateDirect3D11SurfaceFromDXGISurface() { d3d11.CreateDirect3D11SurfaceFromDXGISurface(); }
+	void lib_d3d11_D3D11CoreCreateDevice() { d3d11.D3D11CoreCreateDevice(); }
+	void lib_d3d11_D3D11CoreCreateLayeredDevice() { d3d11.D3D11CoreCreateLayeredDevice(); }
+	void lib_d3d11_D3D11CoreGetLayeredDeviceSize() { d3d11.D3D11CoreGetLayeredDeviceSize(); }
+	void lib_d3d11_D3D11CoreRegisterLayers() { d3d11.D3D11CoreRegisterLayers(); }
+	void lib_d3d11_D3D11CreateDevice() { d3d11.D3D11CreateDevice(); }
+	void lib_d3d11_D3D11CreateDeviceAndSwapChain() { d3d11.D3D11CreateDeviceAndSwapChain(); }
+	void lib_d3d11_D3D11On12CreateDevice() { d3d11.D3D11On12CreateDevice(); }
+	void lib_d3d11_D3DKMTCreateAllocation() { d3d11.D3DKMTCreateAllocation(); }
+	void lib_d3d11_D3DKMTCreateContext() { d3d11.D3DKMTCreateContext(); }
+	void lib_d3d11_D3DKMTCreateDevice() { d3d11.D3DKMTCreateDevice(); }
+	void lib_d3d11_D3DKMTCreateSynchronizationObject() { d3d11.D3DKMTCreateSynchronizationObject(); }
+	void lib_d3d11_D3DKMTEscape() { d3d11.D3DKMTEscape(); }
+	void lib_d3d11_D3DKMTGetContextSchedulingPriority() { d3d11.D3DKMTGetContextSchedulingPriority(); }
+	void lib_d3d11_D3DKMTGetDeviceState() { d3d11.D3DKMTGetDeviceState(); }
+	void lib_d3d11_D3DKMTGetDisplayModeList() { d3d11.D3DKMTGetDisplayModeList(); }
+	void lib_d3d11_D3DKMTGetMultisampleMethodList() { d3d11.D3DKMTGetMultisampleMethodList(); }
+	void lib_d3d11_D3DKMTGetRuntimeData() { d3d11.D3DKMTGetRuntimeData(); }
+	void lib_d3d11_D3DKMTGetSharedPrimaryHandle() { d3d11.D3DKMTGetSharedPrimaryHandle(); }
+	void lib_d3d11_D3DKMTLock() { d3d11.D3DKMTLock(); }
+	void lib_d3d11_D3DKMTOpenAdapterFromHdc() { d3d11.D3DKMTOpenAdapterFromHdc(); }
+	void lib_d3d11_D3DKMTOpenResource() { d3d11.D3DKMTOpenResource(); }
+	void lib_d3d11_D3DKMTQueryAllocationResidency() { d3d11.D3DKMTQueryAllocationResidency(); }
+	void lib_d3d11_D3DKMTQueryResourceInfo() { d3d11.D3DKMTQueryResourceInfo(); }
+	void lib_d3d11_D3DKMTRender() { d3d11.D3DKMTRender(); }
+	void lib_d3d11_D3DKMTSetAllocationPriority() { d3d11.D3DKMTSetAllocationPriority(); }
+	void lib_d3d11_D3DKMTSetContextSchedulingPriority() { d3d11.D3DKMTSetContextSchedulingPriority(); }
+	void lib_d3d11_D3DKMTSetDisplayMode() { d3d11.D3DKMTSetDisplayMode(); }
+	void lib_d3d11_D3DKMTSetGammaRamp() { d3d11.D3DKMTSetGammaRamp(); }
+	void lib_d3d11_D3DKMTSetVidPnSourceOwner() { d3d11.D3DKMTSetVidPnSourceOwner(); }
+	void lib_d3d11_D3DKMTWaitForVerticalBlankEvent() { d3d11.D3DKMTWaitForVerticalBlankEvent(); }
+	void lib_d3d11_D3DPerformance_BeginEvent() { d3d11.D3DPerformance_BeginEvent(); }
+	void lib_d3d11_D3DPerformance_EndEvent() { d3d11.D3DPerformance_EndEvent(); }
+	void lib_d3d11_D3DPerformance_GetStatus() { d3d11.D3DPerformance_GetStatus(); }
+	void lib_d3d11_D3DPerformance_SetMarker() { d3d11.D3DPerformance_SetMarker(); }
+}
 
 bool load_library_d3d11() {
 	d3d11.dll = uif::injector::instance().load_real_library("d3d11.dll");

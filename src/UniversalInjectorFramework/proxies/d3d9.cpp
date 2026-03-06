@@ -31,29 +31,31 @@ struct {
 	FARPROC Direct3DCreate9Ex;
 } d3d9;
 
-void lib_d3d9_Ordinal16() { d3d9.Ordinal16(); }
-void lib_d3d9_Ordinal17() { d3d9.Ordinal17(); }
-void lib_d3d9_Ordinal18() { d3d9.Ordinal18(); }
-void lib_d3d9_Ordinal19() { d3d9.Ordinal19(); }
-void lib_d3d9_Direct3DCreate9On12() { d3d9.Direct3DCreate9On12(); }
-void lib_d3d9_Direct3DCreate9On12Ex() { d3d9.Direct3DCreate9On12Ex(); }
-void lib_d3d9_Ordinal22() { d3d9.Ordinal22(); }
-void lib_d3d9_Ordinal23() { d3d9.Ordinal23(); }
-void lib_d3d9_Direct3DShaderValidatorCreate9() { d3d9.Direct3DShaderValidatorCreate9(); }
-void lib_d3d9_PSGPError() { d3d9.PSGPError(); }
-void lib_d3d9_PSGPSampleTexture() { d3d9.PSGPSampleTexture(); }
-void lib_d3d9_D3DPERF_BeginEvent() { d3d9.D3DPERF_BeginEvent(); }
-void lib_d3d9_D3DPERF_EndEvent() { d3d9.D3DPERF_EndEvent(); }
-void lib_d3d9_D3DPERF_GetStatus() { d3d9.D3DPERF_GetStatus(); }
-void lib_d3d9_D3DPERF_QueryRepeatFrame() { d3d9.D3DPERF_QueryRepeatFrame(); }
-void lib_d3d9_D3DPERF_SetMarker() { d3d9.D3DPERF_SetMarker(); }
-void lib_d3d9_D3DPERF_SetOptions() { d3d9.D3DPERF_SetOptions(); }
-void lib_d3d9_D3DPERF_SetRegion() { d3d9.D3DPERF_SetRegion(); }
-void lib_d3d9_DebugSetLevel() { d3d9.DebugSetLevel(); }
-void lib_d3d9_DebugSetMute() { d3d9.DebugSetMute(); }
-void lib_d3d9_Direct3D9EnableMaximizedWindowedModeShim() { d3d9.Direct3D9EnableMaximizedWindowedModeShim(); }
-void lib_d3d9_Direct3DCreate9() { d3d9.Direct3DCreate9(); }
-void lib_d3d9_Direct3DCreate9Ex() { d3d9.Direct3DCreate9Ex(); }
+extern "C" {
+	void lib_d3d9_Ordinal16() { d3d9.Ordinal16(); }
+	void lib_d3d9_Ordinal17() { d3d9.Ordinal17(); }
+	void lib_d3d9_Ordinal18() { d3d9.Ordinal18(); }
+	void lib_d3d9_Ordinal19() { d3d9.Ordinal19(); }
+	void lib_d3d9_Direct3DCreate9On12() { d3d9.Direct3DCreate9On12(); }
+	void lib_d3d9_Direct3DCreate9On12Ex() { d3d9.Direct3DCreate9On12Ex(); }
+	void lib_d3d9_Ordinal22() { d3d9.Ordinal22(); }
+	void lib_d3d9_Ordinal23() { d3d9.Ordinal23(); }
+	void lib_d3d9_Direct3DShaderValidatorCreate9() { d3d9.Direct3DShaderValidatorCreate9(); }
+	void lib_d3d9_PSGPError() { d3d9.PSGPError(); }
+	void lib_d3d9_PSGPSampleTexture() { d3d9.PSGPSampleTexture(); }
+	void lib_d3d9_D3DPERF_BeginEvent() { d3d9.D3DPERF_BeginEvent(); }
+	void lib_d3d9_D3DPERF_EndEvent() { d3d9.D3DPERF_EndEvent(); }
+	void lib_d3d9_D3DPERF_GetStatus() { d3d9.D3DPERF_GetStatus(); }
+	void lib_d3d9_D3DPERF_QueryRepeatFrame() { d3d9.D3DPERF_QueryRepeatFrame(); }
+	void lib_d3d9_D3DPERF_SetMarker() { d3d9.D3DPERF_SetMarker(); }
+	void lib_d3d9_D3DPERF_SetOptions() { d3d9.D3DPERF_SetOptions(); }
+	void lib_d3d9_D3DPERF_SetRegion() { d3d9.D3DPERF_SetRegion(); }
+	void lib_d3d9_DebugSetLevel() { d3d9.DebugSetLevel(); }
+	void lib_d3d9_DebugSetMute() { d3d9.DebugSetMute(); }
+	void lib_d3d9_Direct3D9EnableMaximizedWindowedModeShim() { d3d9.Direct3D9EnableMaximizedWindowedModeShim(); }
+	void lib_d3d9_Direct3DCreate9() { d3d9.Direct3DCreate9(); }
+	void lib_d3d9_Direct3DCreate9Ex() { d3d9.Direct3DCreate9Ex(); }
+}
 
 bool load_library_d3d9() {
 	d3d9.dll = uif::injector::instance().load_real_library("d3d9.dll");

@@ -27,26 +27,27 @@ struct {
 	FARPROC DXGIReportAdapterConfiguration;
 } dxgi;
 
-void lib_dxgi_ApplyCompatResolutionQuirking() { dxgi.ApplyCompatResolutionQuirking(); }
-void lib_dxgi_CompatString() { dxgi.CompatString(); }
-void lib_dxgi_CompatValue() { dxgi.CompatValue(); }
-void lib_dxgi_DXGIDumpJournal() { dxgi.DXGIDumpJournal(); }
-void lib_dxgi_PIXBeginCapture() { dxgi.PIXBeginCapture(); }
-void lib_dxgi_PIXEndCapture() { dxgi.PIXEndCapture(); }
-void lib_dxgi_PIXGetCaptureState() { dxgi.PIXGetCaptureState(); }
-void lib_dxgi_SetAppCompatStringPointer() { dxgi.SetAppCompatStringPointer(); }
-void lib_dxgi_UpdateHMDEmulationStatus() { dxgi.UpdateHMDEmulationStatus(); }
-void lib_dxgi_CreateDXGIFactory1() { dxgi.CreateDXGIFactory1(); }
-void lib_dxgi_CreateDXGIFactory2() { dxgi.CreateDXGIFactory2(); }
-void lib_dxgi_CreateDXGIFactory() { dxgi.CreateDXGIFactory(); }
-void lib_dxgi_DXGID3D10CreateDevice() { dxgi.DXGID3D10CreateDevice(); }
-void lib_dxgi_DXGID3D10CreateLayeredDevice() { dxgi.DXGID3D10CreateLayeredDevice(); }
-void lib_dxgi_DXGID3D10GetLayeredDeviceSize() { dxgi.DXGID3D10GetLayeredDeviceSize(); }
-void lib_dxgi_DXGID3D10RegisterLayers() { dxgi.DXGID3D10RegisterLayers(); }
-void lib_dxgi_DXGIDeclareAdapterRemovalSupport() { dxgi.DXGIDeclareAdapterRemovalSupport(); }
-void lib_dxgi_DXGIGetDebugInterface1() { dxgi.DXGIGetDebugInterface1(); }
-void lib_dxgi_DXGIReportAdapterConfiguration() { dxgi.DXGIReportAdapterConfiguration(); }
-
+extern "C" {
+	void lib_dxgi_ApplyCompatResolutionQuirking() { dxgi.ApplyCompatResolutionQuirking(); }
+	void lib_dxgi_CompatString() { dxgi.CompatString(); }
+	void lib_dxgi_CompatValue() { dxgi.CompatValue(); }
+	void lib_dxgi_DXGIDumpJournal() { dxgi.DXGIDumpJournal(); }
+	void lib_dxgi_PIXBeginCapture() { dxgi.PIXBeginCapture(); }
+	void lib_dxgi_PIXEndCapture() { dxgi.PIXEndCapture(); }
+	void lib_dxgi_PIXGetCaptureState() { dxgi.PIXGetCaptureState(); }
+	void lib_dxgi_SetAppCompatStringPointer() { dxgi.SetAppCompatStringPointer(); }
+	void lib_dxgi_UpdateHMDEmulationStatus() { dxgi.UpdateHMDEmulationStatus(); }
+	void lib_dxgi_CreateDXGIFactory1() { dxgi.CreateDXGIFactory1(); }
+	void lib_dxgi_CreateDXGIFactory2() { dxgi.CreateDXGIFactory2(); }
+	void lib_dxgi_CreateDXGIFactory() { dxgi.CreateDXGIFactory(); }
+	void lib_dxgi_DXGID3D10CreateDevice() { dxgi.DXGID3D10CreateDevice(); }
+	void lib_dxgi_DXGID3D10CreateLayeredDevice() { dxgi.DXGID3D10CreateLayeredDevice(); }
+	void lib_dxgi_DXGID3D10GetLayeredDeviceSize() { dxgi.DXGID3D10GetLayeredDeviceSize(); }
+	void lib_dxgi_DXGID3D10RegisterLayers() { dxgi.DXGID3D10RegisterLayers(); }
+	void lib_dxgi_DXGIDeclareAdapterRemovalSupport() { dxgi.DXGIDeclareAdapterRemovalSupport(); }
+	void lib_dxgi_DXGIGetDebugInterface1() { dxgi.DXGIGetDebugInterface1(); }
+	void lib_dxgi_DXGIReportAdapterConfiguration() { dxgi.DXGIReportAdapterConfiguration(); }
+}
 bool load_library_dxgi() {
 	dxgi.dll = uif::injector::instance().load_real_library("dxgi.dll");
 	dxgi.ApplyCompatResolutionQuirking = GetProcAddress(dxgi.dll, "ApplyCompatResolutionQuirking");

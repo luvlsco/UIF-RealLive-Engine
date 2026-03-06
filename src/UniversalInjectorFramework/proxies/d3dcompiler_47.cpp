@@ -37,35 +37,37 @@ struct {
 	FARPROC D3DWriteBlobToFile;
 } d3dcompiler_47;
 
-void lib_d3dcompiler_47_D3DAssemble() { d3dcompiler_47.D3DAssemble(); }
-void lib_d3dcompiler_47_DebugSetMute() { d3dcompiler_47.DebugSetMute(); }
-void lib_d3dcompiler_47_D3DCompile2() { d3dcompiler_47.D3DCompile2(); }
-void lib_d3dcompiler_47_D3DCompile() { d3dcompiler_47.D3DCompile(); }
-void lib_d3dcompiler_47_D3DCompileFromFile() { d3dcompiler_47.D3DCompileFromFile(); }
-void lib_d3dcompiler_47_D3DCompressShaders() { d3dcompiler_47.D3DCompressShaders(); }
-void lib_d3dcompiler_47_D3DCreateBlob() { d3dcompiler_47.D3DCreateBlob(); }
-void lib_d3dcompiler_47_D3DCreateFunctionLinkingGraph() { d3dcompiler_47.D3DCreateFunctionLinkingGraph(); }
-void lib_d3dcompiler_47_D3DCreateLinker() { d3dcompiler_47.D3DCreateLinker(); }
-void lib_d3dcompiler_47_D3DDecompressShaders() { d3dcompiler_47.D3DDecompressShaders(); }
-void lib_d3dcompiler_47_D3DDisassemble10Effect() { d3dcompiler_47.D3DDisassemble10Effect(); }
-void lib_d3dcompiler_47_D3DDisassemble11Trace() { d3dcompiler_47.D3DDisassemble11Trace(); }
-void lib_d3dcompiler_47_D3DDisassemble() { d3dcompiler_47.D3DDisassemble(); }
-void lib_d3dcompiler_47_D3DDisassembleRegion() { d3dcompiler_47.D3DDisassembleRegion(); }
-void lib_d3dcompiler_47_D3DGetBlobPart() { d3dcompiler_47.D3DGetBlobPart(); }
-void lib_d3dcompiler_47_D3DGetDebugInfo() { d3dcompiler_47.D3DGetDebugInfo(); }
-void lib_d3dcompiler_47_D3DGetInputAndOutputSignatureBlob() { d3dcompiler_47.D3DGetInputAndOutputSignatureBlob(); }
-void lib_d3dcompiler_47_D3DGetInputSignatureBlob() { d3dcompiler_47.D3DGetInputSignatureBlob(); }
-void lib_d3dcompiler_47_D3DGetOutputSignatureBlob() { d3dcompiler_47.D3DGetOutputSignatureBlob(); }
-void lib_d3dcompiler_47_D3DGetTraceInstructionOffsets() { d3dcompiler_47.D3DGetTraceInstructionOffsets(); }
-void lib_d3dcompiler_47_D3DLoadModule() { d3dcompiler_47.D3DLoadModule(); }
-void lib_d3dcompiler_47_D3DPreprocess() { d3dcompiler_47.D3DPreprocess(); }
-void lib_d3dcompiler_47_D3DReadFileToBlob() { d3dcompiler_47.D3DReadFileToBlob(); }
-void lib_d3dcompiler_47_D3DReflect() { d3dcompiler_47.D3DReflect(); }
-void lib_d3dcompiler_47_D3DReflectLibrary() { d3dcompiler_47.D3DReflectLibrary(); }
-void lib_d3dcompiler_47_D3DReturnFailure1() { d3dcompiler_47.D3DReturnFailure1(); }
-void lib_d3dcompiler_47_D3DSetBlobPart() { d3dcompiler_47.D3DSetBlobPart(); }
-void lib_d3dcompiler_47_D3DStripShader() { d3dcompiler_47.D3DStripShader(); }
-void lib_d3dcompiler_47_D3DWriteBlobToFile() { d3dcompiler_47.D3DWriteBlobToFile(); }
+extern "C" {
+	void lib_d3dcompiler_47_D3DAssemble() { d3dcompiler_47.D3DAssemble(); }
+	void lib_d3dcompiler_47_DebugSetMute() { d3dcompiler_47.DebugSetMute(); }
+	void lib_d3dcompiler_47_D3DCompile2() { d3dcompiler_47.D3DCompile2(); }
+	void lib_d3dcompiler_47_D3DCompile() { d3dcompiler_47.D3DCompile(); }
+	void lib_d3dcompiler_47_D3DCompileFromFile() { d3dcompiler_47.D3DCompileFromFile(); }
+	void lib_d3dcompiler_47_D3DCompressShaders() { d3dcompiler_47.D3DCompressShaders(); }
+	void lib_d3dcompiler_47_D3DCreateBlob() { d3dcompiler_47.D3DCreateBlob(); }
+	void lib_d3dcompiler_47_D3DCreateFunctionLinkingGraph() { d3dcompiler_47.D3DCreateFunctionLinkingGraph(); }
+	void lib_d3dcompiler_47_D3DCreateLinker() { d3dcompiler_47.D3DCreateLinker(); }
+	void lib_d3dcompiler_47_D3DDecompressShaders() { d3dcompiler_47.D3DDecompressShaders(); }
+	void lib_d3dcompiler_47_D3DDisassemble10Effect() { d3dcompiler_47.D3DDisassemble10Effect(); }
+	void lib_d3dcompiler_47_D3DDisassemble11Trace() { d3dcompiler_47.D3DDisassemble11Trace(); }
+	void lib_d3dcompiler_47_D3DDisassemble() { d3dcompiler_47.D3DDisassemble(); }
+	void lib_d3dcompiler_47_D3DDisassembleRegion() { d3dcompiler_47.D3DDisassembleRegion(); }
+	void lib_d3dcompiler_47_D3DGetBlobPart() { d3dcompiler_47.D3DGetBlobPart(); }
+	void lib_d3dcompiler_47_D3DGetDebugInfo() { d3dcompiler_47.D3DGetDebugInfo(); }
+	void lib_d3dcompiler_47_D3DGetInputAndOutputSignatureBlob() { d3dcompiler_47.D3DGetInputAndOutputSignatureBlob(); }
+	void lib_d3dcompiler_47_D3DGetInputSignatureBlob() { d3dcompiler_47.D3DGetInputSignatureBlob(); }
+	void lib_d3dcompiler_47_D3DGetOutputSignatureBlob() { d3dcompiler_47.D3DGetOutputSignatureBlob(); }
+	void lib_d3dcompiler_47_D3DGetTraceInstructionOffsets() { d3dcompiler_47.D3DGetTraceInstructionOffsets(); }
+	void lib_d3dcompiler_47_D3DLoadModule() { d3dcompiler_47.D3DLoadModule(); }
+	void lib_d3dcompiler_47_D3DPreprocess() { d3dcompiler_47.D3DPreprocess(); }
+	void lib_d3dcompiler_47_D3DReadFileToBlob() { d3dcompiler_47.D3DReadFileToBlob(); }
+	void lib_d3dcompiler_47_D3DReflect() { d3dcompiler_47.D3DReflect(); }
+	void lib_d3dcompiler_47_D3DReflectLibrary() { d3dcompiler_47.D3DReflectLibrary(); }
+	void lib_d3dcompiler_47_D3DReturnFailure1() { d3dcompiler_47.D3DReturnFailure1(); }
+	void lib_d3dcompiler_47_D3DSetBlobPart() { d3dcompiler_47.D3DSetBlobPart(); }
+	void lib_d3dcompiler_47_D3DStripShader() { d3dcompiler_47.D3DStripShader(); }
+	void lib_d3dcompiler_47_D3DWriteBlobToFile() { d3dcompiler_47.D3DWriteBlobToFile(); }
+}
 
 bool load_library_d3dcompiler_47() {
 	d3dcompiler_47.dll = uif::injector::instance().load_real_library("d3dcompiler_47.dll");

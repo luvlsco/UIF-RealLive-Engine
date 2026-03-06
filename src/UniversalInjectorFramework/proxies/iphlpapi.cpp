@@ -321,319 +321,321 @@ struct {
 	FARPROC register_icmp;
 } iphlpapi;
 
-void lib_iphlpapi_AddIPAddress() { iphlpapi.AddIPAddress(); }
-void lib_iphlpapi_AllocateAndGetInterfaceInfoFromStack() { iphlpapi.AllocateAndGetInterfaceInfoFromStack(); }
-void lib_iphlpapi_AllocateAndGetIpAddrTableFromStack() { iphlpapi.AllocateAndGetIpAddrTableFromStack(); }
-void lib_iphlpapi_CancelIPChangeNotify() { iphlpapi.CancelIPChangeNotify(); }
-void lib_iphlpapi_CancelIfTimestampConfigChange() { iphlpapi.CancelIfTimestampConfigChange(); }
-void lib_iphlpapi_CancelMibChangeNotify2() { iphlpapi.CancelMibChangeNotify2(); }
-void lib_iphlpapi_CaptureInterfaceHardwareCrossTimestamp() { iphlpapi.CaptureInterfaceHardwareCrossTimestamp(); }
-void lib_iphlpapi_CloseCompartment() { iphlpapi.CloseCompartment(); }
-void lib_iphlpapi_CloseGetIPPhysicalInterfaceForDestination() { iphlpapi.CloseGetIPPhysicalInterfaceForDestination(); }
-void lib_iphlpapi_ConvertCompartmentGuidToId() { iphlpapi.ConvertCompartmentGuidToId(); }
-void lib_iphlpapi_ConvertCompartmentIdToGuid() { iphlpapi.ConvertCompartmentIdToGuid(); }
-void lib_iphlpapi_ConvertGuidToStringA() { iphlpapi.ConvertGuidToStringA(); }
-void lib_iphlpapi_ConvertGuidToStringW() { iphlpapi.ConvertGuidToStringW(); }
-void lib_iphlpapi_ConvertInterfaceAliasToLuid() { iphlpapi.ConvertInterfaceAliasToLuid(); }
-void lib_iphlpapi_ConvertInterfaceGuidToLuid() { iphlpapi.ConvertInterfaceGuidToLuid(); }
-void lib_iphlpapi_ConvertInterfaceIndexToLuid() { iphlpapi.ConvertInterfaceIndexToLuid(); }
-void lib_iphlpapi_ConvertInterfaceLuidToAlias() { iphlpapi.ConvertInterfaceLuidToAlias(); }
-void lib_iphlpapi_ConvertInterfaceLuidToGuid() { iphlpapi.ConvertInterfaceLuidToGuid(); }
-void lib_iphlpapi_ConvertInterfaceLuidToIndex() { iphlpapi.ConvertInterfaceLuidToIndex(); }
-void lib_iphlpapi_ConvertInterfaceLuidToNameA() { iphlpapi.ConvertInterfaceLuidToNameA(); }
-void lib_iphlpapi_ConvertInterfaceLuidToNameW() { iphlpapi.ConvertInterfaceLuidToNameW(); }
-void lib_iphlpapi_ConvertInterfaceNameToLuidA() { iphlpapi.ConvertInterfaceNameToLuidA(); }
-void lib_iphlpapi_ConvertInterfaceNameToLuidW() { iphlpapi.ConvertInterfaceNameToLuidW(); }
-void lib_iphlpapi_ConvertInterfacePhysicalAddressToLuid() { iphlpapi.ConvertInterfacePhysicalAddressToLuid(); }
-void lib_iphlpapi_ConvertIpv4MaskToLength() { iphlpapi.ConvertIpv4MaskToLength(); }
-void lib_iphlpapi_ConvertLengthToIpv4Mask() { iphlpapi.ConvertLengthToIpv4Mask(); }
-void lib_iphlpapi_ConvertRemoteInterfaceAliasToLuid() { iphlpapi.ConvertRemoteInterfaceAliasToLuid(); }
-void lib_iphlpapi_ConvertRemoteInterfaceGuidToLuid() { iphlpapi.ConvertRemoteInterfaceGuidToLuid(); }
-void lib_iphlpapi_ConvertRemoteInterfaceIndexToLuid() { iphlpapi.ConvertRemoteInterfaceIndexToLuid(); }
-void lib_iphlpapi_ConvertRemoteInterfaceLuidToAlias() { iphlpapi.ConvertRemoteInterfaceLuidToAlias(); }
-void lib_iphlpapi_ConvertRemoteInterfaceLuidToGuid() { iphlpapi.ConvertRemoteInterfaceLuidToGuid(); }
-void lib_iphlpapi_ConvertRemoteInterfaceLuidToIndex() { iphlpapi.ConvertRemoteInterfaceLuidToIndex(); }
-void lib_iphlpapi_ConvertStringToGuidA() { iphlpapi.ConvertStringToGuidA(); }
-void lib_iphlpapi_ConvertStringToGuidW() { iphlpapi.ConvertStringToGuidW(); }
-void lib_iphlpapi_ConvertStringToInterfacePhysicalAddress() { iphlpapi.ConvertStringToInterfacePhysicalAddress(); }
-void lib_iphlpapi_CreateAnycastIpAddressEntry() { iphlpapi.CreateAnycastIpAddressEntry(); }
-void lib_iphlpapi_CreateCompartment() { iphlpapi.CreateCompartment(); }
-void lib_iphlpapi_CreateFlVirtualInterface() { iphlpapi.CreateFlVirtualInterface(); }
-void lib_iphlpapi_CreateIpForwardEntry() { iphlpapi.CreateIpForwardEntry(); }
-void lib_iphlpapi_CreateIpForwardEntry2() { iphlpapi.CreateIpForwardEntry2(); }
-void lib_iphlpapi_CreateIpNetEntry() { iphlpapi.CreateIpNetEntry(); }
-void lib_iphlpapi_CreateIpNetEntry2() { iphlpapi.CreateIpNetEntry2(); }
-void lib_iphlpapi_CreatePersistentTcpPortReservation() { iphlpapi.CreatePersistentTcpPortReservation(); }
-void lib_iphlpapi_CreatePersistentUdpPortReservation() { iphlpapi.CreatePersistentUdpPortReservation(); }
-void lib_iphlpapi_CreateProxyArpEntry() { iphlpapi.CreateProxyArpEntry(); }
-void lib_iphlpapi_CreateSortedAddressPairs() { iphlpapi.CreateSortedAddressPairs(); }
-void lib_iphlpapi_CreateUnicastIpAddressEntry() { iphlpapi.CreateUnicastIpAddressEntry(); }
-void lib_iphlpapi_DeleteAnycastIpAddressEntry() { iphlpapi.DeleteAnycastIpAddressEntry(); }
-void lib_iphlpapi_DeleteCompartment() { iphlpapi.DeleteCompartment(); }
-void lib_iphlpapi_DeleteFlVirtualInterface() { iphlpapi.DeleteFlVirtualInterface(); }
-void lib_iphlpapi_DeleteIPAddress() { iphlpapi.DeleteIPAddress(); }
-void lib_iphlpapi_DeleteIpForwardEntry() { iphlpapi.DeleteIpForwardEntry(); }
-void lib_iphlpapi_DeleteIpForwardEntry2() { iphlpapi.DeleteIpForwardEntry2(); }
-void lib_iphlpapi_DeleteIpNetEntry() { iphlpapi.DeleteIpNetEntry(); }
-void lib_iphlpapi_DeleteIpNetEntry2() { iphlpapi.DeleteIpNetEntry2(); }
-void lib_iphlpapi_DeletePersistentTcpPortReservation() { iphlpapi.DeletePersistentTcpPortReservation(); }
-void lib_iphlpapi_DeletePersistentUdpPortReservation() { iphlpapi.DeletePersistentUdpPortReservation(); }
-void lib_iphlpapi_DeleteProxyArpEntry() { iphlpapi.DeleteProxyArpEntry(); }
-void lib_iphlpapi_DeleteUnicastIpAddressEntry() { iphlpapi.DeleteUnicastIpAddressEntry(); }
-void lib_iphlpapi_DisableMediaSense() { iphlpapi.DisableMediaSense(); }
-void lib_iphlpapi_EnableRouter() { iphlpapi.EnableRouter(); }
-void lib_iphlpapi_FlushIpNetTable() { iphlpapi.FlushIpNetTable(); }
-void lib_iphlpapi_FlushIpNetTable2() { iphlpapi.FlushIpNetTable2(); }
-void lib_iphlpapi_FlushIpPathTable() { iphlpapi.FlushIpPathTable(); }
-void lib_iphlpapi_FreeDnsSettings() { iphlpapi.FreeDnsSettings(); }
-void lib_iphlpapi_FreeInterfaceDnsSettings() { iphlpapi.FreeInterfaceDnsSettings(); }
-void lib_iphlpapi_FreeMibTable() { iphlpapi.FreeMibTable(); }
-void lib_iphlpapi_GetAdapterIndex() { iphlpapi.GetAdapterIndex(); }
-void lib_iphlpapi_GetAdapterOrderMap() { iphlpapi.GetAdapterOrderMap(); }
-void lib_iphlpapi_GetAdaptersAddresses() { iphlpapi.GetAdaptersAddresses(); }
-void lib_iphlpapi_GetAdaptersInfo() { iphlpapi.GetAdaptersInfo(); }
-void lib_iphlpapi_GetAnycastIpAddressEntry() { iphlpapi.GetAnycastIpAddressEntry(); }
-void lib_iphlpapi_GetAnycastIpAddressTable() { iphlpapi.GetAnycastIpAddressTable(); }
-void lib_iphlpapi_GetBestInterface() { iphlpapi.GetBestInterface(); }
-void lib_iphlpapi_GetBestInterfaceEx() { iphlpapi.GetBestInterfaceEx(); }
-void lib_iphlpapi_GetBestRoute() { iphlpapi.GetBestRoute(); }
-void lib_iphlpapi_GetBestRoute2() { iphlpapi.GetBestRoute2(); }
-void lib_iphlpapi_GetCurrentThreadCompartmentId() { iphlpapi.GetCurrentThreadCompartmentId(); }
-void lib_iphlpapi_GetCurrentThreadCompartmentScope() { iphlpapi.GetCurrentThreadCompartmentScope(); }
-void lib_iphlpapi_GetDefaultCompartmentId() { iphlpapi.GetDefaultCompartmentId(); }
-void lib_iphlpapi_GetDnsSettings() { iphlpapi.GetDnsSettings(); }
-void lib_iphlpapi_GetExtendedTcpTable() { iphlpapi.GetExtendedTcpTable(); }
-void lib_iphlpapi_GetExtendedUdpTable() { iphlpapi.GetExtendedUdpTable(); }
-void lib_iphlpapi_GetFlVirtualInterface() { iphlpapi.GetFlVirtualInterface(); }
-void lib_iphlpapi_GetFlVirtualInterfaceTable() { iphlpapi.GetFlVirtualInterfaceTable(); }
-void lib_iphlpapi_GetFriendlyIfIndex() { iphlpapi.GetFriendlyIfIndex(); }
-void lib_iphlpapi_GetIcmpStatistics() { iphlpapi.GetIcmpStatistics(); }
-void lib_iphlpapi_GetIcmpStatisticsEx() { iphlpapi.GetIcmpStatisticsEx(); }
-void lib_iphlpapi_GetIfEntry() { iphlpapi.GetIfEntry(); }
-void lib_iphlpapi_GetIfEntry2() { iphlpapi.GetIfEntry2(); }
-void lib_iphlpapi_GetIfEntry2Ex() { iphlpapi.GetIfEntry2Ex(); }
-void lib_iphlpapi_GetIfStackTable() { iphlpapi.GetIfStackTable(); }
-void lib_iphlpapi_GetIfTable() { iphlpapi.GetIfTable(); }
-void lib_iphlpapi_GetIfTable2() { iphlpapi.GetIfTable2(); }
-void lib_iphlpapi_GetIfTable2Ex() { iphlpapi.GetIfTable2Ex(); }
-void lib_iphlpapi_GetInterfaceActiveTimestampCapabilities() { iphlpapi.GetInterfaceActiveTimestampCapabilities(); }
-void lib_iphlpapi_GetInterfaceCompartmentId() { iphlpapi.GetInterfaceCompartmentId(); }
-void lib_iphlpapi_GetInterfaceCurrentTimestampCapabilities() { iphlpapi.GetInterfaceCurrentTimestampCapabilities(); }
-void lib_iphlpapi_GetInterfaceDnsSettings() { iphlpapi.GetInterfaceDnsSettings(); }
-void lib_iphlpapi_GetInterfaceHardwareTimestampCapabilities() { iphlpapi.GetInterfaceHardwareTimestampCapabilities(); }
-void lib_iphlpapi_GetInterfaceInfo() { iphlpapi.GetInterfaceInfo(); }
-void lib_iphlpapi_GetInterfaceSupportedTimestampCapabilities() { iphlpapi.GetInterfaceSupportedTimestampCapabilities(); }
-void lib_iphlpapi_GetInvertedIfStackTable() { iphlpapi.GetInvertedIfStackTable(); }
-void lib_iphlpapi_GetIpAddrTable() { iphlpapi.GetIpAddrTable(); }
-void lib_iphlpapi_GetIpErrorString() { iphlpapi.GetIpErrorString(); }
-void lib_iphlpapi_GetIpForwardEntry2() { iphlpapi.GetIpForwardEntry2(); }
-void lib_iphlpapi_GetIpForwardTable() { iphlpapi.GetIpForwardTable(); }
-void lib_iphlpapi_GetIpForwardTable2() { iphlpapi.GetIpForwardTable2(); }
-void lib_iphlpapi_GetIpInterfaceEntry() { iphlpapi.GetIpInterfaceEntry(); }
-void lib_iphlpapi_GetIpInterfaceTable() { iphlpapi.GetIpInterfaceTable(); }
-void lib_iphlpapi_GetIpNetEntry2() { iphlpapi.GetIpNetEntry2(); }
-void lib_iphlpapi_GetIpNetTable() { iphlpapi.GetIpNetTable(); }
-void lib_iphlpapi_GetIpNetTable2() { iphlpapi.GetIpNetTable2(); }
-void lib_iphlpapi_GetIpNetworkConnectionBandwidthEstimates() { iphlpapi.GetIpNetworkConnectionBandwidthEstimates(); }
-void lib_iphlpapi_GetIpPathEntry() { iphlpapi.GetIpPathEntry(); }
-void lib_iphlpapi_GetIpPathTable() { iphlpapi.GetIpPathTable(); }
-void lib_iphlpapi_GetIpStatistics() { iphlpapi.GetIpStatistics(); }
-void lib_iphlpapi_GetIpStatisticsEx() { iphlpapi.GetIpStatisticsEx(); }
-void lib_iphlpapi_GetJobCompartmentId() { iphlpapi.GetJobCompartmentId(); }
-void lib_iphlpapi_GetMulticastIpAddressEntry() { iphlpapi.GetMulticastIpAddressEntry(); }
-void lib_iphlpapi_GetMulticastIpAddressTable() { iphlpapi.GetMulticastIpAddressTable(); }
-void lib_iphlpapi_GetNetworkConnectivityHint() { iphlpapi.GetNetworkConnectivityHint(); }
-void lib_iphlpapi_GetNetworkConnectivityHintForInterface() { iphlpapi.GetNetworkConnectivityHintForInterface(); }
-void lib_iphlpapi_GetNetworkInformation() { iphlpapi.GetNetworkInformation(); }
-void lib_iphlpapi_GetNetworkParams() { iphlpapi.GetNetworkParams(); }
-void lib_iphlpapi_GetNumberOfInterfaces() { iphlpapi.GetNumberOfInterfaces(); }
-void lib_iphlpapi_GetOwnerModuleFromPidAndInfo() { iphlpapi.GetOwnerModuleFromPidAndInfo(); }
-void lib_iphlpapi_GetOwnerModuleFromTcp6Entry() { iphlpapi.GetOwnerModuleFromTcp6Entry(); }
-void lib_iphlpapi_GetOwnerModuleFromTcpEntry() { iphlpapi.GetOwnerModuleFromTcpEntry(); }
-void lib_iphlpapi_GetOwnerModuleFromUdp6Entry() { iphlpapi.GetOwnerModuleFromUdp6Entry(); }
-void lib_iphlpapi_GetOwnerModuleFromUdpEntry() { iphlpapi.GetOwnerModuleFromUdpEntry(); }
-void lib_iphlpapi_GetPerAdapterInfo() { iphlpapi.GetPerAdapterInfo(); }
-void lib_iphlpapi_GetPerTcp6ConnectionEStats() { iphlpapi.GetPerTcp6ConnectionEStats(); }
-void lib_iphlpapi_GetPerTcp6ConnectionStats() { iphlpapi.GetPerTcp6ConnectionStats(); }
-void lib_iphlpapi_GetPerTcpConnectionEStats() { iphlpapi.GetPerTcpConnectionEStats(); }
-void lib_iphlpapi_GetPerTcpConnectionStats() { iphlpapi.GetPerTcpConnectionStats(); }
-void lib_iphlpapi_GetRTTAndHopCount() { iphlpapi.GetRTTAndHopCount(); }
-void lib_iphlpapi_GetSessionCompartmentId() { iphlpapi.GetSessionCompartmentId(); }
-void lib_iphlpapi_GetTcp6Table() { iphlpapi.GetTcp6Table(); }
-void lib_iphlpapi_GetTcp6Table2() { iphlpapi.GetTcp6Table2(); }
-void lib_iphlpapi_GetTcpStatistics() { iphlpapi.GetTcpStatistics(); }
-void lib_iphlpapi_GetTcpStatisticsEx() { iphlpapi.GetTcpStatisticsEx(); }
-void lib_iphlpapi_GetTcpStatisticsEx2() { iphlpapi.GetTcpStatisticsEx2(); }
-void lib_iphlpapi_GetTcpTable() { iphlpapi.GetTcpTable(); }
-void lib_iphlpapi_GetTcpTable2() { iphlpapi.GetTcpTable2(); }
-void lib_iphlpapi_GetTeredoPort() { iphlpapi.GetTeredoPort(); }
-void lib_iphlpapi_GetUdp6Table() { iphlpapi.GetUdp6Table(); }
-void lib_iphlpapi_GetUdpStatistics() { iphlpapi.GetUdpStatistics(); }
-void lib_iphlpapi_GetUdpStatisticsEx() { iphlpapi.GetUdpStatisticsEx(); }
-void lib_iphlpapi_GetUdpStatisticsEx2() { iphlpapi.GetUdpStatisticsEx2(); }
-void lib_iphlpapi_GetUdpTable() { iphlpapi.GetUdpTable(); }
-void lib_iphlpapi_GetUniDirectionalAdapterInfo() { iphlpapi.GetUniDirectionalAdapterInfo(); }
-void lib_iphlpapi_GetUnicastIpAddressEntry() { iphlpapi.GetUnicastIpAddressEntry(); }
-void lib_iphlpapi_GetUnicastIpAddressTable() { iphlpapi.GetUnicastIpAddressTable(); }
-void lib_iphlpapi_GetWPAOACSupportLevel() { iphlpapi.GetWPAOACSupportLevel(); }
-void lib_iphlpapi_Icmp6CreateFile() { iphlpapi.Icmp6CreateFile(); }
-void lib_iphlpapi_Icmp6ParseReplies() { iphlpapi.Icmp6ParseReplies(); }
-void lib_iphlpapi_Icmp6SendEcho2() { iphlpapi.Icmp6SendEcho2(); }
-void lib_iphlpapi_IcmpCloseHandle() { iphlpapi.IcmpCloseHandle(); }
-void lib_iphlpapi_IcmpCreateFile() { iphlpapi.IcmpCreateFile(); }
-void lib_iphlpapi_IcmpParseReplies() { iphlpapi.IcmpParseReplies(); }
-void lib_iphlpapi_IcmpSendEcho() { iphlpapi.IcmpSendEcho(); }
-void lib_iphlpapi_IcmpSendEcho2() { iphlpapi.IcmpSendEcho2(); }
-void lib_iphlpapi_IcmpSendEcho2Ex() { iphlpapi.IcmpSendEcho2Ex(); }
-void lib_iphlpapi_InitializeCompartmentEntry() { iphlpapi.InitializeCompartmentEntry(); }
-void lib_iphlpapi_InitializeFlVirtualInterfaceEntry() { iphlpapi.InitializeFlVirtualInterfaceEntry(); }
-void lib_iphlpapi_InitializeIpForwardEntry() { iphlpapi.InitializeIpForwardEntry(); }
-void lib_iphlpapi_InitializeIpInterfaceEntry() { iphlpapi.InitializeIpInterfaceEntry(); }
-void lib_iphlpapi_InitializeUnicastIpAddressEntry() { iphlpapi.InitializeUnicastIpAddressEntry(); }
-void lib_iphlpapi_InternalCleanupPersistentStore() { iphlpapi.InternalCleanupPersistentStore(); }
-void lib_iphlpapi_InternalCreateAnycastIpAddressEntry() { iphlpapi.InternalCreateAnycastIpAddressEntry(); }
-void lib_iphlpapi_InternalCreateIpForwardEntry() { iphlpapi.InternalCreateIpForwardEntry(); }
-void lib_iphlpapi_InternalCreateIpForwardEntry2() { iphlpapi.InternalCreateIpForwardEntry2(); }
-void lib_iphlpapi_InternalCreateIpNetEntry() { iphlpapi.InternalCreateIpNetEntry(); }
-void lib_iphlpapi_InternalCreateIpNetEntry2() { iphlpapi.InternalCreateIpNetEntry2(); }
-void lib_iphlpapi_InternalCreateOrRefIpForwardEntry2() { iphlpapi.InternalCreateOrRefIpForwardEntry2(); }
-void lib_iphlpapi_InternalCreateUnicastIpAddressEntry() { iphlpapi.InternalCreateUnicastIpAddressEntry(); }
-void lib_iphlpapi_InternalDeleteAnycastIpAddressEntry() { iphlpapi.InternalDeleteAnycastIpAddressEntry(); }
-void lib_iphlpapi_InternalDeleteIpForwardEntry() { iphlpapi.InternalDeleteIpForwardEntry(); }
-void lib_iphlpapi_InternalDeleteIpForwardEntry2() { iphlpapi.InternalDeleteIpForwardEntry2(); }
-void lib_iphlpapi_InternalDeleteIpNetEntry() { iphlpapi.InternalDeleteIpNetEntry(); }
-void lib_iphlpapi_InternalDeleteIpNetEntry2() { iphlpapi.InternalDeleteIpNetEntry2(); }
-void lib_iphlpapi_InternalDeleteUnicastIpAddressEntry() { iphlpapi.InternalDeleteUnicastIpAddressEntry(); }
-void lib_iphlpapi_InternalFindInterfaceByAddress() { iphlpapi.InternalFindInterfaceByAddress(); }
-void lib_iphlpapi_InternalGetAnycastIpAddressEntry() { iphlpapi.InternalGetAnycastIpAddressEntry(); }
-void lib_iphlpapi_InternalGetAnycastIpAddressTable() { iphlpapi.InternalGetAnycastIpAddressTable(); }
-void lib_iphlpapi_InternalGetBoundTcp6EndpointTable() { iphlpapi.InternalGetBoundTcp6EndpointTable(); }
-void lib_iphlpapi_InternalGetBoundTcpEndpointTable() { iphlpapi.InternalGetBoundTcpEndpointTable(); }
-void lib_iphlpapi_InternalGetForwardIpTable2() { iphlpapi.InternalGetForwardIpTable2(); }
-void lib_iphlpapi_InternalGetIPPhysicalInterfaceForDestination() { iphlpapi.InternalGetIPPhysicalInterfaceForDestination(); }
-void lib_iphlpapi_InternalGetIfEntry2() { iphlpapi.InternalGetIfEntry2(); }
-void lib_iphlpapi_InternalGetIfTable() { iphlpapi.InternalGetIfTable(); }
-void lib_iphlpapi_InternalGetIfTable2() { iphlpapi.InternalGetIfTable2(); }
-void lib_iphlpapi_InternalGetIpAddrTable() { iphlpapi.InternalGetIpAddrTable(); }
-void lib_iphlpapi_InternalGetIpForwardEntry2() { iphlpapi.InternalGetIpForwardEntry2(); }
-void lib_iphlpapi_InternalGetIpForwardTable() { iphlpapi.InternalGetIpForwardTable(); }
-void lib_iphlpapi_InternalGetIpInterfaceEntry() { iphlpapi.InternalGetIpInterfaceEntry(); }
-void lib_iphlpapi_InternalGetIpInterfaceTable() { iphlpapi.InternalGetIpInterfaceTable(); }
-void lib_iphlpapi_InternalGetIpNetEntry2() { iphlpapi.InternalGetIpNetEntry2(); }
-void lib_iphlpapi_InternalGetIpNetTable() { iphlpapi.InternalGetIpNetTable(); }
-void lib_iphlpapi_InternalGetIpNetTable2() { iphlpapi.InternalGetIpNetTable2(); }
-void lib_iphlpapi_InternalGetMulticastIpAddressEntry() { iphlpapi.InternalGetMulticastIpAddressEntry(); }
-void lib_iphlpapi_InternalGetMulticastIpAddressTable() { iphlpapi.InternalGetMulticastIpAddressTable(); }
-void lib_iphlpapi_InternalGetRtcSlotInformation() { iphlpapi.InternalGetRtcSlotInformation(); }
-void lib_iphlpapi_InternalGetTcp6Table2() { iphlpapi.InternalGetTcp6Table2(); }
-void lib_iphlpapi_InternalGetTcp6TableWithOwnerModule() { iphlpapi.InternalGetTcp6TableWithOwnerModule(); }
-void lib_iphlpapi_InternalGetTcp6TableWithOwnerPid() { iphlpapi.InternalGetTcp6TableWithOwnerPid(); }
-void lib_iphlpapi_InternalGetTcpDynamicPortRange() { iphlpapi.InternalGetTcpDynamicPortRange(); }
-void lib_iphlpapi_InternalGetTcpTable() { iphlpapi.InternalGetTcpTable(); }
-void lib_iphlpapi_InternalGetTcpTable2() { iphlpapi.InternalGetTcpTable2(); }
-void lib_iphlpapi_InternalGetTcpTableEx() { iphlpapi.InternalGetTcpTableEx(); }
-void lib_iphlpapi_InternalGetTcpTableWithOwnerModule() { iphlpapi.InternalGetTcpTableWithOwnerModule(); }
-void lib_iphlpapi_InternalGetTcpTableWithOwnerPid() { iphlpapi.InternalGetTcpTableWithOwnerPid(); }
-void lib_iphlpapi_InternalGetTunnelPhysicalAdapter() { iphlpapi.InternalGetTunnelPhysicalAdapter(); }
-void lib_iphlpapi_InternalGetUdp6Table2() { iphlpapi.InternalGetUdp6Table2(); }
-void lib_iphlpapi_InternalGetUdp6TableWithOwnerModule() { iphlpapi.InternalGetUdp6TableWithOwnerModule(); }
-void lib_iphlpapi_InternalGetUdp6TableWithOwnerPid() { iphlpapi.InternalGetUdp6TableWithOwnerPid(); }
-void lib_iphlpapi_InternalGetUdpDynamicPortRange() { iphlpapi.InternalGetUdpDynamicPortRange(); }
-void lib_iphlpapi_InternalGetUdpTable() { iphlpapi.InternalGetUdpTable(); }
-void lib_iphlpapi_InternalGetUdpTable2() { iphlpapi.InternalGetUdpTable2(); }
-void lib_iphlpapi_InternalGetUdpTableEx() { iphlpapi.InternalGetUdpTableEx(); }
-void lib_iphlpapi_InternalGetUdpTableWithOwnerModule() { iphlpapi.InternalGetUdpTableWithOwnerModule(); }
-void lib_iphlpapi_InternalGetUdpTableWithOwnerPid() { iphlpapi.InternalGetUdpTableWithOwnerPid(); }
-void lib_iphlpapi_InternalGetUnicastIpAddressEntry() { iphlpapi.InternalGetUnicastIpAddressEntry(); }
-void lib_iphlpapi_InternalGetUnicastIpAddressTable() { iphlpapi.InternalGetUnicastIpAddressTable(); }
-void lib_iphlpapi_InternalIcmpCreateFileEx() { iphlpapi.InternalIcmpCreateFileEx(); }
-void lib_iphlpapi_InternalSetIfEntry() { iphlpapi.InternalSetIfEntry(); }
-void lib_iphlpapi_InternalSetIpForwardEntry() { iphlpapi.InternalSetIpForwardEntry(); }
-void lib_iphlpapi_InternalSetIpForwardEntry2() { iphlpapi.InternalSetIpForwardEntry2(); }
-void lib_iphlpapi_InternalSetIpInterfaceEntry() { iphlpapi.InternalSetIpInterfaceEntry(); }
-void lib_iphlpapi_InternalSetIpNetEntry() { iphlpapi.InternalSetIpNetEntry(); }
-void lib_iphlpapi_InternalSetIpNetEntry2() { iphlpapi.InternalSetIpNetEntry2(); }
-void lib_iphlpapi_InternalSetIpStats() { iphlpapi.InternalSetIpStats(); }
-void lib_iphlpapi_InternalSetTcpDynamicPortRange() { iphlpapi.InternalSetTcpDynamicPortRange(); }
-void lib_iphlpapi_InternalSetTcpEntry() { iphlpapi.InternalSetTcpEntry(); }
-void lib_iphlpapi_InternalSetTeredoPort() { iphlpapi.InternalSetTeredoPort(); }
-void lib_iphlpapi_InternalSetUdpDynamicPortRange() { iphlpapi.InternalSetUdpDynamicPortRange(); }
-void lib_iphlpapi_InternalSetUnicastIpAddressEntry() { iphlpapi.InternalSetUnicastIpAddressEntry(); }
-void lib_iphlpapi_IpReleaseAddress() { iphlpapi.IpReleaseAddress(); }
-void lib_iphlpapi_IpRenewAddress() { iphlpapi.IpRenewAddress(); }
-void lib_iphlpapi_LookupPersistentTcpPortReservation() { iphlpapi.LookupPersistentTcpPortReservation(); }
-void lib_iphlpapi_LookupPersistentUdpPortReservation() { iphlpapi.LookupPersistentUdpPortReservation(); }
-void lib_iphlpapi_NTPTimeToNTFileTime() { iphlpapi.NTPTimeToNTFileTime(); }
-void lib_iphlpapi_NTTimeToNTPTime() { iphlpapi.NTTimeToNTPTime(); }
-void lib_iphlpapi_NhGetGuidFromInterfaceName() { iphlpapi.NhGetGuidFromInterfaceName(); }
-void lib_iphlpapi_NhGetInterfaceDescriptionFromGuid() { iphlpapi.NhGetInterfaceDescriptionFromGuid(); }
-void lib_iphlpapi_NhGetInterfaceNameFromDeviceGuid() { iphlpapi.NhGetInterfaceNameFromDeviceGuid(); }
-void lib_iphlpapi_NhGetInterfaceNameFromGuid() { iphlpapi.NhGetInterfaceNameFromGuid(); }
-void lib_iphlpapi_NhpAllocateAndGetInterfaceInfoFromStack() { iphlpapi.NhpAllocateAndGetInterfaceInfoFromStack(); }
-void lib_iphlpapi_NotifyAddrChange() { iphlpapi.NotifyAddrChange(); }
-void lib_iphlpapi_NotifyCompartmentChange() { iphlpapi.NotifyCompartmentChange(); }
-void lib_iphlpapi_NotifyIfTimestampConfigChange() { iphlpapi.NotifyIfTimestampConfigChange(); }
-void lib_iphlpapi_NotifyIpInterfaceChange() { iphlpapi.NotifyIpInterfaceChange(); }
-void lib_iphlpapi_NotifyNetworkConnectivityHintChange() { iphlpapi.NotifyNetworkConnectivityHintChange(); }
-void lib_iphlpapi_NotifyRouteChange() { iphlpapi.NotifyRouteChange(); }
-void lib_iphlpapi_NotifyRouteChange2() { iphlpapi.NotifyRouteChange2(); }
-void lib_iphlpapi_NotifyStableUnicastIpAddressTable() { iphlpapi.NotifyStableUnicastIpAddressTable(); }
-void lib_iphlpapi_NotifyTeredoPortChange() { iphlpapi.NotifyTeredoPortChange(); }
-void lib_iphlpapi_NotifyUnicastIpAddressChange() { iphlpapi.NotifyUnicastIpAddressChange(); }
-void lib_iphlpapi_OpenCompartment() { iphlpapi.OpenCompartment(); }
-void lib_iphlpapi_ParseNetworkString() { iphlpapi.ParseNetworkString(); }
-void lib_iphlpapi_PfAddFiltersToInterface() { iphlpapi.PfAddFiltersToInterface(); }
-void lib_iphlpapi_PfAddGlobalFilterToInterface() { iphlpapi.PfAddGlobalFilterToInterface(); }
-void lib_iphlpapi_PfBindInterfaceToIPAddress() { iphlpapi.PfBindInterfaceToIPAddress(); }
-void lib_iphlpapi_PfBindInterfaceToIndex() { iphlpapi.PfBindInterfaceToIndex(); }
-void lib_iphlpapi_PfCreateInterface() { iphlpapi.PfCreateInterface(); }
-void lib_iphlpapi_PfDeleteInterface() { iphlpapi.PfDeleteInterface(); }
-void lib_iphlpapi_PfDeleteLog() { iphlpapi.PfDeleteLog(); }
-void lib_iphlpapi_PfGetInterfaceStatistics() { iphlpapi.PfGetInterfaceStatistics(); }
-void lib_iphlpapi_PfMakeLog() { iphlpapi.PfMakeLog(); }
-void lib_iphlpapi_PfRebindFilters() { iphlpapi.PfRebindFilters(); }
-void lib_iphlpapi_PfRemoveFilterHandles() { iphlpapi.PfRemoveFilterHandles(); }
-void lib_iphlpapi_PfRemoveFiltersFromInterface() { iphlpapi.PfRemoveFiltersFromInterface(); }
-void lib_iphlpapi_PfRemoveGlobalFilterFromInterface() { iphlpapi.PfRemoveGlobalFilterFromInterface(); }
-void lib_iphlpapi_PfSetLogBuffer() { iphlpapi.PfSetLogBuffer(); }
-void lib_iphlpapi_PfTestPacket() { iphlpapi.PfTestPacket(); }
-void lib_iphlpapi_PfUnBindInterface() { iphlpapi.PfUnBindInterface(); }
-void lib_iphlpapi_RegisterInterfaceTimestampConfigChange() { iphlpapi.RegisterInterfaceTimestampConfigChange(); }
-void lib_iphlpapi_ResolveIpNetEntry2() { iphlpapi.ResolveIpNetEntry2(); }
-void lib_iphlpapi_ResolveNeighbor() { iphlpapi.ResolveNeighbor(); }
-void lib_iphlpapi_RestoreMediaSense() { iphlpapi.RestoreMediaSense(); }
-void lib_iphlpapi_SendARP() { iphlpapi.SendARP(); }
-void lib_iphlpapi_SetAdapterIpAddress() { iphlpapi.SetAdapterIpAddress(); }
-void lib_iphlpapi_SetCurrentThreadCompartmentId() { iphlpapi.SetCurrentThreadCompartmentId(); }
-void lib_iphlpapi_SetCurrentThreadCompartmentScope() { iphlpapi.SetCurrentThreadCompartmentScope(); }
-void lib_iphlpapi_SetDnsSettings() { iphlpapi.SetDnsSettings(); }
-void lib_iphlpapi_SetFlVirtualInterface() { iphlpapi.SetFlVirtualInterface(); }
-void lib_iphlpapi_SetIfEntry() { iphlpapi.SetIfEntry(); }
-void lib_iphlpapi_SetInterfaceDnsSettings() { iphlpapi.SetInterfaceDnsSettings(); }
-void lib_iphlpapi_SetIpForwardEntry() { iphlpapi.SetIpForwardEntry(); }
-void lib_iphlpapi_SetIpForwardEntry2() { iphlpapi.SetIpForwardEntry2(); }
-void lib_iphlpapi_SetIpInterfaceEntry() { iphlpapi.SetIpInterfaceEntry(); }
-void lib_iphlpapi_SetIpNetEntry() { iphlpapi.SetIpNetEntry(); }
-void lib_iphlpapi_SetIpNetEntry2() { iphlpapi.SetIpNetEntry2(); }
-void lib_iphlpapi_SetIpStatistics() { iphlpapi.SetIpStatistics(); }
-void lib_iphlpapi_SetIpStatisticsEx() { iphlpapi.SetIpStatisticsEx(); }
-void lib_iphlpapi_SetIpTTL() { iphlpapi.SetIpTTL(); }
-void lib_iphlpapi_SetJobCompartmentId() { iphlpapi.SetJobCompartmentId(); }
-void lib_iphlpapi_SetNetworkInformation() { iphlpapi.SetNetworkInformation(); }
-void lib_iphlpapi_SetPerTcp6ConnectionEStats() { iphlpapi.SetPerTcp6ConnectionEStats(); }
-void lib_iphlpapi_SetPerTcp6ConnectionStats() { iphlpapi.SetPerTcp6ConnectionStats(); }
-void lib_iphlpapi_SetPerTcpConnectionEStats() { iphlpapi.SetPerTcpConnectionEStats(); }
-void lib_iphlpapi_SetPerTcpConnectionStats() { iphlpapi.SetPerTcpConnectionStats(); }
-void lib_iphlpapi_SetSessionCompartmentId() { iphlpapi.SetSessionCompartmentId(); }
-void lib_iphlpapi_SetTcpEntry() { iphlpapi.SetTcpEntry(); }
-void lib_iphlpapi_SetUnicastIpAddressEntry() { iphlpapi.SetUnicastIpAddressEntry(); }
-void lib_iphlpapi_UnenableRouter() { iphlpapi.UnenableRouter(); }
-void lib_iphlpapi_UnregisterInterfaceTimestampConfigChange() { iphlpapi.UnregisterInterfaceTimestampConfigChange(); }
-void lib_iphlpapi_do_echo_rep() { iphlpapi.do_echo_rep(); }
-void lib_iphlpapi_do_echo_req() { iphlpapi.do_echo_req(); }
-void lib_iphlpapi_if_indextoname() { iphlpapi.if_indextoname(); }
-void lib_iphlpapi_if_nametoindex() { iphlpapi.if_nametoindex(); }
-void lib_iphlpapi_register_icmp() { iphlpapi.register_icmp(); }
+extern "C" {
+	void lib_iphlpapi_AddIPAddress() { iphlpapi.AddIPAddress(); }
+	void lib_iphlpapi_AllocateAndGetInterfaceInfoFromStack() { iphlpapi.AllocateAndGetInterfaceInfoFromStack(); }
+	void lib_iphlpapi_AllocateAndGetIpAddrTableFromStack() { iphlpapi.AllocateAndGetIpAddrTableFromStack(); }
+	void lib_iphlpapi_CancelIPChangeNotify() { iphlpapi.CancelIPChangeNotify(); }
+	void lib_iphlpapi_CancelIfTimestampConfigChange() { iphlpapi.CancelIfTimestampConfigChange(); }
+	void lib_iphlpapi_CancelMibChangeNotify2() { iphlpapi.CancelMibChangeNotify2(); }
+	void lib_iphlpapi_CaptureInterfaceHardwareCrossTimestamp() { iphlpapi.CaptureInterfaceHardwareCrossTimestamp(); }
+	void lib_iphlpapi_CloseCompartment() { iphlpapi.CloseCompartment(); }
+	void lib_iphlpapi_CloseGetIPPhysicalInterfaceForDestination() { iphlpapi.CloseGetIPPhysicalInterfaceForDestination(); }
+	void lib_iphlpapi_ConvertCompartmentGuidToId() { iphlpapi.ConvertCompartmentGuidToId(); }
+	void lib_iphlpapi_ConvertCompartmentIdToGuid() { iphlpapi.ConvertCompartmentIdToGuid(); }
+	void lib_iphlpapi_ConvertGuidToStringA() { iphlpapi.ConvertGuidToStringA(); }
+	void lib_iphlpapi_ConvertGuidToStringW() { iphlpapi.ConvertGuidToStringW(); }
+	void lib_iphlpapi_ConvertInterfaceAliasToLuid() { iphlpapi.ConvertInterfaceAliasToLuid(); }
+	void lib_iphlpapi_ConvertInterfaceGuidToLuid() { iphlpapi.ConvertInterfaceGuidToLuid(); }
+	void lib_iphlpapi_ConvertInterfaceIndexToLuid() { iphlpapi.ConvertInterfaceIndexToLuid(); }
+	void lib_iphlpapi_ConvertInterfaceLuidToAlias() { iphlpapi.ConvertInterfaceLuidToAlias(); }
+	void lib_iphlpapi_ConvertInterfaceLuidToGuid() { iphlpapi.ConvertInterfaceLuidToGuid(); }
+	void lib_iphlpapi_ConvertInterfaceLuidToIndex() { iphlpapi.ConvertInterfaceLuidToIndex(); }
+	void lib_iphlpapi_ConvertInterfaceLuidToNameA() { iphlpapi.ConvertInterfaceLuidToNameA(); }
+	void lib_iphlpapi_ConvertInterfaceLuidToNameW() { iphlpapi.ConvertInterfaceLuidToNameW(); }
+	void lib_iphlpapi_ConvertInterfaceNameToLuidA() { iphlpapi.ConvertInterfaceNameToLuidA(); }
+	void lib_iphlpapi_ConvertInterfaceNameToLuidW() { iphlpapi.ConvertInterfaceNameToLuidW(); }
+	void lib_iphlpapi_ConvertInterfacePhysicalAddressToLuid() { iphlpapi.ConvertInterfacePhysicalAddressToLuid(); }
+	void lib_iphlpapi_ConvertIpv4MaskToLength() { iphlpapi.ConvertIpv4MaskToLength(); }
+	void lib_iphlpapi_ConvertLengthToIpv4Mask() { iphlpapi.ConvertLengthToIpv4Mask(); }
+	void lib_iphlpapi_ConvertRemoteInterfaceAliasToLuid() { iphlpapi.ConvertRemoteInterfaceAliasToLuid(); }
+	void lib_iphlpapi_ConvertRemoteInterfaceGuidToLuid() { iphlpapi.ConvertRemoteInterfaceGuidToLuid(); }
+	void lib_iphlpapi_ConvertRemoteInterfaceIndexToLuid() { iphlpapi.ConvertRemoteInterfaceIndexToLuid(); }
+	void lib_iphlpapi_ConvertRemoteInterfaceLuidToAlias() { iphlpapi.ConvertRemoteInterfaceLuidToAlias(); }
+	void lib_iphlpapi_ConvertRemoteInterfaceLuidToGuid() { iphlpapi.ConvertRemoteInterfaceLuidToGuid(); }
+	void lib_iphlpapi_ConvertRemoteInterfaceLuidToIndex() { iphlpapi.ConvertRemoteInterfaceLuidToIndex(); }
+	void lib_iphlpapi_ConvertStringToGuidA() { iphlpapi.ConvertStringToGuidA(); }
+	void lib_iphlpapi_ConvertStringToGuidW() { iphlpapi.ConvertStringToGuidW(); }
+	void lib_iphlpapi_ConvertStringToInterfacePhysicalAddress() { iphlpapi.ConvertStringToInterfacePhysicalAddress(); }
+	void lib_iphlpapi_CreateAnycastIpAddressEntry() { iphlpapi.CreateAnycastIpAddressEntry(); }
+	void lib_iphlpapi_CreateCompartment() { iphlpapi.CreateCompartment(); }
+	void lib_iphlpapi_CreateFlVirtualInterface() { iphlpapi.CreateFlVirtualInterface(); }
+	void lib_iphlpapi_CreateIpForwardEntry() { iphlpapi.CreateIpForwardEntry(); }
+	void lib_iphlpapi_CreateIpForwardEntry2() { iphlpapi.CreateIpForwardEntry2(); }
+	void lib_iphlpapi_CreateIpNetEntry() { iphlpapi.CreateIpNetEntry(); }
+	void lib_iphlpapi_CreateIpNetEntry2() { iphlpapi.CreateIpNetEntry2(); }
+	void lib_iphlpapi_CreatePersistentTcpPortReservation() { iphlpapi.CreatePersistentTcpPortReservation(); }
+	void lib_iphlpapi_CreatePersistentUdpPortReservation() { iphlpapi.CreatePersistentUdpPortReservation(); }
+	void lib_iphlpapi_CreateProxyArpEntry() { iphlpapi.CreateProxyArpEntry(); }
+	void lib_iphlpapi_CreateSortedAddressPairs() { iphlpapi.CreateSortedAddressPairs(); }
+	void lib_iphlpapi_CreateUnicastIpAddressEntry() { iphlpapi.CreateUnicastIpAddressEntry(); }
+	void lib_iphlpapi_DeleteAnycastIpAddressEntry() { iphlpapi.DeleteAnycastIpAddressEntry(); }
+	void lib_iphlpapi_DeleteCompartment() { iphlpapi.DeleteCompartment(); }
+	void lib_iphlpapi_DeleteFlVirtualInterface() { iphlpapi.DeleteFlVirtualInterface(); }
+	void lib_iphlpapi_DeleteIPAddress() { iphlpapi.DeleteIPAddress(); }
+	void lib_iphlpapi_DeleteIpForwardEntry() { iphlpapi.DeleteIpForwardEntry(); }
+	void lib_iphlpapi_DeleteIpForwardEntry2() { iphlpapi.DeleteIpForwardEntry2(); }
+	void lib_iphlpapi_DeleteIpNetEntry() { iphlpapi.DeleteIpNetEntry(); }
+	void lib_iphlpapi_DeleteIpNetEntry2() { iphlpapi.DeleteIpNetEntry2(); }
+	void lib_iphlpapi_DeletePersistentTcpPortReservation() { iphlpapi.DeletePersistentTcpPortReservation(); }
+	void lib_iphlpapi_DeletePersistentUdpPortReservation() { iphlpapi.DeletePersistentUdpPortReservation(); }
+	void lib_iphlpapi_DeleteProxyArpEntry() { iphlpapi.DeleteProxyArpEntry(); }
+	void lib_iphlpapi_DeleteUnicastIpAddressEntry() { iphlpapi.DeleteUnicastIpAddressEntry(); }
+	void lib_iphlpapi_DisableMediaSense() { iphlpapi.DisableMediaSense(); }
+	void lib_iphlpapi_EnableRouter() { iphlpapi.EnableRouter(); }
+	void lib_iphlpapi_FlushIpNetTable() { iphlpapi.FlushIpNetTable(); }
+	void lib_iphlpapi_FlushIpNetTable2() { iphlpapi.FlushIpNetTable2(); }
+	void lib_iphlpapi_FlushIpPathTable() { iphlpapi.FlushIpPathTable(); }
+	void lib_iphlpapi_FreeDnsSettings() { iphlpapi.FreeDnsSettings(); }
+	void lib_iphlpapi_FreeInterfaceDnsSettings() { iphlpapi.FreeInterfaceDnsSettings(); }
+	void lib_iphlpapi_FreeMibTable() { iphlpapi.FreeMibTable(); }
+	void lib_iphlpapi_GetAdapterIndex() { iphlpapi.GetAdapterIndex(); }
+	void lib_iphlpapi_GetAdapterOrderMap() { iphlpapi.GetAdapterOrderMap(); }
+	void lib_iphlpapi_GetAdaptersAddresses() { iphlpapi.GetAdaptersAddresses(); }
+	void lib_iphlpapi_GetAdaptersInfo() { iphlpapi.GetAdaptersInfo(); }
+	void lib_iphlpapi_GetAnycastIpAddressEntry() { iphlpapi.GetAnycastIpAddressEntry(); }
+	void lib_iphlpapi_GetAnycastIpAddressTable() { iphlpapi.GetAnycastIpAddressTable(); }
+	void lib_iphlpapi_GetBestInterface() { iphlpapi.GetBestInterface(); }
+	void lib_iphlpapi_GetBestInterfaceEx() { iphlpapi.GetBestInterfaceEx(); }
+	void lib_iphlpapi_GetBestRoute() { iphlpapi.GetBestRoute(); }
+	void lib_iphlpapi_GetBestRoute2() { iphlpapi.GetBestRoute2(); }
+	void lib_iphlpapi_GetCurrentThreadCompartmentId() { iphlpapi.GetCurrentThreadCompartmentId(); }
+	void lib_iphlpapi_GetCurrentThreadCompartmentScope() { iphlpapi.GetCurrentThreadCompartmentScope(); }
+	void lib_iphlpapi_GetDefaultCompartmentId() { iphlpapi.GetDefaultCompartmentId(); }
+	void lib_iphlpapi_GetDnsSettings() { iphlpapi.GetDnsSettings(); }
+	void lib_iphlpapi_GetExtendedTcpTable() { iphlpapi.GetExtendedTcpTable(); }
+	void lib_iphlpapi_GetExtendedUdpTable() { iphlpapi.GetExtendedUdpTable(); }
+	void lib_iphlpapi_GetFlVirtualInterface() { iphlpapi.GetFlVirtualInterface(); }
+	void lib_iphlpapi_GetFlVirtualInterfaceTable() { iphlpapi.GetFlVirtualInterfaceTable(); }
+	void lib_iphlpapi_GetFriendlyIfIndex() { iphlpapi.GetFriendlyIfIndex(); }
+	void lib_iphlpapi_GetIcmpStatistics() { iphlpapi.GetIcmpStatistics(); }
+	void lib_iphlpapi_GetIcmpStatisticsEx() { iphlpapi.GetIcmpStatisticsEx(); }
+	void lib_iphlpapi_GetIfEntry() { iphlpapi.GetIfEntry(); }
+	void lib_iphlpapi_GetIfEntry2() { iphlpapi.GetIfEntry2(); }
+	void lib_iphlpapi_GetIfEntry2Ex() { iphlpapi.GetIfEntry2Ex(); }
+	void lib_iphlpapi_GetIfStackTable() { iphlpapi.GetIfStackTable(); }
+	void lib_iphlpapi_GetIfTable() { iphlpapi.GetIfTable(); }
+	void lib_iphlpapi_GetIfTable2() { iphlpapi.GetIfTable2(); }
+	void lib_iphlpapi_GetIfTable2Ex() { iphlpapi.GetIfTable2Ex(); }
+	void lib_iphlpapi_GetInterfaceActiveTimestampCapabilities() { iphlpapi.GetInterfaceActiveTimestampCapabilities(); }
+	void lib_iphlpapi_GetInterfaceCompartmentId() { iphlpapi.GetInterfaceCompartmentId(); }
+	void lib_iphlpapi_GetInterfaceCurrentTimestampCapabilities() { iphlpapi.GetInterfaceCurrentTimestampCapabilities(); }
+	void lib_iphlpapi_GetInterfaceDnsSettings() { iphlpapi.GetInterfaceDnsSettings(); }
+	void lib_iphlpapi_GetInterfaceHardwareTimestampCapabilities() { iphlpapi.GetInterfaceHardwareTimestampCapabilities(); }
+	void lib_iphlpapi_GetInterfaceInfo() { iphlpapi.GetInterfaceInfo(); }
+	void lib_iphlpapi_GetInterfaceSupportedTimestampCapabilities() { iphlpapi.GetInterfaceSupportedTimestampCapabilities(); }
+	void lib_iphlpapi_GetInvertedIfStackTable() { iphlpapi.GetInvertedIfStackTable(); }
+	void lib_iphlpapi_GetIpAddrTable() { iphlpapi.GetIpAddrTable(); }
+	void lib_iphlpapi_GetIpErrorString() { iphlpapi.GetIpErrorString(); }
+	void lib_iphlpapi_GetIpForwardEntry2() { iphlpapi.GetIpForwardEntry2(); }
+	void lib_iphlpapi_GetIpForwardTable() { iphlpapi.GetIpForwardTable(); }
+	void lib_iphlpapi_GetIpForwardTable2() { iphlpapi.GetIpForwardTable2(); }
+	void lib_iphlpapi_GetIpInterfaceEntry() { iphlpapi.GetIpInterfaceEntry(); }
+	void lib_iphlpapi_GetIpInterfaceTable() { iphlpapi.GetIpInterfaceTable(); }
+	void lib_iphlpapi_GetIpNetEntry2() { iphlpapi.GetIpNetEntry2(); }
+	void lib_iphlpapi_GetIpNetTable() { iphlpapi.GetIpNetTable(); }
+	void lib_iphlpapi_GetIpNetTable2() { iphlpapi.GetIpNetTable2(); }
+	void lib_iphlpapi_GetIpNetworkConnectionBandwidthEstimates() { iphlpapi.GetIpNetworkConnectionBandwidthEstimates(); }
+	void lib_iphlpapi_GetIpPathEntry() { iphlpapi.GetIpPathEntry(); }
+	void lib_iphlpapi_GetIpPathTable() { iphlpapi.GetIpPathTable(); }
+	void lib_iphlpapi_GetIpStatistics() { iphlpapi.GetIpStatistics(); }
+	void lib_iphlpapi_GetIpStatisticsEx() { iphlpapi.GetIpStatisticsEx(); }
+	void lib_iphlpapi_GetJobCompartmentId() { iphlpapi.GetJobCompartmentId(); }
+	void lib_iphlpapi_GetMulticastIpAddressEntry() { iphlpapi.GetMulticastIpAddressEntry(); }
+	void lib_iphlpapi_GetMulticastIpAddressTable() { iphlpapi.GetMulticastIpAddressTable(); }
+	void lib_iphlpapi_GetNetworkConnectivityHint() { iphlpapi.GetNetworkConnectivityHint(); }
+	void lib_iphlpapi_GetNetworkConnectivityHintForInterface() { iphlpapi.GetNetworkConnectivityHintForInterface(); }
+	void lib_iphlpapi_GetNetworkInformation() { iphlpapi.GetNetworkInformation(); }
+	void lib_iphlpapi_GetNetworkParams() { iphlpapi.GetNetworkParams(); }
+	void lib_iphlpapi_GetNumberOfInterfaces() { iphlpapi.GetNumberOfInterfaces(); }
+	void lib_iphlpapi_GetOwnerModuleFromPidAndInfo() { iphlpapi.GetOwnerModuleFromPidAndInfo(); }
+	void lib_iphlpapi_GetOwnerModuleFromTcp6Entry() { iphlpapi.GetOwnerModuleFromTcp6Entry(); }
+	void lib_iphlpapi_GetOwnerModuleFromTcpEntry() { iphlpapi.GetOwnerModuleFromTcpEntry(); }
+	void lib_iphlpapi_GetOwnerModuleFromUdp6Entry() { iphlpapi.GetOwnerModuleFromUdp6Entry(); }
+	void lib_iphlpapi_GetOwnerModuleFromUdpEntry() { iphlpapi.GetOwnerModuleFromUdpEntry(); }
+	void lib_iphlpapi_GetPerAdapterInfo() { iphlpapi.GetPerAdapterInfo(); }
+	void lib_iphlpapi_GetPerTcp6ConnectionEStats() { iphlpapi.GetPerTcp6ConnectionEStats(); }
+	void lib_iphlpapi_GetPerTcp6ConnectionStats() { iphlpapi.GetPerTcp6ConnectionStats(); }
+	void lib_iphlpapi_GetPerTcpConnectionEStats() { iphlpapi.GetPerTcpConnectionEStats(); }
+	void lib_iphlpapi_GetPerTcpConnectionStats() { iphlpapi.GetPerTcpConnectionStats(); }
+	void lib_iphlpapi_GetRTTAndHopCount() { iphlpapi.GetRTTAndHopCount(); }
+	void lib_iphlpapi_GetSessionCompartmentId() { iphlpapi.GetSessionCompartmentId(); }
+	void lib_iphlpapi_GetTcp6Table() { iphlpapi.GetTcp6Table(); }
+	void lib_iphlpapi_GetTcp6Table2() { iphlpapi.GetTcp6Table2(); }
+	void lib_iphlpapi_GetTcpStatistics() { iphlpapi.GetTcpStatistics(); }
+	void lib_iphlpapi_GetTcpStatisticsEx() { iphlpapi.GetTcpStatisticsEx(); }
+	void lib_iphlpapi_GetTcpStatisticsEx2() { iphlpapi.GetTcpStatisticsEx2(); }
+	void lib_iphlpapi_GetTcpTable() { iphlpapi.GetTcpTable(); }
+	void lib_iphlpapi_GetTcpTable2() { iphlpapi.GetTcpTable2(); }
+	void lib_iphlpapi_GetTeredoPort() { iphlpapi.GetTeredoPort(); }
+	void lib_iphlpapi_GetUdp6Table() { iphlpapi.GetUdp6Table(); }
+	void lib_iphlpapi_GetUdpStatistics() { iphlpapi.GetUdpStatistics(); }
+	void lib_iphlpapi_GetUdpStatisticsEx() { iphlpapi.GetUdpStatisticsEx(); }
+	void lib_iphlpapi_GetUdpStatisticsEx2() { iphlpapi.GetUdpStatisticsEx2(); }
+	void lib_iphlpapi_GetUdpTable() { iphlpapi.GetUdpTable(); }
+	void lib_iphlpapi_GetUniDirectionalAdapterInfo() { iphlpapi.GetUniDirectionalAdapterInfo(); }
+	void lib_iphlpapi_GetUnicastIpAddressEntry() { iphlpapi.GetUnicastIpAddressEntry(); }
+	void lib_iphlpapi_GetUnicastIpAddressTable() { iphlpapi.GetUnicastIpAddressTable(); }
+	void lib_iphlpapi_GetWPAOACSupportLevel() { iphlpapi.GetWPAOACSupportLevel(); }
+	void lib_iphlpapi_Icmp6CreateFile() { iphlpapi.Icmp6CreateFile(); }
+	void lib_iphlpapi_Icmp6ParseReplies() { iphlpapi.Icmp6ParseReplies(); }
+	void lib_iphlpapi_Icmp6SendEcho2() { iphlpapi.Icmp6SendEcho2(); }
+	void lib_iphlpapi_IcmpCloseHandle() { iphlpapi.IcmpCloseHandle(); }
+	void lib_iphlpapi_IcmpCreateFile() { iphlpapi.IcmpCreateFile(); }
+	void lib_iphlpapi_IcmpParseReplies() { iphlpapi.IcmpParseReplies(); }
+	void lib_iphlpapi_IcmpSendEcho() { iphlpapi.IcmpSendEcho(); }
+	void lib_iphlpapi_IcmpSendEcho2() { iphlpapi.IcmpSendEcho2(); }
+	void lib_iphlpapi_IcmpSendEcho2Ex() { iphlpapi.IcmpSendEcho2Ex(); }
+	void lib_iphlpapi_InitializeCompartmentEntry() { iphlpapi.InitializeCompartmentEntry(); }
+	void lib_iphlpapi_InitializeFlVirtualInterfaceEntry() { iphlpapi.InitializeFlVirtualInterfaceEntry(); }
+	void lib_iphlpapi_InitializeIpForwardEntry() { iphlpapi.InitializeIpForwardEntry(); }
+	void lib_iphlpapi_InitializeIpInterfaceEntry() { iphlpapi.InitializeIpInterfaceEntry(); }
+	void lib_iphlpapi_InitializeUnicastIpAddressEntry() { iphlpapi.InitializeUnicastIpAddressEntry(); }
+	void lib_iphlpapi_InternalCleanupPersistentStore() { iphlpapi.InternalCleanupPersistentStore(); }
+	void lib_iphlpapi_InternalCreateAnycastIpAddressEntry() { iphlpapi.InternalCreateAnycastIpAddressEntry(); }
+	void lib_iphlpapi_InternalCreateIpForwardEntry() { iphlpapi.InternalCreateIpForwardEntry(); }
+	void lib_iphlpapi_InternalCreateIpForwardEntry2() { iphlpapi.InternalCreateIpForwardEntry2(); }
+	void lib_iphlpapi_InternalCreateIpNetEntry() { iphlpapi.InternalCreateIpNetEntry(); }
+	void lib_iphlpapi_InternalCreateIpNetEntry2() { iphlpapi.InternalCreateIpNetEntry2(); }
+	void lib_iphlpapi_InternalCreateOrRefIpForwardEntry2() { iphlpapi.InternalCreateOrRefIpForwardEntry2(); }
+	void lib_iphlpapi_InternalCreateUnicastIpAddressEntry() { iphlpapi.InternalCreateUnicastIpAddressEntry(); }
+	void lib_iphlpapi_InternalDeleteAnycastIpAddressEntry() { iphlpapi.InternalDeleteAnycastIpAddressEntry(); }
+	void lib_iphlpapi_InternalDeleteIpForwardEntry() { iphlpapi.InternalDeleteIpForwardEntry(); }
+	void lib_iphlpapi_InternalDeleteIpForwardEntry2() { iphlpapi.InternalDeleteIpForwardEntry2(); }
+	void lib_iphlpapi_InternalDeleteIpNetEntry() { iphlpapi.InternalDeleteIpNetEntry(); }
+	void lib_iphlpapi_InternalDeleteIpNetEntry2() { iphlpapi.InternalDeleteIpNetEntry2(); }
+	void lib_iphlpapi_InternalDeleteUnicastIpAddressEntry() { iphlpapi.InternalDeleteUnicastIpAddressEntry(); }
+	void lib_iphlpapi_InternalFindInterfaceByAddress() { iphlpapi.InternalFindInterfaceByAddress(); }
+	void lib_iphlpapi_InternalGetAnycastIpAddressEntry() { iphlpapi.InternalGetAnycastIpAddressEntry(); }
+	void lib_iphlpapi_InternalGetAnycastIpAddressTable() { iphlpapi.InternalGetAnycastIpAddressTable(); }
+	void lib_iphlpapi_InternalGetBoundTcp6EndpointTable() { iphlpapi.InternalGetBoundTcp6EndpointTable(); }
+	void lib_iphlpapi_InternalGetBoundTcpEndpointTable() { iphlpapi.InternalGetBoundTcpEndpointTable(); }
+	void lib_iphlpapi_InternalGetForwardIpTable2() { iphlpapi.InternalGetForwardIpTable2(); }
+	void lib_iphlpapi_InternalGetIPPhysicalInterfaceForDestination() { iphlpapi.InternalGetIPPhysicalInterfaceForDestination(); }
+	void lib_iphlpapi_InternalGetIfEntry2() { iphlpapi.InternalGetIfEntry2(); }
+	void lib_iphlpapi_InternalGetIfTable() { iphlpapi.InternalGetIfTable(); }
+	void lib_iphlpapi_InternalGetIfTable2() { iphlpapi.InternalGetIfTable2(); }
+	void lib_iphlpapi_InternalGetIpAddrTable() { iphlpapi.InternalGetIpAddrTable(); }
+	void lib_iphlpapi_InternalGetIpForwardEntry2() { iphlpapi.InternalGetIpForwardEntry2(); }
+	void lib_iphlpapi_InternalGetIpForwardTable() { iphlpapi.InternalGetIpForwardTable(); }
+	void lib_iphlpapi_InternalGetIpInterfaceEntry() { iphlpapi.InternalGetIpInterfaceEntry(); }
+	void lib_iphlpapi_InternalGetIpInterfaceTable() { iphlpapi.InternalGetIpInterfaceTable(); }
+	void lib_iphlpapi_InternalGetIpNetEntry2() { iphlpapi.InternalGetIpNetEntry2(); }
+	void lib_iphlpapi_InternalGetIpNetTable() { iphlpapi.InternalGetIpNetTable(); }
+	void lib_iphlpapi_InternalGetIpNetTable2() { iphlpapi.InternalGetIpNetTable2(); }
+	void lib_iphlpapi_InternalGetMulticastIpAddressEntry() { iphlpapi.InternalGetMulticastIpAddressEntry(); }
+	void lib_iphlpapi_InternalGetMulticastIpAddressTable() { iphlpapi.InternalGetMulticastIpAddressTable(); }
+	void lib_iphlpapi_InternalGetRtcSlotInformation() { iphlpapi.InternalGetRtcSlotInformation(); }
+	void lib_iphlpapi_InternalGetTcp6Table2() { iphlpapi.InternalGetTcp6Table2(); }
+	void lib_iphlpapi_InternalGetTcp6TableWithOwnerModule() { iphlpapi.InternalGetTcp6TableWithOwnerModule(); }
+	void lib_iphlpapi_InternalGetTcp6TableWithOwnerPid() { iphlpapi.InternalGetTcp6TableWithOwnerPid(); }
+	void lib_iphlpapi_InternalGetTcpDynamicPortRange() { iphlpapi.InternalGetTcpDynamicPortRange(); }
+	void lib_iphlpapi_InternalGetTcpTable() { iphlpapi.InternalGetTcpTable(); }
+	void lib_iphlpapi_InternalGetTcpTable2() { iphlpapi.InternalGetTcpTable2(); }
+	void lib_iphlpapi_InternalGetTcpTableEx() { iphlpapi.InternalGetTcpTableEx(); }
+	void lib_iphlpapi_InternalGetTcpTableWithOwnerModule() { iphlpapi.InternalGetTcpTableWithOwnerModule(); }
+	void lib_iphlpapi_InternalGetTcpTableWithOwnerPid() { iphlpapi.InternalGetTcpTableWithOwnerPid(); }
+	void lib_iphlpapi_InternalGetTunnelPhysicalAdapter() { iphlpapi.InternalGetTunnelPhysicalAdapter(); }
+	void lib_iphlpapi_InternalGetUdp6Table2() { iphlpapi.InternalGetUdp6Table2(); }
+	void lib_iphlpapi_InternalGetUdp6TableWithOwnerModule() { iphlpapi.InternalGetUdp6TableWithOwnerModule(); }
+	void lib_iphlpapi_InternalGetUdp6TableWithOwnerPid() { iphlpapi.InternalGetUdp6TableWithOwnerPid(); }
+	void lib_iphlpapi_InternalGetUdpDynamicPortRange() { iphlpapi.InternalGetUdpDynamicPortRange(); }
+	void lib_iphlpapi_InternalGetUdpTable() { iphlpapi.InternalGetUdpTable(); }
+	void lib_iphlpapi_InternalGetUdpTable2() { iphlpapi.InternalGetUdpTable2(); }
+	void lib_iphlpapi_InternalGetUdpTableEx() { iphlpapi.InternalGetUdpTableEx(); }
+	void lib_iphlpapi_InternalGetUdpTableWithOwnerModule() { iphlpapi.InternalGetUdpTableWithOwnerModule(); }
+	void lib_iphlpapi_InternalGetUdpTableWithOwnerPid() { iphlpapi.InternalGetUdpTableWithOwnerPid(); }
+	void lib_iphlpapi_InternalGetUnicastIpAddressEntry() { iphlpapi.InternalGetUnicastIpAddressEntry(); }
+	void lib_iphlpapi_InternalGetUnicastIpAddressTable() { iphlpapi.InternalGetUnicastIpAddressTable(); }
+	void lib_iphlpapi_InternalIcmpCreateFileEx() { iphlpapi.InternalIcmpCreateFileEx(); }
+	void lib_iphlpapi_InternalSetIfEntry() { iphlpapi.InternalSetIfEntry(); }
+	void lib_iphlpapi_InternalSetIpForwardEntry() { iphlpapi.InternalSetIpForwardEntry(); }
+	void lib_iphlpapi_InternalSetIpForwardEntry2() { iphlpapi.InternalSetIpForwardEntry2(); }
+	void lib_iphlpapi_InternalSetIpInterfaceEntry() { iphlpapi.InternalSetIpInterfaceEntry(); }
+	void lib_iphlpapi_InternalSetIpNetEntry() { iphlpapi.InternalSetIpNetEntry(); }
+	void lib_iphlpapi_InternalSetIpNetEntry2() { iphlpapi.InternalSetIpNetEntry2(); }
+	void lib_iphlpapi_InternalSetIpStats() { iphlpapi.InternalSetIpStats(); }
+	void lib_iphlpapi_InternalSetTcpDynamicPortRange() { iphlpapi.InternalSetTcpDynamicPortRange(); }
+	void lib_iphlpapi_InternalSetTcpEntry() { iphlpapi.InternalSetTcpEntry(); }
+	void lib_iphlpapi_InternalSetTeredoPort() { iphlpapi.InternalSetTeredoPort(); }
+	void lib_iphlpapi_InternalSetUdpDynamicPortRange() { iphlpapi.InternalSetUdpDynamicPortRange(); }
+	void lib_iphlpapi_InternalSetUnicastIpAddressEntry() { iphlpapi.InternalSetUnicastIpAddressEntry(); }
+	void lib_iphlpapi_IpReleaseAddress() { iphlpapi.IpReleaseAddress(); }
+	void lib_iphlpapi_IpRenewAddress() { iphlpapi.IpRenewAddress(); }
+	void lib_iphlpapi_LookupPersistentTcpPortReservation() { iphlpapi.LookupPersistentTcpPortReservation(); }
+	void lib_iphlpapi_LookupPersistentUdpPortReservation() { iphlpapi.LookupPersistentUdpPortReservation(); }
+	void lib_iphlpapi_NTPTimeToNTFileTime() { iphlpapi.NTPTimeToNTFileTime(); }
+	void lib_iphlpapi_NTTimeToNTPTime() { iphlpapi.NTTimeToNTPTime(); }
+	void lib_iphlpapi_NhGetGuidFromInterfaceName() { iphlpapi.NhGetGuidFromInterfaceName(); }
+	void lib_iphlpapi_NhGetInterfaceDescriptionFromGuid() { iphlpapi.NhGetInterfaceDescriptionFromGuid(); }
+	void lib_iphlpapi_NhGetInterfaceNameFromDeviceGuid() { iphlpapi.NhGetInterfaceNameFromDeviceGuid(); }
+	void lib_iphlpapi_NhGetInterfaceNameFromGuid() { iphlpapi.NhGetInterfaceNameFromGuid(); }
+	void lib_iphlpapi_NhpAllocateAndGetInterfaceInfoFromStack() { iphlpapi.NhpAllocateAndGetInterfaceInfoFromStack(); }
+	void lib_iphlpapi_NotifyAddrChange() { iphlpapi.NotifyAddrChange(); }
+	void lib_iphlpapi_NotifyCompartmentChange() { iphlpapi.NotifyCompartmentChange(); }
+	void lib_iphlpapi_NotifyIfTimestampConfigChange() { iphlpapi.NotifyIfTimestampConfigChange(); }
+	void lib_iphlpapi_NotifyIpInterfaceChange() { iphlpapi.NotifyIpInterfaceChange(); }
+	void lib_iphlpapi_NotifyNetworkConnectivityHintChange() { iphlpapi.NotifyNetworkConnectivityHintChange(); }
+	void lib_iphlpapi_NotifyRouteChange() { iphlpapi.NotifyRouteChange(); }
+	void lib_iphlpapi_NotifyRouteChange2() { iphlpapi.NotifyRouteChange2(); }
+	void lib_iphlpapi_NotifyStableUnicastIpAddressTable() { iphlpapi.NotifyStableUnicastIpAddressTable(); }
+	void lib_iphlpapi_NotifyTeredoPortChange() { iphlpapi.NotifyTeredoPortChange(); }
+	void lib_iphlpapi_NotifyUnicastIpAddressChange() { iphlpapi.NotifyUnicastIpAddressChange(); }
+	void lib_iphlpapi_OpenCompartment() { iphlpapi.OpenCompartment(); }
+	void lib_iphlpapi_ParseNetworkString() { iphlpapi.ParseNetworkString(); }
+	void lib_iphlpapi_PfAddFiltersToInterface() { iphlpapi.PfAddFiltersToInterface(); }
+	void lib_iphlpapi_PfAddGlobalFilterToInterface() { iphlpapi.PfAddGlobalFilterToInterface(); }
+	void lib_iphlpapi_PfBindInterfaceToIPAddress() { iphlpapi.PfBindInterfaceToIPAddress(); }
+	void lib_iphlpapi_PfBindInterfaceToIndex() { iphlpapi.PfBindInterfaceToIndex(); }
+	void lib_iphlpapi_PfCreateInterface() { iphlpapi.PfCreateInterface(); }
+	void lib_iphlpapi_PfDeleteInterface() { iphlpapi.PfDeleteInterface(); }
+	void lib_iphlpapi_PfDeleteLog() { iphlpapi.PfDeleteLog(); }
+	void lib_iphlpapi_PfGetInterfaceStatistics() { iphlpapi.PfGetInterfaceStatistics(); }
+	void lib_iphlpapi_PfMakeLog() { iphlpapi.PfMakeLog(); }
+	void lib_iphlpapi_PfRebindFilters() { iphlpapi.PfRebindFilters(); }
+	void lib_iphlpapi_PfRemoveFilterHandles() { iphlpapi.PfRemoveFilterHandles(); }
+	void lib_iphlpapi_PfRemoveFiltersFromInterface() { iphlpapi.PfRemoveFiltersFromInterface(); }
+	void lib_iphlpapi_PfRemoveGlobalFilterFromInterface() { iphlpapi.PfRemoveGlobalFilterFromInterface(); }
+	void lib_iphlpapi_PfSetLogBuffer() { iphlpapi.PfSetLogBuffer(); }
+	void lib_iphlpapi_PfTestPacket() { iphlpapi.PfTestPacket(); }
+	void lib_iphlpapi_PfUnBindInterface() { iphlpapi.PfUnBindInterface(); }
+	void lib_iphlpapi_RegisterInterfaceTimestampConfigChange() { iphlpapi.RegisterInterfaceTimestampConfigChange(); }
+	void lib_iphlpapi_ResolveIpNetEntry2() { iphlpapi.ResolveIpNetEntry2(); }
+	void lib_iphlpapi_ResolveNeighbor() { iphlpapi.ResolveNeighbor(); }
+	void lib_iphlpapi_RestoreMediaSense() { iphlpapi.RestoreMediaSense(); }
+	void lib_iphlpapi_SendARP() { iphlpapi.SendARP(); }
+	void lib_iphlpapi_SetAdapterIpAddress() { iphlpapi.SetAdapterIpAddress(); }
+	void lib_iphlpapi_SetCurrentThreadCompartmentId() { iphlpapi.SetCurrentThreadCompartmentId(); }
+	void lib_iphlpapi_SetCurrentThreadCompartmentScope() { iphlpapi.SetCurrentThreadCompartmentScope(); }
+	void lib_iphlpapi_SetDnsSettings() { iphlpapi.SetDnsSettings(); }
+	void lib_iphlpapi_SetFlVirtualInterface() { iphlpapi.SetFlVirtualInterface(); }
+	void lib_iphlpapi_SetIfEntry() { iphlpapi.SetIfEntry(); }
+	void lib_iphlpapi_SetInterfaceDnsSettings() { iphlpapi.SetInterfaceDnsSettings(); }
+	void lib_iphlpapi_SetIpForwardEntry() { iphlpapi.SetIpForwardEntry(); }
+	void lib_iphlpapi_SetIpForwardEntry2() { iphlpapi.SetIpForwardEntry2(); }
+	void lib_iphlpapi_SetIpInterfaceEntry() { iphlpapi.SetIpInterfaceEntry(); }
+	void lib_iphlpapi_SetIpNetEntry() { iphlpapi.SetIpNetEntry(); }
+	void lib_iphlpapi_SetIpNetEntry2() { iphlpapi.SetIpNetEntry2(); }
+	void lib_iphlpapi_SetIpStatistics() { iphlpapi.SetIpStatistics(); }
+	void lib_iphlpapi_SetIpStatisticsEx() { iphlpapi.SetIpStatisticsEx(); }
+	void lib_iphlpapi_SetIpTTL() { iphlpapi.SetIpTTL(); }
+	void lib_iphlpapi_SetJobCompartmentId() { iphlpapi.SetJobCompartmentId(); }
+	void lib_iphlpapi_SetNetworkInformation() { iphlpapi.SetNetworkInformation(); }
+	void lib_iphlpapi_SetPerTcp6ConnectionEStats() { iphlpapi.SetPerTcp6ConnectionEStats(); }
+	void lib_iphlpapi_SetPerTcp6ConnectionStats() { iphlpapi.SetPerTcp6ConnectionStats(); }
+	void lib_iphlpapi_SetPerTcpConnectionEStats() { iphlpapi.SetPerTcpConnectionEStats(); }
+	void lib_iphlpapi_SetPerTcpConnectionStats() { iphlpapi.SetPerTcpConnectionStats(); }
+	void lib_iphlpapi_SetSessionCompartmentId() { iphlpapi.SetSessionCompartmentId(); }
+	void lib_iphlpapi_SetTcpEntry() { iphlpapi.SetTcpEntry(); }
+	void lib_iphlpapi_SetUnicastIpAddressEntry() { iphlpapi.SetUnicastIpAddressEntry(); }
+	void lib_iphlpapi_UnenableRouter() { iphlpapi.UnenableRouter(); }
+	void lib_iphlpapi_UnregisterInterfaceTimestampConfigChange() { iphlpapi.UnregisterInterfaceTimestampConfigChange(); }
+	void lib_iphlpapi_do_echo_rep() { iphlpapi.do_echo_rep(); }
+	void lib_iphlpapi_do_echo_req() { iphlpapi.do_echo_req(); }
+	void lib_iphlpapi_if_indextoname() { iphlpapi.if_indextoname(); }
+	void lib_iphlpapi_if_nametoindex() { iphlpapi.if_nametoindex(); }
+	void lib_iphlpapi_register_icmp() { iphlpapi.register_icmp(); }
+}
 
 bool load_library_iphlpapi() {
 	iphlpapi.dll = uif::injector::instance().load_real_library("iphlpapi.dll");

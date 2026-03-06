@@ -376,374 +376,376 @@ struct {
 	FARPROC wglUseFontOutlinesW;
 } opengl32;
 
-void lib_opengl32_GlmfBeginGlsBlock() { opengl32.GlmfBeginGlsBlock(); }
-void lib_opengl32_GlmfCloseMetaFile() { opengl32.GlmfCloseMetaFile(); }
-void lib_opengl32_GlmfEndGlsBlock() { opengl32.GlmfEndGlsBlock(); }
-void lib_opengl32_GlmfEndPlayback() { opengl32.GlmfEndPlayback(); }
-void lib_opengl32_GlmfInitPlayback() { opengl32.GlmfInitPlayback(); }
-void lib_opengl32_GlmfPlayGlsRecord() { opengl32.GlmfPlayGlsRecord(); }
-void lib_opengl32_glAccum() { opengl32.glAccum(); }
-void lib_opengl32_glAlphaFunc() { opengl32.glAlphaFunc(); }
-void lib_opengl32_glAreTexturesResident() { opengl32.glAreTexturesResident(); }
-void lib_opengl32_glArrayElement() { opengl32.glArrayElement(); }
-void lib_opengl32_glBegin() { opengl32.glBegin(); }
-void lib_opengl32_glBindTexture() { opengl32.glBindTexture(); }
-void lib_opengl32_glBitmap() { opengl32.glBitmap(); }
-void lib_opengl32_glBlendFunc() { opengl32.glBlendFunc(); }
-void lib_opengl32_glCallList() { opengl32.glCallList(); }
-void lib_opengl32_glCallLists() { opengl32.glCallLists(); }
-void lib_opengl32_glClear() { opengl32.glClear(); }
-void lib_opengl32_glClearAccum() { opengl32.glClearAccum(); }
-void lib_opengl32_glClearColor() { opengl32.glClearColor(); }
-void lib_opengl32_glClearDepth() { opengl32.glClearDepth(); }
-void lib_opengl32_glClearIndex() { opengl32.glClearIndex(); }
-void lib_opengl32_glClearStencil() { opengl32.glClearStencil(); }
-void lib_opengl32_glClipPlane() { opengl32.glClipPlane(); }
-void lib_opengl32_glColor3b() { opengl32.glColor3b(); }
-void lib_opengl32_glColor3bv() { opengl32.glColor3bv(); }
-void lib_opengl32_glColor3d() { opengl32.glColor3d(); }
-void lib_opengl32_glColor3dv() { opengl32.glColor3dv(); }
-void lib_opengl32_glColor3f() { opengl32.glColor3f(); }
-void lib_opengl32_glColor3fv() { opengl32.glColor3fv(); }
-void lib_opengl32_glColor3i() { opengl32.glColor3i(); }
-void lib_opengl32_glColor3iv() { opengl32.glColor3iv(); }
-void lib_opengl32_glColor3s() { opengl32.glColor3s(); }
-void lib_opengl32_glColor3sv() { opengl32.glColor3sv(); }
-void lib_opengl32_glColor3ub() { opengl32.glColor3ub(); }
-void lib_opengl32_glColor3ubv() { opengl32.glColor3ubv(); }
-void lib_opengl32_glColor3ui() { opengl32.glColor3ui(); }
-void lib_opengl32_glColor3uiv() { opengl32.glColor3uiv(); }
-void lib_opengl32_glColor3us() { opengl32.glColor3us(); }
-void lib_opengl32_glColor3usv() { opengl32.glColor3usv(); }
-void lib_opengl32_glColor4b() { opengl32.glColor4b(); }
-void lib_opengl32_glColor4bv() { opengl32.glColor4bv(); }
-void lib_opengl32_glColor4d() { opengl32.glColor4d(); }
-void lib_opengl32_glColor4dv() { opengl32.glColor4dv(); }
-void lib_opengl32_glColor4f() { opengl32.glColor4f(); }
-void lib_opengl32_glColor4fv() { opengl32.glColor4fv(); }
-void lib_opengl32_glColor4i() { opengl32.glColor4i(); }
-void lib_opengl32_glColor4iv() { opengl32.glColor4iv(); }
-void lib_opengl32_glColor4s() { opengl32.glColor4s(); }
-void lib_opengl32_glColor4sv() { opengl32.glColor4sv(); }
-void lib_opengl32_glColor4ub() { opengl32.glColor4ub(); }
-void lib_opengl32_glColor4ubv() { opengl32.glColor4ubv(); }
-void lib_opengl32_glColor4ui() { opengl32.glColor4ui(); }
-void lib_opengl32_glColor4uiv() { opengl32.glColor4uiv(); }
-void lib_opengl32_glColor4us() { opengl32.glColor4us(); }
-void lib_opengl32_glColor4usv() { opengl32.glColor4usv(); }
-void lib_opengl32_glColorMask() { opengl32.glColorMask(); }
-void lib_opengl32_glColorMaterial() { opengl32.glColorMaterial(); }
-void lib_opengl32_glColorPointer() { opengl32.glColorPointer(); }
-void lib_opengl32_glCopyPixels() { opengl32.glCopyPixels(); }
-void lib_opengl32_glCopyTexImage1D() { opengl32.glCopyTexImage1D(); }
-void lib_opengl32_glCopyTexImage2D() { opengl32.glCopyTexImage2D(); }
-void lib_opengl32_glCopyTexSubImage1D() { opengl32.glCopyTexSubImage1D(); }
-void lib_opengl32_glCopyTexSubImage2D() { opengl32.glCopyTexSubImage2D(); }
-void lib_opengl32_glCullFace() { opengl32.glCullFace(); }
-void lib_opengl32_glDebugEntry() { opengl32.glDebugEntry(); }
-void lib_opengl32_glDeleteLists() { opengl32.glDeleteLists(); }
-void lib_opengl32_glDeleteTextures() { opengl32.glDeleteTextures(); }
-void lib_opengl32_glDepthFunc() { opengl32.glDepthFunc(); }
-void lib_opengl32_glDepthMask() { opengl32.glDepthMask(); }
-void lib_opengl32_glDepthRange() { opengl32.glDepthRange(); }
-void lib_opengl32_glDisable() { opengl32.glDisable(); }
-void lib_opengl32_glDisableClientState() { opengl32.glDisableClientState(); }
-void lib_opengl32_glDrawArrays() { opengl32.glDrawArrays(); }
-void lib_opengl32_glDrawBuffer() { opengl32.glDrawBuffer(); }
-void lib_opengl32_glDrawElements() { opengl32.glDrawElements(); }
-void lib_opengl32_glDrawPixels() { opengl32.glDrawPixels(); }
-void lib_opengl32_glEdgeFlag() { opengl32.glEdgeFlag(); }
-void lib_opengl32_glEdgeFlagPointer() { opengl32.glEdgeFlagPointer(); }
-void lib_opengl32_glEdgeFlagv() { opengl32.glEdgeFlagv(); }
-void lib_opengl32_glEnable() { opengl32.glEnable(); }
-void lib_opengl32_glEnableClientState() { opengl32.glEnableClientState(); }
-void lib_opengl32_glEnd() { opengl32.glEnd(); }
-void lib_opengl32_glEndList() { opengl32.glEndList(); }
-void lib_opengl32_glEvalCoord1d() { opengl32.glEvalCoord1d(); }
-void lib_opengl32_glEvalCoord1dv() { opengl32.glEvalCoord1dv(); }
-void lib_opengl32_glEvalCoord1f() { opengl32.glEvalCoord1f(); }
-void lib_opengl32_glEvalCoord1fv() { opengl32.glEvalCoord1fv(); }
-void lib_opengl32_glEvalCoord2d() { opengl32.glEvalCoord2d(); }
-void lib_opengl32_glEvalCoord2dv() { opengl32.glEvalCoord2dv(); }
-void lib_opengl32_glEvalCoord2f() { opengl32.glEvalCoord2f(); }
-void lib_opengl32_glEvalCoord2fv() { opengl32.glEvalCoord2fv(); }
-void lib_opengl32_glEvalMesh1() { opengl32.glEvalMesh1(); }
-void lib_opengl32_glEvalMesh2() { opengl32.glEvalMesh2(); }
-void lib_opengl32_glEvalPoint1() { opengl32.glEvalPoint1(); }
-void lib_opengl32_glEvalPoint2() { opengl32.glEvalPoint2(); }
-void lib_opengl32_glFeedbackBuffer() { opengl32.glFeedbackBuffer(); }
-void lib_opengl32_glFinish() { opengl32.glFinish(); }
-void lib_opengl32_glFlush() { opengl32.glFlush(); }
-void lib_opengl32_glFogf() { opengl32.glFogf(); }
-void lib_opengl32_glFogfv() { opengl32.glFogfv(); }
-void lib_opengl32_glFogi() { opengl32.glFogi(); }
-void lib_opengl32_glFogiv() { opengl32.glFogiv(); }
-void lib_opengl32_glFrontFace() { opengl32.glFrontFace(); }
-void lib_opengl32_glFrustum() { opengl32.glFrustum(); }
-void lib_opengl32_glGenLists() { opengl32.glGenLists(); }
-void lib_opengl32_glGenTextures() { opengl32.glGenTextures(); }
-void lib_opengl32_glGetBooleanv() { opengl32.glGetBooleanv(); }
-void lib_opengl32_glGetClipPlane() { opengl32.glGetClipPlane(); }
-void lib_opengl32_glGetDoublev() { opengl32.glGetDoublev(); }
-void lib_opengl32_glGetError() { opengl32.glGetError(); }
-void lib_opengl32_glGetFloatv() { opengl32.glGetFloatv(); }
-void lib_opengl32_glGetIntegerv() { opengl32.glGetIntegerv(); }
-void lib_opengl32_glGetLightfv() { opengl32.glGetLightfv(); }
-void lib_opengl32_glGetLightiv() { opengl32.glGetLightiv(); }
-void lib_opengl32_glGetMapdv() { opengl32.glGetMapdv(); }
-void lib_opengl32_glGetMapfv() { opengl32.glGetMapfv(); }
-void lib_opengl32_glGetMapiv() { opengl32.glGetMapiv(); }
-void lib_opengl32_glGetMaterialfv() { opengl32.glGetMaterialfv(); }
-void lib_opengl32_glGetMaterialiv() { opengl32.glGetMaterialiv(); }
-void lib_opengl32_glGetPixelMapfv() { opengl32.glGetPixelMapfv(); }
-void lib_opengl32_glGetPixelMapuiv() { opengl32.glGetPixelMapuiv(); }
-void lib_opengl32_glGetPixelMapusv() { opengl32.glGetPixelMapusv(); }
-void lib_opengl32_glGetPointerv() { opengl32.glGetPointerv(); }
-void lib_opengl32_glGetPolygonStipple() { opengl32.glGetPolygonStipple(); }
-void lib_opengl32_glGetString() { opengl32.glGetString(); }
-void lib_opengl32_glGetTexEnvfv() { opengl32.glGetTexEnvfv(); }
-void lib_opengl32_glGetTexEnviv() { opengl32.glGetTexEnviv(); }
-void lib_opengl32_glGetTexGendv() { opengl32.glGetTexGendv(); }
-void lib_opengl32_glGetTexGenfv() { opengl32.glGetTexGenfv(); }
-void lib_opengl32_glGetTexGeniv() { opengl32.glGetTexGeniv(); }
-void lib_opengl32_glGetTexImage() { opengl32.glGetTexImage(); }
-void lib_opengl32_glGetTexLevelParameterfv() { opengl32.glGetTexLevelParameterfv(); }
-void lib_opengl32_glGetTexLevelParameteriv() { opengl32.glGetTexLevelParameteriv(); }
-void lib_opengl32_glGetTexParameterfv() { opengl32.glGetTexParameterfv(); }
-void lib_opengl32_glGetTexParameteriv() { opengl32.glGetTexParameteriv(); }
-void lib_opengl32_glHint() { opengl32.glHint(); }
-void lib_opengl32_glIndexMask() { opengl32.glIndexMask(); }
-void lib_opengl32_glIndexPointer() { opengl32.glIndexPointer(); }
-void lib_opengl32_glIndexd() { opengl32.glIndexd(); }
-void lib_opengl32_glIndexdv() { opengl32.glIndexdv(); }
-void lib_opengl32_glIndexf() { opengl32.glIndexf(); }
-void lib_opengl32_glIndexfv() { opengl32.glIndexfv(); }
-void lib_opengl32_glIndexi() { opengl32.glIndexi(); }
-void lib_opengl32_glIndexiv() { opengl32.glIndexiv(); }
-void lib_opengl32_glIndexs() { opengl32.glIndexs(); }
-void lib_opengl32_glIndexsv() { opengl32.glIndexsv(); }
-void lib_opengl32_glIndexub() { opengl32.glIndexub(); }
-void lib_opengl32_glIndexubv() { opengl32.glIndexubv(); }
-void lib_opengl32_glInitNames() { opengl32.glInitNames(); }
-void lib_opengl32_glInterleavedArrays() { opengl32.glInterleavedArrays(); }
-void lib_opengl32_glIsEnabled() { opengl32.glIsEnabled(); }
-void lib_opengl32_glIsList() { opengl32.glIsList(); }
-void lib_opengl32_glIsTexture() { opengl32.glIsTexture(); }
-void lib_opengl32_glLightModelf() { opengl32.glLightModelf(); }
-void lib_opengl32_glLightModelfv() { opengl32.glLightModelfv(); }
-void lib_opengl32_glLightModeli() { opengl32.glLightModeli(); }
-void lib_opengl32_glLightModeliv() { opengl32.glLightModeliv(); }
-void lib_opengl32_glLightf() { opengl32.glLightf(); }
-void lib_opengl32_glLightfv() { opengl32.glLightfv(); }
-void lib_opengl32_glLighti() { opengl32.glLighti(); }
-void lib_opengl32_glLightiv() { opengl32.glLightiv(); }
-void lib_opengl32_glLineStipple() { opengl32.glLineStipple(); }
-void lib_opengl32_glLineWidth() { opengl32.glLineWidth(); }
-void lib_opengl32_glListBase() { opengl32.glListBase(); }
-void lib_opengl32_glLoadIdentity() { opengl32.glLoadIdentity(); }
-void lib_opengl32_glLoadMatrixd() { opengl32.glLoadMatrixd(); }
-void lib_opengl32_glLoadMatrixf() { opengl32.glLoadMatrixf(); }
-void lib_opengl32_glLoadName() { opengl32.glLoadName(); }
-void lib_opengl32_glLogicOp() { opengl32.glLogicOp(); }
-void lib_opengl32_glMap1d() { opengl32.glMap1d(); }
-void lib_opengl32_glMap1f() { opengl32.glMap1f(); }
-void lib_opengl32_glMap2d() { opengl32.glMap2d(); }
-void lib_opengl32_glMap2f() { opengl32.glMap2f(); }
-void lib_opengl32_glMapGrid1d() { opengl32.glMapGrid1d(); }
-void lib_opengl32_glMapGrid1f() { opengl32.glMapGrid1f(); }
-void lib_opengl32_glMapGrid2d() { opengl32.glMapGrid2d(); }
-void lib_opengl32_glMapGrid2f() { opengl32.glMapGrid2f(); }
-void lib_opengl32_glMaterialf() { opengl32.glMaterialf(); }
-void lib_opengl32_glMaterialfv() { opengl32.glMaterialfv(); }
-void lib_opengl32_glMateriali() { opengl32.glMateriali(); }
-void lib_opengl32_glMaterialiv() { opengl32.glMaterialiv(); }
-void lib_opengl32_glMatrixMode() { opengl32.glMatrixMode(); }
-void lib_opengl32_glMultMatrixd() { opengl32.glMultMatrixd(); }
-void lib_opengl32_glMultMatrixf() { opengl32.glMultMatrixf(); }
-void lib_opengl32_glNewList() { opengl32.glNewList(); }
-void lib_opengl32_glNormal3b() { opengl32.glNormal3b(); }
-void lib_opengl32_glNormal3bv() { opengl32.glNormal3bv(); }
-void lib_opengl32_glNormal3d() { opengl32.glNormal3d(); }
-void lib_opengl32_glNormal3dv() { opengl32.glNormal3dv(); }
-void lib_opengl32_glNormal3f() { opengl32.glNormal3f(); }
-void lib_opengl32_glNormal3fv() { opengl32.glNormal3fv(); }
-void lib_opengl32_glNormal3i() { opengl32.glNormal3i(); }
-void lib_opengl32_glNormal3iv() { opengl32.glNormal3iv(); }
-void lib_opengl32_glNormal3s() { opengl32.glNormal3s(); }
-void lib_opengl32_glNormal3sv() { opengl32.glNormal3sv(); }
-void lib_opengl32_glNormalPointer() { opengl32.glNormalPointer(); }
-void lib_opengl32_glOrtho() { opengl32.glOrtho(); }
-void lib_opengl32_glPassThrough() { opengl32.glPassThrough(); }
-void lib_opengl32_glPixelMapfv() { opengl32.glPixelMapfv(); }
-void lib_opengl32_glPixelMapuiv() { opengl32.glPixelMapuiv(); }
-void lib_opengl32_glPixelMapusv() { opengl32.glPixelMapusv(); }
-void lib_opengl32_glPixelStoref() { opengl32.glPixelStoref(); }
-void lib_opengl32_glPixelStorei() { opengl32.glPixelStorei(); }
-void lib_opengl32_glPixelTransferf() { opengl32.glPixelTransferf(); }
-void lib_opengl32_glPixelTransferi() { opengl32.glPixelTransferi(); }
-void lib_opengl32_glPixelZoom() { opengl32.glPixelZoom(); }
-void lib_opengl32_glPointSize() { opengl32.glPointSize(); }
-void lib_opengl32_glPolygonMode() { opengl32.glPolygonMode(); }
-void lib_opengl32_glPolygonOffset() { opengl32.glPolygonOffset(); }
-void lib_opengl32_glPolygonStipple() { opengl32.glPolygonStipple(); }
-void lib_opengl32_glPopAttrib() { opengl32.glPopAttrib(); }
-void lib_opengl32_glPopClientAttrib() { opengl32.glPopClientAttrib(); }
-void lib_opengl32_glPopMatrix() { opengl32.glPopMatrix(); }
-void lib_opengl32_glPopName() { opengl32.glPopName(); }
-void lib_opengl32_glPrioritizeTextures() { opengl32.glPrioritizeTextures(); }
-void lib_opengl32_glPushAttrib() { opengl32.glPushAttrib(); }
-void lib_opengl32_glPushClientAttrib() { opengl32.glPushClientAttrib(); }
-void lib_opengl32_glPushMatrix() { opengl32.glPushMatrix(); }
-void lib_opengl32_glPushName() { opengl32.glPushName(); }
-void lib_opengl32_glRasterPos2d() { opengl32.glRasterPos2d(); }
-void lib_opengl32_glRasterPos2dv() { opengl32.glRasterPos2dv(); }
-void lib_opengl32_glRasterPos2f() { opengl32.glRasterPos2f(); }
-void lib_opengl32_glRasterPos2fv() { opengl32.glRasterPos2fv(); }
-void lib_opengl32_glRasterPos2i() { opengl32.glRasterPos2i(); }
-void lib_opengl32_glRasterPos2iv() { opengl32.glRasterPos2iv(); }
-void lib_opengl32_glRasterPos2s() { opengl32.glRasterPos2s(); }
-void lib_opengl32_glRasterPos2sv() { opengl32.glRasterPos2sv(); }
-void lib_opengl32_glRasterPos3d() { opengl32.glRasterPos3d(); }
-void lib_opengl32_glRasterPos3dv() { opengl32.glRasterPos3dv(); }
-void lib_opengl32_glRasterPos3f() { opengl32.glRasterPos3f(); }
-void lib_opengl32_glRasterPos3fv() { opengl32.glRasterPos3fv(); }
-void lib_opengl32_glRasterPos3i() { opengl32.glRasterPos3i(); }
-void lib_opengl32_glRasterPos3iv() { opengl32.glRasterPos3iv(); }
-void lib_opengl32_glRasterPos3s() { opengl32.glRasterPos3s(); }
-void lib_opengl32_glRasterPos3sv() { opengl32.glRasterPos3sv(); }
-void lib_opengl32_glRasterPos4d() { opengl32.glRasterPos4d(); }
-void lib_opengl32_glRasterPos4dv() { opengl32.glRasterPos4dv(); }
-void lib_opengl32_glRasterPos4f() { opengl32.glRasterPos4f(); }
-void lib_opengl32_glRasterPos4fv() { opengl32.glRasterPos4fv(); }
-void lib_opengl32_glRasterPos4i() { opengl32.glRasterPos4i(); }
-void lib_opengl32_glRasterPos4iv() { opengl32.glRasterPos4iv(); }
-void lib_opengl32_glRasterPos4s() { opengl32.glRasterPos4s(); }
-void lib_opengl32_glRasterPos4sv() { opengl32.glRasterPos4sv(); }
-void lib_opengl32_glReadBuffer() { opengl32.glReadBuffer(); }
-void lib_opengl32_glReadPixels() { opengl32.glReadPixels(); }
-void lib_opengl32_glRectd() { opengl32.glRectd(); }
-void lib_opengl32_glRectdv() { opengl32.glRectdv(); }
-void lib_opengl32_glRectf() { opengl32.glRectf(); }
-void lib_opengl32_glRectfv() { opengl32.glRectfv(); }
-void lib_opengl32_glRecti() { opengl32.glRecti(); }
-void lib_opengl32_glRectiv() { opengl32.glRectiv(); }
-void lib_opengl32_glRects() { opengl32.glRects(); }
-void lib_opengl32_glRectsv() { opengl32.glRectsv(); }
-void lib_opengl32_glRenderMode() { opengl32.glRenderMode(); }
-void lib_opengl32_glRotated() { opengl32.glRotated(); }
-void lib_opengl32_glRotatef() { opengl32.glRotatef(); }
-void lib_opengl32_glScaled() { opengl32.glScaled(); }
-void lib_opengl32_glScalef() { opengl32.glScalef(); }
-void lib_opengl32_glScissor() { opengl32.glScissor(); }
-void lib_opengl32_glSelectBuffer() { opengl32.glSelectBuffer(); }
-void lib_opengl32_glShadeModel() { opengl32.glShadeModel(); }
-void lib_opengl32_glStencilFunc() { opengl32.glStencilFunc(); }
-void lib_opengl32_glStencilMask() { opengl32.glStencilMask(); }
-void lib_opengl32_glStencilOp() { opengl32.glStencilOp(); }
-void lib_opengl32_glTexCoord1d() { opengl32.glTexCoord1d(); }
-void lib_opengl32_glTexCoord1dv() { opengl32.glTexCoord1dv(); }
-void lib_opengl32_glTexCoord1f() { opengl32.glTexCoord1f(); }
-void lib_opengl32_glTexCoord1fv() { opengl32.glTexCoord1fv(); }
-void lib_opengl32_glTexCoord1i() { opengl32.glTexCoord1i(); }
-void lib_opengl32_glTexCoord1iv() { opengl32.glTexCoord1iv(); }
-void lib_opengl32_glTexCoord1s() { opengl32.glTexCoord1s(); }
-void lib_opengl32_glTexCoord1sv() { opengl32.glTexCoord1sv(); }
-void lib_opengl32_glTexCoord2d() { opengl32.glTexCoord2d(); }
-void lib_opengl32_glTexCoord2dv() { opengl32.glTexCoord2dv(); }
-void lib_opengl32_glTexCoord2f() { opengl32.glTexCoord2f(); }
-void lib_opengl32_glTexCoord2fv() { opengl32.glTexCoord2fv(); }
-void lib_opengl32_glTexCoord2i() { opengl32.glTexCoord2i(); }
-void lib_opengl32_glTexCoord2iv() { opengl32.glTexCoord2iv(); }
-void lib_opengl32_glTexCoord2s() { opengl32.glTexCoord2s(); }
-void lib_opengl32_glTexCoord2sv() { opengl32.glTexCoord2sv(); }
-void lib_opengl32_glTexCoord3d() { opengl32.glTexCoord3d(); }
-void lib_opengl32_glTexCoord3dv() { opengl32.glTexCoord3dv(); }
-void lib_opengl32_glTexCoord3f() { opengl32.glTexCoord3f(); }
-void lib_opengl32_glTexCoord3fv() { opengl32.glTexCoord3fv(); }
-void lib_opengl32_glTexCoord3i() { opengl32.glTexCoord3i(); }
-void lib_opengl32_glTexCoord3iv() { opengl32.glTexCoord3iv(); }
-void lib_opengl32_glTexCoord3s() { opengl32.glTexCoord3s(); }
-void lib_opengl32_glTexCoord3sv() { opengl32.glTexCoord3sv(); }
-void lib_opengl32_glTexCoord4d() { opengl32.glTexCoord4d(); }
-void lib_opengl32_glTexCoord4dv() { opengl32.glTexCoord4dv(); }
-void lib_opengl32_glTexCoord4f() { opengl32.glTexCoord4f(); }
-void lib_opengl32_glTexCoord4fv() { opengl32.glTexCoord4fv(); }
-void lib_opengl32_glTexCoord4i() { opengl32.glTexCoord4i(); }
-void lib_opengl32_glTexCoord4iv() { opengl32.glTexCoord4iv(); }
-void lib_opengl32_glTexCoord4s() { opengl32.glTexCoord4s(); }
-void lib_opengl32_glTexCoord4sv() { opengl32.glTexCoord4sv(); }
-void lib_opengl32_glTexCoordPointer() { opengl32.glTexCoordPointer(); }
-void lib_opengl32_glTexEnvf() { opengl32.glTexEnvf(); }
-void lib_opengl32_glTexEnvfv() { opengl32.glTexEnvfv(); }
-void lib_opengl32_glTexEnvi() { opengl32.glTexEnvi(); }
-void lib_opengl32_glTexEnviv() { opengl32.glTexEnviv(); }
-void lib_opengl32_glTexGend() { opengl32.glTexGend(); }
-void lib_opengl32_glTexGendv() { opengl32.glTexGendv(); }
-void lib_opengl32_glTexGenf() { opengl32.glTexGenf(); }
-void lib_opengl32_glTexGenfv() { opengl32.glTexGenfv(); }
-void lib_opengl32_glTexGeni() { opengl32.glTexGeni(); }
-void lib_opengl32_glTexGeniv() { opengl32.glTexGeniv(); }
-void lib_opengl32_glTexImage1D() { opengl32.glTexImage1D(); }
-void lib_opengl32_glTexImage2D() { opengl32.glTexImage2D(); }
-void lib_opengl32_glTexParameterf() { opengl32.glTexParameterf(); }
-void lib_opengl32_glTexParameterfv() { opengl32.glTexParameterfv(); }
-void lib_opengl32_glTexParameteri() { opengl32.glTexParameteri(); }
-void lib_opengl32_glTexParameteriv() { opengl32.glTexParameteriv(); }
-void lib_opengl32_glTexSubImage1D() { opengl32.glTexSubImage1D(); }
-void lib_opengl32_glTexSubImage2D() { opengl32.glTexSubImage2D(); }
-void lib_opengl32_glTranslated() { opengl32.glTranslated(); }
-void lib_opengl32_glTranslatef() { opengl32.glTranslatef(); }
-void lib_opengl32_glVertex2d() { opengl32.glVertex2d(); }
-void lib_opengl32_glVertex2dv() { opengl32.glVertex2dv(); }
-void lib_opengl32_glVertex2f() { opengl32.glVertex2f(); }
-void lib_opengl32_glVertex2fv() { opengl32.glVertex2fv(); }
-void lib_opengl32_glVertex2i() { opengl32.glVertex2i(); }
-void lib_opengl32_glVertex2iv() { opengl32.glVertex2iv(); }
-void lib_opengl32_glVertex2s() { opengl32.glVertex2s(); }
-void lib_opengl32_glVertex2sv() { opengl32.glVertex2sv(); }
-void lib_opengl32_glVertex3d() { opengl32.glVertex3d(); }
-void lib_opengl32_glVertex3dv() { opengl32.glVertex3dv(); }
-void lib_opengl32_glVertex3f() { opengl32.glVertex3f(); }
-void lib_opengl32_glVertex3fv() { opengl32.glVertex3fv(); }
-void lib_opengl32_glVertex3i() { opengl32.glVertex3i(); }
-void lib_opengl32_glVertex3iv() { opengl32.glVertex3iv(); }
-void lib_opengl32_glVertex3s() { opengl32.glVertex3s(); }
-void lib_opengl32_glVertex3sv() { opengl32.glVertex3sv(); }
-void lib_opengl32_glVertex4d() { opengl32.glVertex4d(); }
-void lib_opengl32_glVertex4dv() { opengl32.glVertex4dv(); }
-void lib_opengl32_glVertex4f() { opengl32.glVertex4f(); }
-void lib_opengl32_glVertex4fv() { opengl32.glVertex4fv(); }
-void lib_opengl32_glVertex4i() { opengl32.glVertex4i(); }
-void lib_opengl32_glVertex4iv() { opengl32.glVertex4iv(); }
-void lib_opengl32_glVertex4s() { opengl32.glVertex4s(); }
-void lib_opengl32_glVertex4sv() { opengl32.glVertex4sv(); }
-void lib_opengl32_glVertexPointer() { opengl32.glVertexPointer(); }
-void lib_opengl32_glViewport() { opengl32.glViewport(); }
-void lib_opengl32_wglChoosePixelFormat() { opengl32.wglChoosePixelFormat(); }
-void lib_opengl32_wglCopyContext() { opengl32.wglCopyContext(); }
-void lib_opengl32_wglCreateContext() { opengl32.wglCreateContext(); }
-void lib_opengl32_wglCreateLayerContext() { opengl32.wglCreateLayerContext(); }
-void lib_opengl32_wglDeleteContext() { opengl32.wglDeleteContext(); }
-void lib_opengl32_wglDescribeLayerPlane() { opengl32.wglDescribeLayerPlane(); }
-void lib_opengl32_wglDescribePixelFormat() { opengl32.wglDescribePixelFormat(); }
-void lib_opengl32_wglGetCurrentContext() { opengl32.wglGetCurrentContext(); }
-void lib_opengl32_wglGetCurrentDC() { opengl32.wglGetCurrentDC(); }
-void lib_opengl32_wglGetDefaultProcAddress() { opengl32.wglGetDefaultProcAddress(); }
-void lib_opengl32_wglGetLayerPaletteEntries() { opengl32.wglGetLayerPaletteEntries(); }
-void lib_opengl32_wglGetPixelFormat() { opengl32.wglGetPixelFormat(); }
-void lib_opengl32_wglGetProcAddress() { opengl32.wglGetProcAddress(); }
-void lib_opengl32_wglMakeCurrent() { opengl32.wglMakeCurrent(); }
-void lib_opengl32_wglRealizeLayerPalette() { opengl32.wglRealizeLayerPalette(); }
-void lib_opengl32_wglSetLayerPaletteEntries() { opengl32.wglSetLayerPaletteEntries(); }
-void lib_opengl32_wglSetPixelFormat() { opengl32.wglSetPixelFormat(); }
-void lib_opengl32_wglShareLists() { opengl32.wglShareLists(); }
-void lib_opengl32_wglSwapBuffers() { opengl32.wglSwapBuffers(); }
-void lib_opengl32_wglSwapLayerBuffers() { opengl32.wglSwapLayerBuffers(); }
-void lib_opengl32_wglSwapMultipleBuffers() { opengl32.wglSwapMultipleBuffers(); }
-void lib_opengl32_wglUseFontBitmapsA() { opengl32.wglUseFontBitmapsA(); }
-void lib_opengl32_wglUseFontBitmapsW() { opengl32.wglUseFontBitmapsW(); }
-void lib_opengl32_wglUseFontOutlinesA() { opengl32.wglUseFontOutlinesA(); }
-void lib_opengl32_wglUseFontOutlinesW() { opengl32.wglUseFontOutlinesW(); }
+extern "C" {
+	void lib_opengl32_GlmfBeginGlsBlock() { opengl32.GlmfBeginGlsBlock(); }
+	void lib_opengl32_GlmfCloseMetaFile() { opengl32.GlmfCloseMetaFile(); }
+	void lib_opengl32_GlmfEndGlsBlock() { opengl32.GlmfEndGlsBlock(); }
+	void lib_opengl32_GlmfEndPlayback() { opengl32.GlmfEndPlayback(); }
+	void lib_opengl32_GlmfInitPlayback() { opengl32.GlmfInitPlayback(); }
+	void lib_opengl32_GlmfPlayGlsRecord() { opengl32.GlmfPlayGlsRecord(); }
+	void lib_opengl32_glAccum() { opengl32.glAccum(); }
+	void lib_opengl32_glAlphaFunc() { opengl32.glAlphaFunc(); }
+	void lib_opengl32_glAreTexturesResident() { opengl32.glAreTexturesResident(); }
+	void lib_opengl32_glArrayElement() { opengl32.glArrayElement(); }
+	void lib_opengl32_glBegin() { opengl32.glBegin(); }
+	void lib_opengl32_glBindTexture() { opengl32.glBindTexture(); }
+	void lib_opengl32_glBitmap() { opengl32.glBitmap(); }
+	void lib_opengl32_glBlendFunc() { opengl32.glBlendFunc(); }
+	void lib_opengl32_glCallList() { opengl32.glCallList(); }
+	void lib_opengl32_glCallLists() { opengl32.glCallLists(); }
+	void lib_opengl32_glClear() { opengl32.glClear(); }
+	void lib_opengl32_glClearAccum() { opengl32.glClearAccum(); }
+	void lib_opengl32_glClearColor() { opengl32.glClearColor(); }
+	void lib_opengl32_glClearDepth() { opengl32.glClearDepth(); }
+	void lib_opengl32_glClearIndex() { opengl32.glClearIndex(); }
+	void lib_opengl32_glClearStencil() { opengl32.glClearStencil(); }
+	void lib_opengl32_glClipPlane() { opengl32.glClipPlane(); }
+	void lib_opengl32_glColor3b() { opengl32.glColor3b(); }
+	void lib_opengl32_glColor3bv() { opengl32.glColor3bv(); }
+	void lib_opengl32_glColor3d() { opengl32.glColor3d(); }
+	void lib_opengl32_glColor3dv() { opengl32.glColor3dv(); }
+	void lib_opengl32_glColor3f() { opengl32.glColor3f(); }
+	void lib_opengl32_glColor3fv() { opengl32.glColor3fv(); }
+	void lib_opengl32_glColor3i() { opengl32.glColor3i(); }
+	void lib_opengl32_glColor3iv() { opengl32.glColor3iv(); }
+	void lib_opengl32_glColor3s() { opengl32.glColor3s(); }
+	void lib_opengl32_glColor3sv() { opengl32.glColor3sv(); }
+	void lib_opengl32_glColor3ub() { opengl32.glColor3ub(); }
+	void lib_opengl32_glColor3ubv() { opengl32.glColor3ubv(); }
+	void lib_opengl32_glColor3ui() { opengl32.glColor3ui(); }
+	void lib_opengl32_glColor3uiv() { opengl32.glColor3uiv(); }
+	void lib_opengl32_glColor3us() { opengl32.glColor3us(); }
+	void lib_opengl32_glColor3usv() { opengl32.glColor3usv(); }
+	void lib_opengl32_glColor4b() { opengl32.glColor4b(); }
+	void lib_opengl32_glColor4bv() { opengl32.glColor4bv(); }
+	void lib_opengl32_glColor4d() { opengl32.glColor4d(); }
+	void lib_opengl32_glColor4dv() { opengl32.glColor4dv(); }
+	void lib_opengl32_glColor4f() { opengl32.glColor4f(); }
+	void lib_opengl32_glColor4fv() { opengl32.glColor4fv(); }
+	void lib_opengl32_glColor4i() { opengl32.glColor4i(); }
+	void lib_opengl32_glColor4iv() { opengl32.glColor4iv(); }
+	void lib_opengl32_glColor4s() { opengl32.glColor4s(); }
+	void lib_opengl32_glColor4sv() { opengl32.glColor4sv(); }
+	void lib_opengl32_glColor4ub() { opengl32.glColor4ub(); }
+	void lib_opengl32_glColor4ubv() { opengl32.glColor4ubv(); }
+	void lib_opengl32_glColor4ui() { opengl32.glColor4ui(); }
+	void lib_opengl32_glColor4uiv() { opengl32.glColor4uiv(); }
+	void lib_opengl32_glColor4us() { opengl32.glColor4us(); }
+	void lib_opengl32_glColor4usv() { opengl32.glColor4usv(); }
+	void lib_opengl32_glColorMask() { opengl32.glColorMask(); }
+	void lib_opengl32_glColorMaterial() { opengl32.glColorMaterial(); }
+	void lib_opengl32_glColorPointer() { opengl32.glColorPointer(); }
+	void lib_opengl32_glCopyPixels() { opengl32.glCopyPixels(); }
+	void lib_opengl32_glCopyTexImage1D() { opengl32.glCopyTexImage1D(); }
+	void lib_opengl32_glCopyTexImage2D() { opengl32.glCopyTexImage2D(); }
+	void lib_opengl32_glCopyTexSubImage1D() { opengl32.glCopyTexSubImage1D(); }
+	void lib_opengl32_glCopyTexSubImage2D() { opengl32.glCopyTexSubImage2D(); }
+	void lib_opengl32_glCullFace() { opengl32.glCullFace(); }
+	void lib_opengl32_glDebugEntry() { opengl32.glDebugEntry(); }
+	void lib_opengl32_glDeleteLists() { opengl32.glDeleteLists(); }
+	void lib_opengl32_glDeleteTextures() { opengl32.glDeleteTextures(); }
+	void lib_opengl32_glDepthFunc() { opengl32.glDepthFunc(); }
+	void lib_opengl32_glDepthMask() { opengl32.glDepthMask(); }
+	void lib_opengl32_glDepthRange() { opengl32.glDepthRange(); }
+	void lib_opengl32_glDisable() { opengl32.glDisable(); }
+	void lib_opengl32_glDisableClientState() { opengl32.glDisableClientState(); }
+	void lib_opengl32_glDrawArrays() { opengl32.glDrawArrays(); }
+	void lib_opengl32_glDrawBuffer() { opengl32.glDrawBuffer(); }
+	void lib_opengl32_glDrawElements() { opengl32.glDrawElements(); }
+	void lib_opengl32_glDrawPixels() { opengl32.glDrawPixels(); }
+	void lib_opengl32_glEdgeFlag() { opengl32.glEdgeFlag(); }
+	void lib_opengl32_glEdgeFlagPointer() { opengl32.glEdgeFlagPointer(); }
+	void lib_opengl32_glEdgeFlagv() { opengl32.glEdgeFlagv(); }
+	void lib_opengl32_glEnable() { opengl32.glEnable(); }
+	void lib_opengl32_glEnableClientState() { opengl32.glEnableClientState(); }
+	void lib_opengl32_glEnd() { opengl32.glEnd(); }
+	void lib_opengl32_glEndList() { opengl32.glEndList(); }
+	void lib_opengl32_glEvalCoord1d() { opengl32.glEvalCoord1d(); }
+	void lib_opengl32_glEvalCoord1dv() { opengl32.glEvalCoord1dv(); }
+	void lib_opengl32_glEvalCoord1f() { opengl32.glEvalCoord1f(); }
+	void lib_opengl32_glEvalCoord1fv() { opengl32.glEvalCoord1fv(); }
+	void lib_opengl32_glEvalCoord2d() { opengl32.glEvalCoord2d(); }
+	void lib_opengl32_glEvalCoord2dv() { opengl32.glEvalCoord2dv(); }
+	void lib_opengl32_glEvalCoord2f() { opengl32.glEvalCoord2f(); }
+	void lib_opengl32_glEvalCoord2fv() { opengl32.glEvalCoord2fv(); }
+	void lib_opengl32_glEvalMesh1() { opengl32.glEvalMesh1(); }
+	void lib_opengl32_glEvalMesh2() { opengl32.glEvalMesh2(); }
+	void lib_opengl32_glEvalPoint1() { opengl32.glEvalPoint1(); }
+	void lib_opengl32_glEvalPoint2() { opengl32.glEvalPoint2(); }
+	void lib_opengl32_glFeedbackBuffer() { opengl32.glFeedbackBuffer(); }
+	void lib_opengl32_glFinish() { opengl32.glFinish(); }
+	void lib_opengl32_glFlush() { opengl32.glFlush(); }
+	void lib_opengl32_glFogf() { opengl32.glFogf(); }
+	void lib_opengl32_glFogfv() { opengl32.glFogfv(); }
+	void lib_opengl32_glFogi() { opengl32.glFogi(); }
+	void lib_opengl32_glFogiv() { opengl32.glFogiv(); }
+	void lib_opengl32_glFrontFace() { opengl32.glFrontFace(); }
+	void lib_opengl32_glFrustum() { opengl32.glFrustum(); }
+	void lib_opengl32_glGenLists() { opengl32.glGenLists(); }
+	void lib_opengl32_glGenTextures() { opengl32.glGenTextures(); }
+	void lib_opengl32_glGetBooleanv() { opengl32.glGetBooleanv(); }
+	void lib_opengl32_glGetClipPlane() { opengl32.glGetClipPlane(); }
+	void lib_opengl32_glGetDoublev() { opengl32.glGetDoublev(); }
+	void lib_opengl32_glGetError() { opengl32.glGetError(); }
+	void lib_opengl32_glGetFloatv() { opengl32.glGetFloatv(); }
+	void lib_opengl32_glGetIntegerv() { opengl32.glGetIntegerv(); }
+	void lib_opengl32_glGetLightfv() { opengl32.glGetLightfv(); }
+	void lib_opengl32_glGetLightiv() { opengl32.glGetLightiv(); }
+	void lib_opengl32_glGetMapdv() { opengl32.glGetMapdv(); }
+	void lib_opengl32_glGetMapfv() { opengl32.glGetMapfv(); }
+	void lib_opengl32_glGetMapiv() { opengl32.glGetMapiv(); }
+	void lib_opengl32_glGetMaterialfv() { opengl32.glGetMaterialfv(); }
+	void lib_opengl32_glGetMaterialiv() { opengl32.glGetMaterialiv(); }
+	void lib_opengl32_glGetPixelMapfv() { opengl32.glGetPixelMapfv(); }
+	void lib_opengl32_glGetPixelMapuiv() { opengl32.glGetPixelMapuiv(); }
+	void lib_opengl32_glGetPixelMapusv() { opengl32.glGetPixelMapusv(); }
+	void lib_opengl32_glGetPointerv() { opengl32.glGetPointerv(); }
+	void lib_opengl32_glGetPolygonStipple() { opengl32.glGetPolygonStipple(); }
+	void lib_opengl32_glGetString() { opengl32.glGetString(); }
+	void lib_opengl32_glGetTexEnvfv() { opengl32.glGetTexEnvfv(); }
+	void lib_opengl32_glGetTexEnviv() { opengl32.glGetTexEnviv(); }
+	void lib_opengl32_glGetTexGendv() { opengl32.glGetTexGendv(); }
+	void lib_opengl32_glGetTexGenfv() { opengl32.glGetTexGenfv(); }
+	void lib_opengl32_glGetTexGeniv() { opengl32.glGetTexGeniv(); }
+	void lib_opengl32_glGetTexImage() { opengl32.glGetTexImage(); }
+	void lib_opengl32_glGetTexLevelParameterfv() { opengl32.glGetTexLevelParameterfv(); }
+	void lib_opengl32_glGetTexLevelParameteriv() { opengl32.glGetTexLevelParameteriv(); }
+	void lib_opengl32_glGetTexParameterfv() { opengl32.glGetTexParameterfv(); }
+	void lib_opengl32_glGetTexParameteriv() { opengl32.glGetTexParameteriv(); }
+	void lib_opengl32_glHint() { opengl32.glHint(); }
+	void lib_opengl32_glIndexMask() { opengl32.glIndexMask(); }
+	void lib_opengl32_glIndexPointer() { opengl32.glIndexPointer(); }
+	void lib_opengl32_glIndexd() { opengl32.glIndexd(); }
+	void lib_opengl32_glIndexdv() { opengl32.glIndexdv(); }
+	void lib_opengl32_glIndexf() { opengl32.glIndexf(); }
+	void lib_opengl32_glIndexfv() { opengl32.glIndexfv(); }
+	void lib_opengl32_glIndexi() { opengl32.glIndexi(); }
+	void lib_opengl32_glIndexiv() { opengl32.glIndexiv(); }
+	void lib_opengl32_glIndexs() { opengl32.glIndexs(); }
+	void lib_opengl32_glIndexsv() { opengl32.glIndexsv(); }
+	void lib_opengl32_glIndexub() { opengl32.glIndexub(); }
+	void lib_opengl32_glIndexubv() { opengl32.glIndexubv(); }
+	void lib_opengl32_glInitNames() { opengl32.glInitNames(); }
+	void lib_opengl32_glInterleavedArrays() { opengl32.glInterleavedArrays(); }
+	void lib_opengl32_glIsEnabled() { opengl32.glIsEnabled(); }
+	void lib_opengl32_glIsList() { opengl32.glIsList(); }
+	void lib_opengl32_glIsTexture() { opengl32.glIsTexture(); }
+	void lib_opengl32_glLightModelf() { opengl32.glLightModelf(); }
+	void lib_opengl32_glLightModelfv() { opengl32.glLightModelfv(); }
+	void lib_opengl32_glLightModeli() { opengl32.glLightModeli(); }
+	void lib_opengl32_glLightModeliv() { opengl32.glLightModeliv(); }
+	void lib_opengl32_glLightf() { opengl32.glLightf(); }
+	void lib_opengl32_glLightfv() { opengl32.glLightfv(); }
+	void lib_opengl32_glLighti() { opengl32.glLighti(); }
+	void lib_opengl32_glLightiv() { opengl32.glLightiv(); }
+	void lib_opengl32_glLineStipple() { opengl32.glLineStipple(); }
+	void lib_opengl32_glLineWidth() { opengl32.glLineWidth(); }
+	void lib_opengl32_glListBase() { opengl32.glListBase(); }
+	void lib_opengl32_glLoadIdentity() { opengl32.glLoadIdentity(); }
+	void lib_opengl32_glLoadMatrixd() { opengl32.glLoadMatrixd(); }
+	void lib_opengl32_glLoadMatrixf() { opengl32.glLoadMatrixf(); }
+	void lib_opengl32_glLoadName() { opengl32.glLoadName(); }
+	void lib_opengl32_glLogicOp() { opengl32.glLogicOp(); }
+	void lib_opengl32_glMap1d() { opengl32.glMap1d(); }
+	void lib_opengl32_glMap1f() { opengl32.glMap1f(); }
+	void lib_opengl32_glMap2d() { opengl32.glMap2d(); }
+	void lib_opengl32_glMap2f() { opengl32.glMap2f(); }
+	void lib_opengl32_glMapGrid1d() { opengl32.glMapGrid1d(); }
+	void lib_opengl32_glMapGrid1f() { opengl32.glMapGrid1f(); }
+	void lib_opengl32_glMapGrid2d() { opengl32.glMapGrid2d(); }
+	void lib_opengl32_glMapGrid2f() { opengl32.glMapGrid2f(); }
+	void lib_opengl32_glMaterialf() { opengl32.glMaterialf(); }
+	void lib_opengl32_glMaterialfv() { opengl32.glMaterialfv(); }
+	void lib_opengl32_glMateriali() { opengl32.glMateriali(); }
+	void lib_opengl32_glMaterialiv() { opengl32.glMaterialiv(); }
+	void lib_opengl32_glMatrixMode() { opengl32.glMatrixMode(); }
+	void lib_opengl32_glMultMatrixd() { opengl32.glMultMatrixd(); }
+	void lib_opengl32_glMultMatrixf() { opengl32.glMultMatrixf(); }
+	void lib_opengl32_glNewList() { opengl32.glNewList(); }
+	void lib_opengl32_glNormal3b() { opengl32.glNormal3b(); }
+	void lib_opengl32_glNormal3bv() { opengl32.glNormal3bv(); }
+	void lib_opengl32_glNormal3d() { opengl32.glNormal3d(); }
+	void lib_opengl32_glNormal3dv() { opengl32.glNormal3dv(); }
+	void lib_opengl32_glNormal3f() { opengl32.glNormal3f(); }
+	void lib_opengl32_glNormal3fv() { opengl32.glNormal3fv(); }
+	void lib_opengl32_glNormal3i() { opengl32.glNormal3i(); }
+	void lib_opengl32_glNormal3iv() { opengl32.glNormal3iv(); }
+	void lib_opengl32_glNormal3s() { opengl32.glNormal3s(); }
+	void lib_opengl32_glNormal3sv() { opengl32.glNormal3sv(); }
+	void lib_opengl32_glNormalPointer() { opengl32.glNormalPointer(); }
+	void lib_opengl32_glOrtho() { opengl32.glOrtho(); }
+	void lib_opengl32_glPassThrough() { opengl32.glPassThrough(); }
+	void lib_opengl32_glPixelMapfv() { opengl32.glPixelMapfv(); }
+	void lib_opengl32_glPixelMapuiv() { opengl32.glPixelMapuiv(); }
+	void lib_opengl32_glPixelMapusv() { opengl32.glPixelMapusv(); }
+	void lib_opengl32_glPixelStoref() { opengl32.glPixelStoref(); }
+	void lib_opengl32_glPixelStorei() { opengl32.glPixelStorei(); }
+	void lib_opengl32_glPixelTransferf() { opengl32.glPixelTransferf(); }
+	void lib_opengl32_glPixelTransferi() { opengl32.glPixelTransferi(); }
+	void lib_opengl32_glPixelZoom() { opengl32.glPixelZoom(); }
+	void lib_opengl32_glPointSize() { opengl32.glPointSize(); }
+	void lib_opengl32_glPolygonMode() { opengl32.glPolygonMode(); }
+	void lib_opengl32_glPolygonOffset() { opengl32.glPolygonOffset(); }
+	void lib_opengl32_glPolygonStipple() { opengl32.glPolygonStipple(); }
+	void lib_opengl32_glPopAttrib() { opengl32.glPopAttrib(); }
+	void lib_opengl32_glPopClientAttrib() { opengl32.glPopClientAttrib(); }
+	void lib_opengl32_glPopMatrix() { opengl32.glPopMatrix(); }
+	void lib_opengl32_glPopName() { opengl32.glPopName(); }
+	void lib_opengl32_glPrioritizeTextures() { opengl32.glPrioritizeTextures(); }
+	void lib_opengl32_glPushAttrib() { opengl32.glPushAttrib(); }
+	void lib_opengl32_glPushClientAttrib() { opengl32.glPushClientAttrib(); }
+	void lib_opengl32_glPushMatrix() { opengl32.glPushMatrix(); }
+	void lib_opengl32_glPushName() { opengl32.glPushName(); }
+	void lib_opengl32_glRasterPos2d() { opengl32.glRasterPos2d(); }
+	void lib_opengl32_glRasterPos2dv() { opengl32.glRasterPos2dv(); }
+	void lib_opengl32_glRasterPos2f() { opengl32.glRasterPos2f(); }
+	void lib_opengl32_glRasterPos2fv() { opengl32.glRasterPos2fv(); }
+	void lib_opengl32_glRasterPos2i() { opengl32.glRasterPos2i(); }
+	void lib_opengl32_glRasterPos2iv() { opengl32.glRasterPos2iv(); }
+	void lib_opengl32_glRasterPos2s() { opengl32.glRasterPos2s(); }
+	void lib_opengl32_glRasterPos2sv() { opengl32.glRasterPos2sv(); }
+	void lib_opengl32_glRasterPos3d() { opengl32.glRasterPos3d(); }
+	void lib_opengl32_glRasterPos3dv() { opengl32.glRasterPos3dv(); }
+	void lib_opengl32_glRasterPos3f() { opengl32.glRasterPos3f(); }
+	void lib_opengl32_glRasterPos3fv() { opengl32.glRasterPos3fv(); }
+	void lib_opengl32_glRasterPos3i() { opengl32.glRasterPos3i(); }
+	void lib_opengl32_glRasterPos3iv() { opengl32.glRasterPos3iv(); }
+	void lib_opengl32_glRasterPos3s() { opengl32.glRasterPos3s(); }
+	void lib_opengl32_glRasterPos3sv() { opengl32.glRasterPos3sv(); }
+	void lib_opengl32_glRasterPos4d() { opengl32.glRasterPos4d(); }
+	void lib_opengl32_glRasterPos4dv() { opengl32.glRasterPos4dv(); }
+	void lib_opengl32_glRasterPos4f() { opengl32.glRasterPos4f(); }
+	void lib_opengl32_glRasterPos4fv() { opengl32.glRasterPos4fv(); }
+	void lib_opengl32_glRasterPos4i() { opengl32.glRasterPos4i(); }
+	void lib_opengl32_glRasterPos4iv() { opengl32.glRasterPos4iv(); }
+	void lib_opengl32_glRasterPos4s() { opengl32.glRasterPos4s(); }
+	void lib_opengl32_glRasterPos4sv() { opengl32.glRasterPos4sv(); }
+	void lib_opengl32_glReadBuffer() { opengl32.glReadBuffer(); }
+	void lib_opengl32_glReadPixels() { opengl32.glReadPixels(); }
+	void lib_opengl32_glRectd() { opengl32.glRectd(); }
+	void lib_opengl32_glRectdv() { opengl32.glRectdv(); }
+	void lib_opengl32_glRectf() { opengl32.glRectf(); }
+	void lib_opengl32_glRectfv() { opengl32.glRectfv(); }
+	void lib_opengl32_glRecti() { opengl32.glRecti(); }
+	void lib_opengl32_glRectiv() { opengl32.glRectiv(); }
+	void lib_opengl32_glRects() { opengl32.glRects(); }
+	void lib_opengl32_glRectsv() { opengl32.glRectsv(); }
+	void lib_opengl32_glRenderMode() { opengl32.glRenderMode(); }
+	void lib_opengl32_glRotated() { opengl32.glRotated(); }
+	void lib_opengl32_glRotatef() { opengl32.glRotatef(); }
+	void lib_opengl32_glScaled() { opengl32.glScaled(); }
+	void lib_opengl32_glScalef() { opengl32.glScalef(); }
+	void lib_opengl32_glScissor() { opengl32.glScissor(); }
+	void lib_opengl32_glSelectBuffer() { opengl32.glSelectBuffer(); }
+	void lib_opengl32_glShadeModel() { opengl32.glShadeModel(); }
+	void lib_opengl32_glStencilFunc() { opengl32.glStencilFunc(); }
+	void lib_opengl32_glStencilMask() { opengl32.glStencilMask(); }
+	void lib_opengl32_glStencilOp() { opengl32.glStencilOp(); }
+	void lib_opengl32_glTexCoord1d() { opengl32.glTexCoord1d(); }
+	void lib_opengl32_glTexCoord1dv() { opengl32.glTexCoord1dv(); }
+	void lib_opengl32_glTexCoord1f() { opengl32.glTexCoord1f(); }
+	void lib_opengl32_glTexCoord1fv() { opengl32.glTexCoord1fv(); }
+	void lib_opengl32_glTexCoord1i() { opengl32.glTexCoord1i(); }
+	void lib_opengl32_glTexCoord1iv() { opengl32.glTexCoord1iv(); }
+	void lib_opengl32_glTexCoord1s() { opengl32.glTexCoord1s(); }
+	void lib_opengl32_glTexCoord1sv() { opengl32.glTexCoord1sv(); }
+	void lib_opengl32_glTexCoord2d() { opengl32.glTexCoord2d(); }
+	void lib_opengl32_glTexCoord2dv() { opengl32.glTexCoord2dv(); }
+	void lib_opengl32_glTexCoord2f() { opengl32.glTexCoord2f(); }
+	void lib_opengl32_glTexCoord2fv() { opengl32.glTexCoord2fv(); }
+	void lib_opengl32_glTexCoord2i() { opengl32.glTexCoord2i(); }
+	void lib_opengl32_glTexCoord2iv() { opengl32.glTexCoord2iv(); }
+	void lib_opengl32_glTexCoord2s() { opengl32.glTexCoord2s(); }
+	void lib_opengl32_glTexCoord2sv() { opengl32.glTexCoord2sv(); }
+	void lib_opengl32_glTexCoord3d() { opengl32.glTexCoord3d(); }
+	void lib_opengl32_glTexCoord3dv() { opengl32.glTexCoord3dv(); }
+	void lib_opengl32_glTexCoord3f() { opengl32.glTexCoord3f(); }
+	void lib_opengl32_glTexCoord3fv() { opengl32.glTexCoord3fv(); }
+	void lib_opengl32_glTexCoord3i() { opengl32.glTexCoord3i(); }
+	void lib_opengl32_glTexCoord3iv() { opengl32.glTexCoord3iv(); }
+	void lib_opengl32_glTexCoord3s() { opengl32.glTexCoord3s(); }
+	void lib_opengl32_glTexCoord3sv() { opengl32.glTexCoord3sv(); }
+	void lib_opengl32_glTexCoord4d() { opengl32.glTexCoord4d(); }
+	void lib_opengl32_glTexCoord4dv() { opengl32.glTexCoord4dv(); }
+	void lib_opengl32_glTexCoord4f() { opengl32.glTexCoord4f(); }
+	void lib_opengl32_glTexCoord4fv() { opengl32.glTexCoord4fv(); }
+	void lib_opengl32_glTexCoord4i() { opengl32.glTexCoord4i(); }
+	void lib_opengl32_glTexCoord4iv() { opengl32.glTexCoord4iv(); }
+	void lib_opengl32_glTexCoord4s() { opengl32.glTexCoord4s(); }
+	void lib_opengl32_glTexCoord4sv() { opengl32.glTexCoord4sv(); }
+	void lib_opengl32_glTexCoordPointer() { opengl32.glTexCoordPointer(); }
+	void lib_opengl32_glTexEnvf() { opengl32.glTexEnvf(); }
+	void lib_opengl32_glTexEnvfv() { opengl32.glTexEnvfv(); }
+	void lib_opengl32_glTexEnvi() { opengl32.glTexEnvi(); }
+	void lib_opengl32_glTexEnviv() { opengl32.glTexEnviv(); }
+	void lib_opengl32_glTexGend() { opengl32.glTexGend(); }
+	void lib_opengl32_glTexGendv() { opengl32.glTexGendv(); }
+	void lib_opengl32_glTexGenf() { opengl32.glTexGenf(); }
+	void lib_opengl32_glTexGenfv() { opengl32.glTexGenfv(); }
+	void lib_opengl32_glTexGeni() { opengl32.glTexGeni(); }
+	void lib_opengl32_glTexGeniv() { opengl32.glTexGeniv(); }
+	void lib_opengl32_glTexImage1D() { opengl32.glTexImage1D(); }
+	void lib_opengl32_glTexImage2D() { opengl32.glTexImage2D(); }
+	void lib_opengl32_glTexParameterf() { opengl32.glTexParameterf(); }
+	void lib_opengl32_glTexParameterfv() { opengl32.glTexParameterfv(); }
+	void lib_opengl32_glTexParameteri() { opengl32.glTexParameteri(); }
+	void lib_opengl32_glTexParameteriv() { opengl32.glTexParameteriv(); }
+	void lib_opengl32_glTexSubImage1D() { opengl32.glTexSubImage1D(); }
+	void lib_opengl32_glTexSubImage2D() { opengl32.glTexSubImage2D(); }
+	void lib_opengl32_glTranslated() { opengl32.glTranslated(); }
+	void lib_opengl32_glTranslatef() { opengl32.glTranslatef(); }
+	void lib_opengl32_glVertex2d() { opengl32.glVertex2d(); }
+	void lib_opengl32_glVertex2dv() { opengl32.glVertex2dv(); }
+	void lib_opengl32_glVertex2f() { opengl32.glVertex2f(); }
+	void lib_opengl32_glVertex2fv() { opengl32.glVertex2fv(); }
+	void lib_opengl32_glVertex2i() { opengl32.glVertex2i(); }
+	void lib_opengl32_glVertex2iv() { opengl32.glVertex2iv(); }
+	void lib_opengl32_glVertex2s() { opengl32.glVertex2s(); }
+	void lib_opengl32_glVertex2sv() { opengl32.glVertex2sv(); }
+	void lib_opengl32_glVertex3d() { opengl32.glVertex3d(); }
+	void lib_opengl32_glVertex3dv() { opengl32.glVertex3dv(); }
+	void lib_opengl32_glVertex3f() { opengl32.glVertex3f(); }
+	void lib_opengl32_glVertex3fv() { opengl32.glVertex3fv(); }
+	void lib_opengl32_glVertex3i() { opengl32.glVertex3i(); }
+	void lib_opengl32_glVertex3iv() { opengl32.glVertex3iv(); }
+	void lib_opengl32_glVertex3s() { opengl32.glVertex3s(); }
+	void lib_opengl32_glVertex3sv() { opengl32.glVertex3sv(); }
+	void lib_opengl32_glVertex4d() { opengl32.glVertex4d(); }
+	void lib_opengl32_glVertex4dv() { opengl32.glVertex4dv(); }
+	void lib_opengl32_glVertex4f() { opengl32.glVertex4f(); }
+	void lib_opengl32_glVertex4fv() { opengl32.glVertex4fv(); }
+	void lib_opengl32_glVertex4i() { opengl32.glVertex4i(); }
+	void lib_opengl32_glVertex4iv() { opengl32.glVertex4iv(); }
+	void lib_opengl32_glVertex4s() { opengl32.glVertex4s(); }
+	void lib_opengl32_glVertex4sv() { opengl32.glVertex4sv(); }
+	void lib_opengl32_glVertexPointer() { opengl32.glVertexPointer(); }
+	void lib_opengl32_glViewport() { opengl32.glViewport(); }
+	void lib_opengl32_wglChoosePixelFormat() { opengl32.wglChoosePixelFormat(); }
+	void lib_opengl32_wglCopyContext() { opengl32.wglCopyContext(); }
+	void lib_opengl32_wglCreateContext() { opengl32.wglCreateContext(); }
+	void lib_opengl32_wglCreateLayerContext() { opengl32.wglCreateLayerContext(); }
+	void lib_opengl32_wglDeleteContext() { opengl32.wglDeleteContext(); }
+	void lib_opengl32_wglDescribeLayerPlane() { opengl32.wglDescribeLayerPlane(); }
+	void lib_opengl32_wglDescribePixelFormat() { opengl32.wglDescribePixelFormat(); }
+	void lib_opengl32_wglGetCurrentContext() { opengl32.wglGetCurrentContext(); }
+	void lib_opengl32_wglGetCurrentDC() { opengl32.wglGetCurrentDC(); }
+	void lib_opengl32_wglGetDefaultProcAddress() { opengl32.wglGetDefaultProcAddress(); }
+	void lib_opengl32_wglGetLayerPaletteEntries() { opengl32.wglGetLayerPaletteEntries(); }
+	void lib_opengl32_wglGetPixelFormat() { opengl32.wglGetPixelFormat(); }
+	void lib_opengl32_wglGetProcAddress() { opengl32.wglGetProcAddress(); }
+	void lib_opengl32_wglMakeCurrent() { opengl32.wglMakeCurrent(); }
+	void lib_opengl32_wglRealizeLayerPalette() { opengl32.wglRealizeLayerPalette(); }
+	void lib_opengl32_wglSetLayerPaletteEntries() { opengl32.wglSetLayerPaletteEntries(); }
+	void lib_opengl32_wglSetPixelFormat() { opengl32.wglSetPixelFormat(); }
+	void lib_opengl32_wglShareLists() { opengl32.wglShareLists(); }
+	void lib_opengl32_wglSwapBuffers() { opengl32.wglSwapBuffers(); }
+	void lib_opengl32_wglSwapLayerBuffers() { opengl32.wglSwapLayerBuffers(); }
+	void lib_opengl32_wglSwapMultipleBuffers() { opengl32.wglSwapMultipleBuffers(); }
+	void lib_opengl32_wglUseFontBitmapsA() { opengl32.wglUseFontBitmapsA(); }
+	void lib_opengl32_wglUseFontBitmapsW() { opengl32.wglUseFontBitmapsW(); }
+	void lib_opengl32_wglUseFontOutlinesA() { opengl32.wglUseFontOutlinesA(); }
+	void lib_opengl32_wglUseFontOutlinesW() { opengl32.wglUseFontOutlinesW(); }
+}
 
 bool load_library_opengl32() {
 	opengl32.dll = uif::injector::instance().load_real_library("opengl32.dll");
