@@ -14,16 +14,19 @@ namespace uif::utils {
 	bool file_exists(const wchar_t* path);
 	bool file_create_new(const wchar_t* path, const char* content, size_t length);
 	std::filesystem::path get_dll_path();
+	std::filesystem::path get_module_path();
 	std::string get_module_name(HMODULE hModule);
 	std::string get_last_error_message(DWORD error = 0);
 	void normalize(std::wstring& text);
 	std::wstring normalize(const std::string& text);
+	std::filesystem::path normalize_path(const std::filesystem::path& path);
 	WORD set_console_color(WORD color);
 	void print_colored(const char* text, WORD color);
 	void patch_memory(void* address, const void* data, size_t size, void* oldDataBuffer);
 	void patch_address(void** patchAddress, void* patchValue);
 	void* parse_address(const nlohmann::json& json);
 	void* parse_address(const std::string& string);
+	bool is_utf8_beta_enabled();
 	[[noreturn]] void fail(const std::string& reason);
 
 	inline void debug_notify(const char* caption, const char* message, UINT type = MB_OK | MB_ICONINFORMATION)

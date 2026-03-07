@@ -114,6 +114,13 @@ namespace uif::utils
 		return { path };
 	}
 
+	std::filesystem::path get_module_path()
+	{
+		char modulePath[MAX_PATH];
+		GetModuleFileNameA(nullptr, modulePath, MAX_PATH);
+		return std::filesystem::path(modulePath).parent_path();
+	}
+
 	std::string get_module_name(HMODULE hModule)
 	{
 		char dllNameBuffer[MAX_PATH];
@@ -172,6 +179,13 @@ namespace uif::utils
 		return wide;
 	}
 
+	std::filesystem::path normalize_path(const std::filesystem::path& path)
+	{
+		std::wstring string = path.wstring();
+		std::transform(string.begin(), string.end(), string.begin(), ::tolower);
+		return std::filesystem::path(string);
+	}
+
 	WORD set_console_color(const WORD color)
 	{
 		CONSOLE_SCREEN_BUFFER_INFO info;
@@ -186,6 +200,11 @@ namespace uif::utils
 		const auto prev = set_console_color(color);
 		std::cout << text;
 		set_console_color(prev);
+	}
+
+	bool is_utf8_beta_enabled()
+	{
+		return GetACP() == 65001;
 	}
 
 	[[noreturn]]
