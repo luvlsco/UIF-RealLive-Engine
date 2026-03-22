@@ -1,0 +1,230 @@
+#include "pch.h"
+#include "hooks.h"
+#include "injector.h"
+#include "file_redirector.h"
+
+#include <winternl.h>
+
+#pragma region TypeDefs
+
+typedef NTSTATUS(__stdcall* NtCreateFile_t)(
+	PHANDLE FileHandle,
+	ACCESS_MASK DesiredAccess,
+	POBJECT_ATTRIBUTES ObjectAttributes,
+	PIO_STATUS_BLOCK IoStatusBlock,
+	PLARGE_INTEGER AllocationSize,
+	ULONG FileAttributes,
+	ULONG ShareAccess,
+	ULONG CreateDisposition,
+	ULONG CreateOptions,
+	PVOID EaBuffer,
+	ULONG EaLength);
+
+static NtCreateFile_t HookNtCreateFile = nullptr;
+
+#pragma endregion
+
+#pragma region NtPathTools
+
+std::wstring normalize_nt_path(PUNICODE_STRING name)
+{
+	std::wstring path(name->Buffer, name->Length / sizeof(wchar_t));
+	if (path.starts_with(L"\\??\\"))
+	{
+		path = path.substr(4);
+	}
+
+	return path;
+}
+
+bool init_unicode_string(const std::wstring& path, UNICODE_STRING& out, wchar_t* buffer, size_t bufferSize)
+{
+	if (path.size() + 1 > bufferSize)
+	{
+		return false;
+	}
+
+	wcscpy_s(buffer, bufferSize, path.c_str());
+
+	out.Buffer = buffer;
+	out.Length = static_cast<USHORT>(path.size() * sizeof(wchar_t));
+	out.MaximumLength = static_cast<USHORT>(bufferSize * sizeof(wchar_t));
+
+	return true;
+}
+
+#pragma endregion
+
+#pragma region PathFiltering
+
+bool path_has_excluded_component(const std::filesystem::path& path)
+{
+	const auto& redirector = uif::injector::instance().feature<uif::features::file_redirector>();
+
+	for (const auto& component : path)
+	{
+		if (redirector.get_excluded_folders().contains(uif::utils::normalize_path(component)))
+		{
+			return true;
+		}
+	}
+
+	if(redirector.get_excluded_extensions().contains(uif::utils::normalize_path(path.extension())))
+	{
+		return true;
+	}
+
+	return false;
+}
+
+#pragma endregion
+
+#pragma region PatchPathBuilding
+
+std::filesystem::path build_patch_path(const std::filesystem::path& originalPath, const std::filesystem::path& patchFolderName, const std::filesystem::path& gameRoot)
+{
+	auto relativePath = originalPath.is_absolute() ? originalPath.lexically_relative(gameRoot) : originalPath;
+
+	return gameRoot / patchFolderName / relativePath;
+}
+
+std::filesystem::path redirect_to_patch_path(const std::filesystem::path& originalPath)
+{
+	if (originalPath.empty())
+	{
+		return originalPath;
+	}
+
+	if (path_has_excluded_component(originalPath))
+	{
+		return originalPath;
+	}
+
+	static const auto gameRoot = uif::utils::get_module_path();
+
+	if (!originalPath.is_relative())
+	{
+		auto relative = originalPath.lexically_relative(gameRoot);
+
+		if (relative.empty() || relative.native().starts_with(L".."))
+		{
+			return originalPath;
+		}
+	}
+
+	const auto& patchFolderName = uif::injector::instance().feature<uif::features::file_redirector>();
+	return build_patch_path(originalPath, patchFolderName.get_patch_folder_name(), gameRoot);
+}
+
+#pragma endregion
+
+#pragma region NtHooks
+
+NTSTATUS __stdcall NtCreateFileHook(
+	PHANDLE FileHandle,
+	ACCESS_MASK DesiredAccess,
+	POBJECT_ATTRIBUTES ObjectAttributes,
+	PIO_STATUS_BLOCK IoStatusBlock,
+	PLARGE_INTEGER AllocationSize,
+	ULONG FileAttributes,
+	ULONG ShareAccess,
+	ULONG CreateDisposition,
+	ULONG CreateOptions,
+	PVOID EaBuffer,
+	ULONG EaLength)
+{
+	auto redirectNtCreateFile = [&](POBJECT_ATTRIBUTES objectAttributes) -> NTSTATUS
+	{
+		return HookNtCreateFile(FileHandle, DesiredAccess, objectAttributes, IoStatusBlock, 
+			AllocationSize, FileAttributes, ShareAccess, CreateDisposition, CreateOptions, EaBuffer, EaLength);
+	};
+
+	if (!ObjectAttributes || !ObjectAttributes->ObjectName)
+	{
+		return redirectNtCreateFile(ObjectAttributes);
+	}
+
+	std::wstring_view origPathUniView(ObjectAttributes->ObjectName->Buffer, ObjectAttributes->ObjectName->Length / sizeof(wchar_t));
+
+	std::wstring normalizedPath = normalize_nt_path(ObjectAttributes->ObjectName);
+	std::filesystem::path originalPath(normalizedPath);
+	
+	if (originalPath.is_relative())
+	{
+		return redirectNtCreateFile(ObjectAttributes);
+	}
+
+	auto redirectedPath = redirect_to_patch_path(originalPath).lexically_normal();
+
+	if (redirectedPath.wstring() != originalPath.wstring())
+	{
+		static thread_local wchar_t buffer[32768];
+		std::wstring finalPath = redirectedPath.wstring();
+
+		if (origPathUniView.starts_with(L"\\??\\") && !finalPath.starts_with(L"\\??\\"))
+		{
+			finalPath = L"\\??\\" + finalPath;
+		}
+
+		UNICODE_STRING newName;
+		if (init_unicode_string(finalPath, newName, buffer, 32768))
+		{
+			OBJECT_ATTRIBUTES patchObjAttrs = *ObjectAttributes;
+			patchObjAttrs.ObjectName = &newName;
+
+			NTSTATUS redirectStatus = redirectNtCreateFile(&patchObjAttrs);
+			if (NT_SUCCESS(redirectStatus))
+			{
+				return redirectStatus;
+			}
+		}
+	}
+	return redirectNtCreateFile(ObjectAttributes);
+}
+
+#pragma endregion
+
+void uif::features::file_redirector::initialize()
+{
+	if(config().value("/enable"_json_pointer, false))
+	{
+		patch_folder_name = config().value("/patch_folder_name"_json_pointer, "");
+
+		if(config().value("/file_redirector/enable"_json_pointer, false))
+		{
+			if (config().contains("/file_redirector/excluded_folders"_json_pointer) && 
+				config()["/file_redirector/excluded_folders"_json_pointer].is_array())
+			{
+				for (const auto& folder : config()["/file_redirector/excluded_folders"_json_pointer])
+				{
+					if (folder.is_string())
+					{
+						excluded_folders.insert(uif::utils::normalize_path(folder.get<std::string>()));
+					}
+				}
+			}
+			
+			if (config().contains("/file_redirector/excluded_extensions"_json_pointer) && 
+				config()["/file_redirector/excluded_extensions"_json_pointer].is_array())
+			{
+				for (const auto& extension : config()["/file_redirector/excluded_extensions"_json_pointer])
+				{
+					if (extension.is_string())
+					{
+						excluded_extensions.insert(uif::utils::normalize_path(extension.get<std::string>()));
+					}
+				}
+			}
+
+			#pragma warning(suppress: 6387) // ntdll will always be loaded, safe to call GetProcAddress
+			HookNtCreateFile = reinterpret_cast<NtCreateFile_t>(GetProcAddress(GetModuleHandleW(L"ntdll.dll"), "NtCreateFile"));
+
+			uif::hooks::hook_function(this, reinterpret_cast<void*&>(HookNtCreateFile), reinterpret_cast<void*>(NtCreateFileHook), "NtCreateFile");
+		}
+	}
+}
+
+void uif::features::file_redirector::finalize()
+{
+	uif::hooks::unhook_function(this, reinterpret_cast<void*&>(HookNtCreateFile), reinterpret_cast<void*>(NtCreateFileHook), "NtCreateFile");
+}

@@ -270,6 +270,7 @@
     <ClInclude Include="features\character_substitution.h" />
     <ClInclude Include="features\custom_feature.h" />
     <ClInclude Include="features\file_monitor.h" />
+    <ClInclude Include="features\file_redirector.h" />
     <ClInclude Include="features\font_manager.h" />
     <ClInclude Include="features\locale_emulator.h" />
     <ClInclude Include="features\memory_patcher.h" />
@@ -307,6 +308,7 @@
     <ClCompile Include="features\character_substitution.cpp" />
     <ClCompile Include="features\custom_feature.cpp" />
     <ClCompile Include="features\file_monitor.cpp" />
+    <ClCompile Include="features\file_redirector.cpp" />
     <ClCompile Include="features\font_manager.cpp" />
     <ClCompile Include="features\locale_emulator.cpp" />
     <ClCompile Include="features\memory_patcher.cpp" />

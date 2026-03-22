@@ -131,6 +131,9 @@
     <ClInclude Include="proxies\dsound.h">
       <Filter>Header Files\proxies</Filter>
     </ClInclude>
+    <ClInclude Include="features\file_redirector.h">
+      <Filter>Header Files\features</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp">
@@ -234,6 +237,9 @@
     </ClCompile>
     <ClCompile Include="proxies\dsound.cpp">
       <Filter>Source Files\proxies</Filter>
+    </ClCompile>
+    <ClCompile Include="features\file_redirector.cpp">
+      <Filter>Source Files\features</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
