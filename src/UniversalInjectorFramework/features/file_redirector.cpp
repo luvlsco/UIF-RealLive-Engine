@@ -7,6 +7,18 @@
 
 #pragma region TypeDefs
 
+typedef NTSTATUS(__stdcall* NtQueryDirectoryFileEx_t)(
+	HANDLE FileHandle,
+	HANDLE Event,
+	PIO_APC_ROUTINE ApcRoutine,
+	PVOID ApcContext,
+	PIO_STATUS_BLOCK IoStatusBlock,
+	PVOID FileInformation,
+	ULONG Length,
+	FILE_INFORMATION_CLASS FileInformationClass,
+	ULONG QueryFlags,
+	PUNICODE_STRING FileName);
+
 typedef NTSTATUS(__stdcall* NtCreateFile_t)(
 	PHANDLE FileHandle,
 	ACCESS_MASK DesiredAccess,
@@ -20,6 +32,7 @@ typedef NTSTATUS(__stdcall* NtCreateFile_t)(
 	PVOID EaBuffer,
 	ULONG EaLength);
 
+static NtQueryDirectoryFileEx_t HookNtQueryDirectoryFileEx = nullptr;
 static NtCreateFile_t HookNtCreateFile = nullptr;
 
 #pragma endregion
@@ -80,6 +93,21 @@ bool path_has_excluded_component(const std::filesystem::path& path)
 #pragma endregion
 
 #pragma region NtHooks
+
+NTSTATUS __stdcall NtQueryDirectoryFileExHook(
+    HANDLE FileHandle,
+    HANDLE Event,
+    PIO_APC_ROUTINE ApcRoutine,
+    PVOID ApcContext,
+    PIO_STATUS_BLOCK IoStatusBlock,
+    PVOID FileInformation,
+    ULONG Length,
+    FILE_INFORMATION_CLASS FileInformationClass,
+    ULONG QueryFlags,
+    PUNICODE_STRING FileName)
+{
+	return HookNtQueryDirectoryFileEx(FileHandle, Event, ApcRoutine, ApcContext, IoStatusBlock, FileInformation, Length, FileInformationClass, QueryFlags, FileName);
+}
 
 NTSTATUS __stdcall NtCreateFileHook(
 	PHANDLE FileHandle,
@@ -178,9 +206,11 @@ void uif::features::file_redirector::initialize()
 				}
 			}
 
-			#pragma warning(suppress: 6387) // ntdll will always be loaded, safe to call GetProcAddress
+			#pragma warning(suppress: 6387)
+			HookNtQueryDirectoryFileEx = reinterpret_cast<NtQueryDirectoryFileEx_t>(GetProcAddress(GetModuleHandleW(L"ntdll.dll"), "NtQueryDirectoryFileEx"));
 			HookNtCreateFile = reinterpret_cast<NtCreateFile_t>(GetProcAddress(GetModuleHandleW(L"ntdll.dll"), "NtCreateFile"));
 
+			uif::hooks::hook_function(this, reinterpret_cast<void*&>(HookNtQueryDirectoryFileEx), reinterpret_cast<void*>(NtQueryDirectoryFileExHook), "NtQueryDirectoryFileEx");
 			uif::hooks::hook_function(this, reinterpret_cast<void*&>(HookNtCreateFile), reinterpret_cast<void*>(NtCreateFileHook), "NtCreateFile");
 		}
 	}
@@ -188,5 +218,6 @@ void uif::features::file_redirector::initialize()
 
 void uif::features::file_redirector::finalize()
 {
+	uif::hooks::unhook_function(this, reinterpret_cast<void*&>(HookNtQueryDirectoryFileEx), reinterpret_cast<void*>(NtQueryDirectoryFileExHook), "NtQueryDirectoryFileEx");
 	uif::hooks::unhook_function(this, reinterpret_cast<void*&>(HookNtCreateFile), reinterpret_cast<void*>(NtCreateFileHook), "NtCreateFile");
 }
