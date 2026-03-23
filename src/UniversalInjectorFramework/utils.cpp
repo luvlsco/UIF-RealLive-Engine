@@ -121,6 +121,35 @@ namespace uif::utils
 		return std::filesystem::path(modulePath).parent_path();
 	}
 
+	std::filesystem::path build_patch_path(const std::filesystem::path& originalPath, const std::filesystem::path& patchFolderName, const std::filesystem::path& gameRoot)
+	{
+		auto relativePath = originalPath.is_absolute() ? originalPath.lexically_relative(gameRoot) : originalPath;
+
+		return gameRoot / patchFolderName / relativePath;
+	}
+
+	std::filesystem::path redirect_to_patch_path(const std::filesystem::path& originalPath, const std::filesystem::path& patchFolderName)
+	{
+		if (originalPath.empty())
+		{
+			return originalPath;
+		}
+
+		static const auto gameRoot = uif::utils::get_module_path();
+
+		if (!originalPath.is_relative())
+		{
+			auto relative = originalPath.lexically_relative(gameRoot);
+
+			if (relative.empty() || relative.native().starts_with(L".."))
+			{
+				return originalPath;
+			}
+		}
+
+		return build_patch_path(originalPath, patchFolderName, gameRoot);
+	}
+
 	std::string get_module_name(HMODULE hModule)
 	{
 		char dllNameBuffer[MAX_PATH];

@@ -79,45 +79,6 @@ bool path_has_excluded_component(const std::filesystem::path& path)
 
 #pragma endregion
 
-#pragma region PatchPathBuilding
-
-std::filesystem::path build_patch_path(const std::filesystem::path& originalPath, const std::filesystem::path& patchFolderName, const std::filesystem::path& gameRoot)
-{
-	auto relativePath = originalPath.is_absolute() ? originalPath.lexically_relative(gameRoot) : originalPath;
-
-	return gameRoot / patchFolderName / relativePath;
-}
-
-std::filesystem::path redirect_to_patch_path(const std::filesystem::path& originalPath)
-{
-	if (originalPath.empty())
-	{
-		return originalPath;
-	}
-
-	if (path_has_excluded_component(originalPath))
-	{
-		return originalPath;
-	}
-
-	static const auto gameRoot = uif::utils::get_module_path();
-
-	if (!originalPath.is_relative())
-	{
-		auto relative = originalPath.lexically_relative(gameRoot);
-
-		if (relative.empty() || relative.native().starts_with(L".."))
-		{
-			return originalPath;
-		}
-	}
-
-	const auto& patchFolderName = uif::injector::instance().feature<uif::features::file_redirector>();
-	return build_patch_path(originalPath, patchFolderName.get_patch_folder_name(), gameRoot);
-}
-
-#pragma endregion
-
 #pragma region NtHooks
 
 NTSTATUS __stdcall NtCreateFileHook(
@@ -149,12 +110,13 @@ NTSTATUS __stdcall NtCreateFileHook(
 	std::wstring normalizedPath = normalize_nt_path(ObjectAttributes->ObjectName);
 	std::filesystem::path originalPath(normalizedPath);
 	
-	if (originalPath.is_relative())
+	if (originalPath.is_relative() || path_has_excluded_component(originalPath))
 	{
 		return redirectNtCreateFile(ObjectAttributes);
 	}
 
-	auto redirectedPath = redirect_to_patch_path(originalPath).lexically_normal();
+	const auto& patchFolderName = uif::injector::instance().feature<uif::features::file_redirector>();
+	auto redirectedPath = uif::utils::redirect_to_patch_path(originalPath, patchFolderName.get_patch_folder_name()).lexically_normal();
 
 	if (redirectedPath.wstring() != originalPath.wstring())
 	{

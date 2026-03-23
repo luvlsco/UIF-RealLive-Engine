@@ -15,6 +15,8 @@ namespace uif::utils {
 	bool file_create_new(const wchar_t* path, const char* content, size_t length);
 	std::filesystem::path get_dll_path();
 	std::filesystem::path get_module_path();
+	std::filesystem::path build_patch_path(const std::filesystem::path& originalPath, const std::filesystem::path& patchFolderName, const std::filesystem::path& gameRoot);
+	std::filesystem::path redirect_to_patch_path(const std::filesystem::path& originalPath, const std::filesystem::path& patchFolderName);
 	std::string get_module_name(HMODULE hModule);
 	std::string get_last_error_message(DWORD error = 0);
 	void normalize(std::wstring& text);
