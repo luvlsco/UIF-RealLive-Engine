@@ -141,7 +141,7 @@ namespace uif::utils
 		{
 			auto relative = originalPath.lexically_relative(gameRoot);
 
-			if (relative.empty() || relative.native().starts_with(L".."))
+			if (relative.empty() || relative.native().starts_with(L"..") || relative.native().starts_with(patchFolderName.native()))
 			{
 				return originalPath;
 			}
