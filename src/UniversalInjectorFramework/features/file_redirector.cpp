@@ -39,7 +39,7 @@ static NtCreateFile_t HookNtCreateFile = nullptr;
 
 #pragma region NtPathTools
 
-std::wstring normalize_nt_path(PUNICODE_STRING name)
+static std::wstring normalize_nt_path(PUNICODE_STRING name)
 {
 	std::wstring path(name->Buffer, name->Length / sizeof(wchar_t));
 	if (path.starts_with(L"\\??\\"))
@@ -50,7 +50,7 @@ std::wstring normalize_nt_path(PUNICODE_STRING name)
 	return path;
 }
 
-bool init_unicode_string(const std::wstring& path, UNICODE_STRING& out, wchar_t* buffer, size_t bufferSize)
+static bool init_unicode_string(const std::wstring& path, UNICODE_STRING& out, wchar_t* buffer, size_t bufferSize)
 {
 	if (path.size() + 1 > bufferSize)
 	{
@@ -70,7 +70,7 @@ bool init_unicode_string(const std::wstring& path, UNICODE_STRING& out, wchar_t*
 
 #pragma region PathFiltering
 
-bool path_has_excluded_component(const std::filesystem::path& path)
+static bool path_has_excluded_component(const std::filesystem::path& path)
 {
 	const auto& redirector = uif::injector::instance().feature<uif::features::file_redirector>();
 
@@ -90,23 +90,97 @@ bool path_has_excluded_component(const std::filesystem::path& path)
 	return false;
 }
 
+static bool get_path_from_handle(HANDLE handle, std::filesystem::path& outPath)
+{
+	if (handle == nullptr || handle == INVALID_HANDLE_VALUE)
+	{
+		return false;
+	}
+
+	wchar_t pathBuf[MAX_PATH];
+	DWORD pathLength = GetFinalPathNameByHandleW(handle, pathBuf, ARRAYSIZE(pathBuf), VOLUME_NAME_DOS);
+
+	if (pathLength == 0 || pathLength >= ARRAYSIZE(pathBuf))
+	{
+		return false;
+	}
+
+	std::wstring path(pathBuf, pathLength);
+	if (path.starts_with(L"\\\\?\\"))
+	{
+		path = path.substr(4);
+	}
+
+	outPath = std::filesystem::path(path);
+	return true;
+}
+
+static bool open_directory_handle(const std::filesystem::path& path, HANDLE& outHandle)
+{
+	outHandle = CreateFileW(
+		path.c_str(),
+		FILE_LIST_DIRECTORY | SYNCHRONIZE,
+		FILE_SHARE_READ | FILE_SHARE_WRITE | FILE_SHARE_DELETE,
+		nullptr,
+		OPEN_EXISTING,
+		FILE_FLAG_BACKUP_SEMANTICS,
+		nullptr);
+
+	return outHandle != INVALID_HANDLE_VALUE;
+}
+
 #pragma endregion
 
 #pragma region NtHooks
 
 NTSTATUS __stdcall NtQueryDirectoryFileExHook(
-    HANDLE FileHandle,
-    HANDLE Event,
-    PIO_APC_ROUTINE ApcRoutine,
-    PVOID ApcContext,
-    PIO_STATUS_BLOCK IoStatusBlock,
-    PVOID FileInformation,
-    ULONG Length,
-    FILE_INFORMATION_CLASS FileInformationClass,
-    ULONG QueryFlags,
-    PUNICODE_STRING FileName)
+	HANDLE FileHandle,
+	HANDLE Event,
+	PIO_APC_ROUTINE ApcRoutine,
+	PVOID ApcContext,
+	PIO_STATUS_BLOCK IoStatusBlock,
+	PVOID FileInformation,
+	ULONG Length,
+	FILE_INFORMATION_CLASS FileInformationClass,
+	ULONG QueryFlags,
+	PUNICODE_STRING FileName)
 {
-	return HookNtQueryDirectoryFileEx(FileHandle, Event, ApcRoutine, ApcContext, IoStatusBlock, FileInformation, Length, FileInformationClass, QueryFlags, FileName);
+	auto redirectNtQueryDirectoryFileEx = [&](HANDLE fileHandle) -> NTSTATUS
+	{
+		return HookNtQueryDirectoryFileEx(fileHandle, Event, ApcRoutine, ApcContext, IoStatusBlock, 
+			FileInformation, Length, FileInformationClass, QueryFlags, FileName);
+	};
+
+	if (!FileName || FileName->Length == 0)
+		return redirectNtQueryDirectoryFileEx(FileHandle);
+
+	std::filesystem::path fileName = normalize_nt_path(FileName);
+
+	std::filesystem::path directoryPath;
+	if (!get_path_from_handle(FileHandle, directoryPath))
+		return redirectNtQueryDirectoryFileEx(FileHandle);
+
+	auto candidatePath = (directoryPath / fileName).lexically_normal();
+	if (path_has_excluded_component(candidatePath))
+		return redirectNtQueryDirectoryFileEx(FileHandle);
+
+	const auto& patchFolderName = uif::injector::instance().feature<uif::features::file_redirector>();
+	auto patchPath = uif::utils::redirect_to_patch_path(candidatePath, patchFolderName.get_patch_folder_name()).lexically_normal();
+
+	if (patchPath != candidatePath &&
+		!path_has_excluded_component(patchPath) &&
+		std::filesystem::exists(patchPath))
+	{
+		HANDLE patchDirHandle = INVALID_HANDLE_VALUE;
+		if (open_directory_handle(patchPath.parent_path(), patchDirHandle))
+		{
+			NTSTATUS status = redirectNtQueryDirectoryFileEx(patchDirHandle);
+			CloseHandle(patchDirHandle);
+			return status;
+		}
+	}
+
+	return redirectNtQueryDirectoryFileEx(FileHandle);
 }
 
 NTSTATUS __stdcall NtCreateFileHook(
