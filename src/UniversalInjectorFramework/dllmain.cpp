@@ -77,10 +77,6 @@ BOOL APIENTRY DllMain(HMODULE hModule, DWORD ul_reason_for_call, LPVOID lpReserv
 		uif::utils::debug_log("DllMain: detach");
 		Detach();
 		break;
-
-	default:
-		uif::utils::debug_log("DllMain: default");
-		break;
 	}
 	return TRUE;
 }
