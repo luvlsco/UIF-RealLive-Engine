@@ -131,6 +131,22 @@ static bool open_directory_handle(const std::filesystem::path& path, HANDLE& out
 
 #pragma endregion
 
+#pragma region Misc
+
+static void load_fonts(const std::filesystem::path& patchFolderPath)
+{
+    for (const auto& entry : std::filesystem::directory_iterator(patchFolderPath / "dat"))
+    {
+        if (entry.is_regular_file() && !path_has_excluded_component(entry.path()))
+        {
+            if (entry.path().extension() == ".ttf" || entry.path().extension() == ".otf" || entry.path().extension() == ".ttc")
+            {
+                AddFontResourceExA(std::filesystem::absolute(entry.path()).string().c_str(), FR_PRIVATE, nullptr);
+            }
+        }
+    }
+}
+
 #pragma region NtHooks
 
 NTSTATUS __stdcall NtQueryDirectoryFileExHook(
@@ -164,8 +180,8 @@ NTSTATUS __stdcall NtQueryDirectoryFileExHook(
 	if (path_has_excluded_component(candidatePath))
 		return redirectNtQueryDirectoryFileEx(FileHandle);
 
-	const auto& patchFolderName = uif::injector::instance().feature<uif::features::file_redirector>();
-	auto patchPath = uif::utils::redirect_to_patch_path(candidatePath, patchFolderName.get_patch_folder_name()).lexically_normal();
+	const auto& redirector = uif::injector::instance().feature<uif::features::file_redirector>();
+	auto patchPath = uif::utils::redirect_to_patch_path(candidatePath, redirector.get_patch_folder_name()).lexically_normal();
 
 	if (patchPath != candidatePath &&
 		!path_has_excluded_component(patchPath) &&
@@ -217,9 +233,15 @@ NTSTATUS __stdcall NtCreateFileHook(
 		return redirectNtCreateFile(ObjectAttributes);
 	}
 
-	const auto& patchFolderName = uif::injector::instance().feature<uif::features::file_redirector>();
-	auto redirectedPath = uif::utils::redirect_to_patch_path(originalPath, patchFolderName.get_patch_folder_name()).lexically_normal();
+	const auto& redirector = uif::injector::instance().feature<uif::features::file_redirector>();
+	auto redirectedPath = uif::utils::redirect_to_patch_path(originalPath, redirector.get_patch_folder_name()).lexically_normal();
 
+	static std::once_flag load_fonts_flag;
+	std::call_once(load_fonts_flag, [&]()
+	{
+		load_fonts(redirector.get_patch_folder_name());
+	});
+	
 	if (redirectedPath.wstring() != originalPath.wstring())
 	{
 		static thread_local wchar_t buffer[32768];
