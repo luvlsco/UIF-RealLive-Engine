@@ -168,24 +168,28 @@ NTSTATUS __stdcall NtQueryDirectoryFileExHook(
 	};
 
 	if (!FileName || FileName->Length == 0)
+	{
 		return redirectNtQueryDirectoryFileEx(FileHandle);
-
+	}
+	
 	std::filesystem::path fileName = normalize_nt_path(FileName);
 
 	std::filesystem::path directoryPath;
 	if (!get_path_from_handle(FileHandle, directoryPath))
+	{
 		return redirectNtQueryDirectoryFileEx(FileHandle);
+	}
 
 	auto candidatePath = (directoryPath / fileName).lexically_normal();
 	if (path_has_excluded_component(candidatePath))
+	{
 		return redirectNtQueryDirectoryFileEx(FileHandle);
+	}
 
 	const auto& redirector = uif::injector::instance().feature<uif::features::file_redirector>();
 	auto patchPath = uif::utils::redirect_to_patch_path(candidatePath, redirector.get_patch_folder_name()).lexically_normal();
 
-	if (patchPath != candidatePath &&
-		!path_has_excluded_component(patchPath) &&
-		std::filesystem::exists(patchPath))
+	if (patchPath != candidatePath && !path_has_excluded_component(patchPath) && std::filesystem::exists(patchPath))
 	{
 		HANDLE patchDirHandle = INVALID_HANDLE_VALUE;
 		if (open_directory_handle(patchPath.parent_path(), patchDirHandle))
