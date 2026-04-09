@@ -20,6 +20,18 @@ typedef NTSTATUS(__stdcall* NtQueryDirectoryFile_t)(
 	PUNICODE_STRING FileName,
 	BOOLEAN RestartScan);
 
+typedef NTSTATUS(__stdcall* NtQueryDirectoryFileEx_t)(
+	HANDLE FileHandle,
+	HANDLE Event,
+	PIO_APC_ROUTINE ApcRoutine,
+	PVOID ApcContext,
+	PIO_STATUS_BLOCK IoStatusBlock,
+	PVOID FileInformation,
+	ULONG Length,
+	FILE_INFORMATION_CLASS FileInformationClass,
+	ULONG QueryFlags,
+	PUNICODE_STRING FileName);
+
 typedef NTSTATUS(__stdcall* NtCreateFile_t)(
 	PHANDLE FileHandle,
 	ACCESS_MASK DesiredAccess,
@@ -34,6 +46,7 @@ typedef NTSTATUS(__stdcall* NtCreateFile_t)(
 	ULONG EaLength);
 
 static NtQueryDirectoryFile_t HookNtQueryDirectoryFile = nullptr;
+static NtQueryDirectoryFileEx_t HookNtQueryDirectoryFileEx = nullptr;
 static NtCreateFile_t HookNtCreateFile = nullptr;
 
 #pragma endregion
@@ -205,6 +218,60 @@ NTSTATUS __stdcall NtQueryDirectoryFileHook(
 	return redirectNtQueryDirectoryFile(FileHandle);
 }
 
+NTSTATUS __stdcall NtQueryDirectoryFileExHook(
+	HANDLE FileHandle,
+	HANDLE Event,
+	PIO_APC_ROUTINE ApcRoutine,
+	PVOID ApcContext,
+	PIO_STATUS_BLOCK IoStatusBlock,
+	PVOID FileInformation,
+	ULONG Length,
+	FILE_INFORMATION_CLASS FileInformationClass,
+	ULONG QueryFlags,
+	PUNICODE_STRING FileName)
+{
+	auto redirectNtQueryDirectoryFileEx = [&](HANDLE fileHandle) -> NTSTATUS
+	{
+		return HookNtQueryDirectoryFileEx(fileHandle, Event, ApcRoutine, ApcContext, IoStatusBlock, 
+			FileInformation, Length, FileInformationClass, QueryFlags, FileName);
+	};
+
+	if (!FileName || FileName->Length == 0)
+	{
+		return redirectNtQueryDirectoryFileEx(FileHandle);
+	}
+	
+	std::filesystem::path fileName = normalize_nt_path(FileName);
+
+	std::filesystem::path directoryPath;
+	if (!get_path_from_handle(FileHandle, directoryPath))
+	{
+		return redirectNtQueryDirectoryFileEx(FileHandle);
+	}
+
+	auto candidatePath = (directoryPath / fileName).lexically_normal();
+	if (path_has_excluded_component(candidatePath))
+	{
+		return redirectNtQueryDirectoryFileEx(FileHandle);
+	}
+
+	const auto& redirector = uif::injector::instance().feature<uif::features::file_redirector>();
+	auto patchPath = uif::utils::redirect_to_patch_path(candidatePath, redirector.get_patch_folder_name()).lexically_normal();
+
+	if (patchPath != candidatePath && !path_has_excluded_component(patchPath) && std::filesystem::exists(patchPath))
+	{
+		HANDLE patchDirHandle = INVALID_HANDLE_VALUE;
+		if (open_directory_handle(patchPath.parent_path(), patchDirHandle))
+		{
+			NTSTATUS status = redirectNtQueryDirectoryFileEx(patchDirHandle);
+			CloseHandle(patchDirHandle);
+			return status;
+		}
+	}
+
+	return redirectNtQueryDirectoryFileEx(FileHandle);
+}
+
 NTSTATUS __stdcall NtCreateFileHook(
 	PHANDLE FileHandle,
 	ACCESS_MASK DesiredAccess,
@@ -310,9 +377,11 @@ void uif::features::file_redirector::initialize()
 
 			#pragma warning(suppress: 6387)
 			HookNtQueryDirectoryFile = reinterpret_cast<NtQueryDirectoryFile_t>(GetProcAddress(GetModuleHandleW(L"ntdll.dll"), "NtQueryDirectoryFile"));
+			HookNtQueryDirectoryFileEx = reinterpret_cast<NtQueryDirectoryFileEx_t>(GetProcAddress(GetModuleHandleW(L"ntdll.dll"), "NtQueryDirectoryFileEx"));
 			HookNtCreateFile = reinterpret_cast<NtCreateFile_t>(GetProcAddress(GetModuleHandleW(L"ntdll.dll"), "NtCreateFile"));
 
 			uif::hooks::hook_function(this, reinterpret_cast<void*&>(HookNtQueryDirectoryFile), reinterpret_cast<void*>(NtQueryDirectoryFileHook), "NtQueryDirectoryFile");
+			uif::hooks::hook_function(this, reinterpret_cast<void*&>(HookNtQueryDirectoryFileEx), reinterpret_cast<void*>(NtQueryDirectoryFileExHook), "NtQueryDirectoryFileEx");
 			uif::hooks::hook_function(this, reinterpret_cast<void*&>(HookNtCreateFile), reinterpret_cast<void*>(NtCreateFileHook), "NtCreateFile");
 		}
 	}
@@ -321,5 +390,6 @@ void uif::features::file_redirector::initialize()
 void uif::features::file_redirector::finalize()
 {
 	uif::hooks::unhook_function(this, reinterpret_cast<void*&>(HookNtQueryDirectoryFile), reinterpret_cast<void*>(NtQueryDirectoryFileHook), "NtQueryDirectoryFile");
+	uif::hooks::unhook_function(this, reinterpret_cast<void*&>(HookNtQueryDirectoryFileEx), reinterpret_cast<void*>(NtQueryDirectoryFileExHook), "NtQueryDirectoryFileEx");
 	uif::hooks::unhook_function(this, reinterpret_cast<void*&>(HookNtCreateFile), reinterpret_cast<void*>(NtCreateFileHook), "NtCreateFile");
 }
