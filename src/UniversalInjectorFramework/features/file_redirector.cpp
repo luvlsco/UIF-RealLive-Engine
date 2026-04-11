@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "hooks.h"
 #include "injector.h"
+#include "encoding.h"
 #include "file_redirector.h"
 
 #include <winternl.h>
@@ -143,22 +144,50 @@ static bool open_directory_handle(const std::filesystem::path& path, HANDLE& out
 	return outHandle != INVALID_HANDLE_VALUE;
 }
 
+static std::filesystem::path remove_substrings_from_path(const std::filesystem::path& path)
+{
+	const auto& redirector = uif::injector::instance().feature<uif::features::file_redirector>();
+	if (redirector.get_removed_substrings().empty())
+		return path;
+
+	std::wstring original = path.wstring();
+	std::wstring lower = original;
+	std::transform(lower.begin(), lower.end(), lower.begin(), ::towlower);
+
+	for (const auto& substr : redirector.get_removed_substrings())
+	{
+		if (substr.empty()) continue;
+
+		std::wstring lowerSub = substr;
+		std::transform(lowerSub.begin(), lowerSub.end(), lowerSub.begin(), ::towlower);
+
+		size_t pos = 0;
+		while ((pos = lower.find(lowerSub, pos)) != std::wstring::npos)
+		{
+			original.erase(pos, substr.size());
+			lower.erase(pos, lowerSub.size());
+		}
+	}
+
+	return std::filesystem::path(original);
+}
+
 #pragma endregion
 
 #pragma region Misc
 
 static void load_fonts(const std::filesystem::path& patchFolderPath)
 {
-    for (const auto& entry : std::filesystem::directory_iterator(patchFolderPath / "dat"))
-    {
-        if (entry.is_regular_file() && !path_has_excluded_component(entry.path()))
-        {
-            if (entry.path().extension() == ".ttf" || entry.path().extension() == ".otf" || entry.path().extension() == ".ttc")
-            {
-                AddFontResourceExA(std::filesystem::absolute(entry.path()).string().c_str(), FR_PRIVATE, nullptr);
-            }
-        }
-    }
+	for (const auto& entry : std::filesystem::directory_iterator(patchFolderPath / "dat"))
+	{
+		if (entry.is_regular_file() && !path_has_excluded_component(entry.path()))
+		{
+			if (entry.path().extension() == ".ttf" || entry.path().extension() == ".otf" || entry.path().extension() == ".ttc")
+			{
+				AddFontResourceExA(std::filesystem::absolute(entry.path()).string().c_str(), FR_PRIVATE, nullptr);
+			}
+		}
+	}
 }
 
 #pragma region NtHooks
@@ -196,6 +225,8 @@ NTSTATUS __stdcall NtQueryDirectoryFileHook(
 	}
 
 	auto candidatePath = (directoryPath / fileName).lexically_normal();
+	candidatePath = remove_substrings_from_path(candidatePath);
+	
 	if (path_has_excluded_component(candidatePath))
 	{
 		return redirectNtQueryDirectoryFile(FileHandle);
@@ -250,6 +281,8 @@ NTSTATUS __stdcall NtQueryDirectoryFileExHook(
 	}
 
 	auto candidatePath = (directoryPath / fileName).lexically_normal();
+	candidatePath = remove_substrings_from_path(candidatePath);
+	
 	if (path_has_excluded_component(candidatePath))
 	{
 		return redirectNtQueryDirectoryFileEx(FileHandle);
@@ -299,15 +332,16 @@ NTSTATUS __stdcall NtCreateFileHook(
 	std::wstring_view origPathUniView(ObjectAttributes->ObjectName->Buffer, ObjectAttributes->ObjectName->Length / sizeof(wchar_t));
 
 	std::wstring normalizedPath = normalize_nt_path(ObjectAttributes->ObjectName);
-	std::filesystem::path originalPath(normalizedPath);
-	
-	if (originalPath.is_relative() || path_has_excluded_component(originalPath))
+	std::filesystem::path candidatePath(normalizedPath);
+	candidatePath = remove_substrings_from_path(candidatePath);
+
+	if (candidatePath.is_relative() || path_has_excluded_component(candidatePath))
 	{
 		return redirectNtCreateFile(ObjectAttributes);
 	}
 
 	const auto& redirector = uif::injector::instance().feature<uif::features::file_redirector>();
-	auto redirectedPath = uif::utils::redirect_to_patch_path(originalPath, redirector.get_patch_folder_name()).lexically_normal();
+	auto redirectedPath = uif::utils::redirect_to_patch_path(candidatePath, redirector.get_patch_folder_name()).lexically_normal();
 
 	static std::once_flag load_fonts_flag;
 	std::call_once(load_fonts_flag, [&]()
@@ -315,7 +349,7 @@ NTSTATUS __stdcall NtCreateFileHook(
 		load_fonts(redirector.get_patch_folder_name());
 	});
 	
-	if (redirectedPath.wstring() != originalPath.wstring())
+	if (redirectedPath.wstring() != candidatePath.wstring())
 	{
 		static thread_local wchar_t buffer[32768];
 		std::wstring finalPath = redirectedPath.wstring();
@@ -375,10 +409,23 @@ void uif::features::file_redirector::initialize()
 				}
 			}
 
+			if (config().contains("/file_redirector/remove_substrings_from_path"_json_pointer) && 
+				config()["/file_redirector/remove_substrings_from_path"_json_pointer].is_array())
+			{
+				for (const auto& substr : config()["/file_redirector/remove_substrings_from_path"_json_pointer]){
+					if (substr.is_string())
+					{
+						removed_substrings.push_back(encoding::utf8_to_utf16(substr.get<std::string>()));
+					}
+				}
+			}
+
 			#pragma warning(suppress: 6387)
-			HookNtQueryDirectoryFile = reinterpret_cast<NtQueryDirectoryFile_t>(GetProcAddress(GetModuleHandleW(L"ntdll.dll"), "NtQueryDirectoryFile"));
-			HookNtQueryDirectoryFileEx = reinterpret_cast<NtQueryDirectoryFileEx_t>(GetProcAddress(GetModuleHandleW(L"ntdll.dll"), "NtQueryDirectoryFileEx"));
-			HookNtCreateFile = reinterpret_cast<NtCreateFile_t>(GetProcAddress(GetModuleHandleW(L"ntdll.dll"), "NtCreateFile"));
+			{
+				HookNtQueryDirectoryFile = reinterpret_cast<NtQueryDirectoryFile_t>(GetProcAddress(GetModuleHandleW(L"ntdll.dll"), "NtQueryDirectoryFile"));
+				HookNtQueryDirectoryFileEx = reinterpret_cast<NtQueryDirectoryFileEx_t>(GetProcAddress(GetModuleHandleW(L"ntdll.dll"), "NtQueryDirectoryFileEx"));
+				HookNtCreateFile = reinterpret_cast<NtCreateFile_t>(GetProcAddress(GetModuleHandleW(L"ntdll.dll"), "NtCreateFile"));
+			}
 
 			uif::hooks::hook_function(this, reinterpret_cast<void*&>(HookNtQueryDirectoryFile), reinterpret_cast<void*>(NtQueryDirectoryFileHook), "NtQueryDirectoryFile");
 			uif::hooks::hook_function(this, reinterpret_cast<void*&>(HookNtQueryDirectoryFileEx), reinterpret_cast<void*>(NtQueryDirectoryFileExHook), "NtQueryDirectoryFileEx");
