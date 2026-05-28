@@ -176,20 +176,6 @@ static std::filesystem::path remove_substrings_from_path(const std::filesystem::
 
 #pragma region Misc
 
-static void load_fonts(const std::filesystem::path& patchFolderPath)
-{
-	for (const auto& entry : std::filesystem::directory_iterator(patchFolderPath / "dat"))
-	{
-		if (entry.is_regular_file() && !path_has_excluded_component(entry.path()))
-		{
-			if (entry.path().extension() == ".ttf" || entry.path().extension() == ".otf" || entry.path().extension() == ".ttc")
-			{
-				AddFontResourceExA(std::filesystem::absolute(entry.path()).string().c_str(), FR_PRIVATE, nullptr);
-			}
-		}
-	}
-}
-
 #pragma region NtHooks
 
 NTSTATUS __stdcall NtQueryDirectoryFileHook(
@@ -342,12 +328,6 @@ NTSTATUS __stdcall NtCreateFileHook(
 
 	const auto& redirector = uif::injector::instance().feature<uif::features::file_redirector>();
 	auto redirectedPath = uif::utils::redirect_to_patch_path(candidatePath, redirector.get_patch_folder_name()).lexically_normal();
-
-	static std::once_flag load_fonts_flag;
-	std::call_once(load_fonts_flag, [&]()
-	{
-		load_fonts(redirector.get_patch_folder_name());
-	});
 	
 	if (redirectedPath.wstring() != candidatePath.wstring())
 	{
