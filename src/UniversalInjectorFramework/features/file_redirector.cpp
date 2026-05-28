@@ -191,6 +191,27 @@ static std::filesystem::path remove_substrings_from_path(const std::filesystem::
 	return std::filesystem::path(original);
 }
 
+static std::filesystem::path try_redirect_to_patch_directory(
+	const std::filesystem::path& originalDir,
+	const std::wstring& searchPattern)
+{
+	const auto& redirector = uif::injector::instance().feature<uif::features::file_redirector>();
+	auto patchDir = uif::utils::redirect_to_patch_path(originalDir, redirector.get_patch_folder_name());
+
+	if (patchDir == originalDir)
+	{
+		return originalDir;
+	}
+
+	auto fullPath = patchDir / searchPattern;
+	if (std::filesystem::exists(fullPath))
+	{
+		return patchDir;
+	}
+
+	return originalDir;
+}
+
 #pragma endregion
 
 #pragma region Misc
@@ -213,16 +234,23 @@ static PathContext extract_path_context(POBJECT_ATTRIBUTES objAttrs)
 }
 
 template<typename CallFn>
-static NTSTATUS call_with_modified_path(const std::optional<std::wstring>& modifiedPath,
-	POBJECT_ATTRIBUTES objAttrs, CallFn&& redirect, size_t bufferSize = BUFFER_SIZE_LARGE)
+static NTSTATUS call_with_modified_path(
+	const std::optional<std::wstring>& modifiedPath,
+	POBJECT_ATTRIBUTES objAttrs,
+	CallFn&& redirect,
+	size_t bufferSize = BUFFER_SIZE_LARGE)
 {
 	if (!modifiedPath)
+	{
 		return redirect(objAttrs);
+	}
 
 	static thread_local wchar_t buffer[BUFFER_SIZE_LARGE];
 	UNICODE_STRING newName;
 	if (!init_unicode_string(*modifiedPath, newName, buffer, bufferSize))
+	{
 		return redirect(objAttrs);
+	}
 
 	OBJECT_ATTRIBUTES modifiedAttrs = *objAttrs;
 	modifiedAttrs.ObjectName = &newName;
@@ -233,15 +261,21 @@ static std::wstring apply_nt_prefix(const std::wstring_view& origView, const std
 {
 	std::wstring result = path;
 	if (origView.starts_with(L"\\??\\") && !result.starts_with(L"\\??\\"))
+	{
 		result = L"\\??\\" + result;
+	}
 	return result;
 }
 
-static std::optional<std::wstring> get_modified_path_if_changed(const std::wstring_view& origView,
-	const std::filesystem::path& modified, POBJECT_ATTRIBUTES objAttrs)
+static std::optional<std::wstring> get_modified_path_if_changed(
+	const std::wstring_view& origView,
+	const std::filesystem::path& modified,
+	POBJECT_ATTRIBUTES objAttrs)
 {
 	if (modified.wstring() == normalize_nt_path(objAttrs->ObjectName))
+	{
 		return std::nullopt;
+	}
 	return apply_nt_prefix(origView, modified.wstring());
 }
 
@@ -291,6 +325,18 @@ NTSTATUS __stdcall NtQueryDirectoryFileHook(
 		}
 	}
 
+	auto effectiveDir = try_redirect_to_patch_directory(directoryPath, searchPattern);
+	if (effectiveDir != directoryPath)
+	{
+		HANDLE patchHandle;
+		if (open_directory_handle(effectiveDir, patchHandle))
+		{
+			NTSTATUS status = redirect(patchHandle);
+			CloseHandle(patchHandle);
+			return status;
+		}
+	}
+
 	return redirect(FileHandle);
 }
 
@@ -337,6 +383,18 @@ NTSTATUS __stdcall NtQueryDirectoryFileExHook(
 		}
 	}
 
+	auto effectiveDir = try_redirect_to_patch_directory(directoryPath, searchPattern);
+	if (effectiveDir != directoryPath)
+	{
+		HANDLE patchHandle;
+		if (open_directory_handle(effectiveDir, patchHandle))
+		{
+			NTSTATUS status = redirect(patchHandle);
+			CloseHandle(patchHandle);
+			return status;
+		}
+	}
+
 	return redirect(FileHandle);
 }
 
@@ -359,12 +417,16 @@ NTSTATUS __stdcall NtCreateFileHook(
 	};
 
 	if (!ObjectAttributes || !ObjectAttributes->ObjectName)
+	{
 		return redirect(ObjectAttributes);
+	}
 
 	auto [originalPathView, filteredPath] = extract_path_context(ObjectAttributes);
 
 	if (filteredPath.is_relative() || path_has_excluded_component(filteredPath))
+	{
 		return redirect(ObjectAttributes);
+	}
 
 	const auto& redirector = uif::injector::instance().feature<uif::features::file_redirector>();
 	auto patchPath = uif::utils::redirect_to_patch_path(filteredPath, redirector.get_patch_folder_name()).lexically_normal();
@@ -373,7 +435,9 @@ NTSTATUS __stdcall NtCreateFileHook(
 	{
 		auto finalPath = get_modified_path_if_changed(originalPathView, patchPath, ObjectAttributes);
 		if (auto status = call_with_modified_path(finalPath, ObjectAttributes, redirect); NT_SUCCESS(status))
+		{
 			return status;
+		}
 	}
 
 	auto finalPath = get_modified_path_if_changed(originalPathView, filteredPath, ObjectAttributes);
@@ -393,12 +457,16 @@ NTSTATUS __stdcall NtOpenFileHook(
 	};
 
 	if (!ObjectAttributes || !ObjectAttributes->ObjectName)
+	{
 		return redirect(ObjectAttributes);
+	}
 
 	auto [originalPathView, filteredPath] = extract_path_context(ObjectAttributes);
 
 	if (filteredPath.is_relative() || path_has_excluded_component(filteredPath))
+	{
 		return redirect(ObjectAttributes);
+	}
 
 	auto finalPath = get_modified_path_if_changed(originalPathView, filteredPath, ObjectAttributes);
 	return call_with_modified_path(finalPath, ObjectAttributes, redirect);
@@ -413,12 +481,16 @@ NTSTATUS __stdcall NtQueryFullAttributesFileHook(
 	};
 
 	if (!ObjectAttributes || !ObjectAttributes->ObjectName)
+	{
 		return redirect(ObjectAttributes);
+	}
 
 	auto [originalPathView, filteredPath] = extract_path_context(ObjectAttributes);
 
 	if (filteredPath.is_relative() || path_has_excluded_component(filteredPath))
+	{
 		return redirect(ObjectAttributes);
+	}
 
 	auto finalPath = get_modified_path_if_changed(originalPathView, filteredPath, ObjectAttributes);
 	return call_with_modified_path(finalPath, ObjectAttributes, redirect);
@@ -433,12 +505,16 @@ NTSTATUS __stdcall NtQueryAttributesFileHook(
 	};
 
 	if (!ObjectAttributes || !ObjectAttributes->ObjectName)
+	{
 		return redirect(ObjectAttributes);
+	}
 
 	auto [originalPathView, filteredPath] = extract_path_context(ObjectAttributes);
 
 	if (filteredPath.is_relative() || path_has_excluded_component(filteredPath))
+	{
 		return redirect(ObjectAttributes);
+	}
 
 	auto finalPath = get_modified_path_if_changed(originalPathView, filteredPath, ObjectAttributes);
 	return call_with_modified_path(finalPath, ObjectAttributes, redirect);
