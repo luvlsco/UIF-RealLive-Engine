@@ -46,9 +46,28 @@ typedef NTSTATUS(__stdcall* NtCreateFile_t)(
 	PVOID EaBuffer,
 	ULONG EaLength);
 
+typedef NTSTATUS(__stdcall* NtOpenFile_t)(
+	PHANDLE FileHandle,
+	ACCESS_MASK DesiredAccess,
+	POBJECT_ATTRIBUTES ObjectAttributes,
+	PIO_STATUS_BLOCK IoStatusBlock,
+	ULONG ShareAccess,
+	ULONG OpenOptions);
+
+typedef NTSTATUS(__stdcall* NtQueryFullAttributesFile_t)(
+	POBJECT_ATTRIBUTES ObjectAttributes,
+	PVOID FileInformation);
+
+typedef NTSTATUS(__stdcall* NtQueryAttributesFile_t)(
+	POBJECT_ATTRIBUTES ObjectAttributes,
+	PVOID FileInformation);
+
 static NtQueryDirectoryFile_t HookNtQueryDirectoryFile = nullptr;
 static NtQueryDirectoryFileEx_t HookNtQueryDirectoryFileEx = nullptr;
 static NtCreateFile_t HookNtCreateFile = nullptr;
+static NtOpenFile_t HookNtOpenFile = nullptr;
+static NtQueryFullAttributesFile_t HookNtQueryFullAttributesFile = nullptr;
+static NtQueryAttributesFile_t HookNtQueryAttributesFile = nullptr;
 
 #pragma endregion
 
@@ -176,6 +195,56 @@ static std::filesystem::path remove_substrings_from_path(const std::filesystem::
 
 #pragma region Misc
 
+constexpr size_t BUFFER_SIZE_SMALL = 1024;
+constexpr size_t BUFFER_SIZE_LARGE = 32768;
+
+struct PathContext
+{
+	std::wstring_view originalPathView;
+	std::filesystem::path filteredPath;
+};
+
+static PathContext extract_path_context(POBJECT_ATTRIBUTES objAttrs)
+{
+	std::wstring originalPath = normalize_nt_path(objAttrs->ObjectName);
+	std::wstring_view originalView(objAttrs->ObjectName->Buffer, objAttrs->ObjectName->Length / sizeof(wchar_t));
+	std::filesystem::path filtered = remove_substrings_from_path(std::filesystem::path(originalPath));
+	return {originalView, filtered};
+}
+
+template<typename CallFn>
+static NTSTATUS call_with_modified_path(const std::optional<std::wstring>& modifiedPath,
+	POBJECT_ATTRIBUTES objAttrs, CallFn&& redirect, size_t bufferSize = BUFFER_SIZE_LARGE)
+{
+	if (!modifiedPath)
+		return redirect(objAttrs);
+
+	static thread_local wchar_t buffer[BUFFER_SIZE_LARGE];
+	UNICODE_STRING newName;
+	if (!init_unicode_string(*modifiedPath, newName, buffer, bufferSize))
+		return redirect(objAttrs);
+
+	OBJECT_ATTRIBUTES modifiedAttrs = *objAttrs;
+	modifiedAttrs.ObjectName = &newName;
+	return redirect(&modifiedAttrs);
+}
+
+static std::wstring apply_nt_prefix(const std::wstring_view& origView, const std::wstring& path)
+{
+	std::wstring result = path;
+	if (origView.starts_with(L"\\??\\") && !result.starts_with(L"\\??\\"))
+		result = L"\\??\\" + result;
+	return result;
+}
+
+static std::optional<std::wstring> get_modified_path_if_changed(const std::wstring_view& origView,
+	const std::filesystem::path& modified, POBJECT_ATTRIBUTES objAttrs)
+{
+	if (modified.wstring() == normalize_nt_path(objAttrs->ObjectName))
+		return std::nullopt;
+	return apply_nt_prefix(origView, modified.wstring());
+}
+
 #pragma region NtHooks
 
 NTSTATUS __stdcall NtQueryDirectoryFileHook(
@@ -191,48 +260,38 @@ NTSTATUS __stdcall NtQueryDirectoryFileHook(
 	PUNICODE_STRING FileName,
 	BOOLEAN RestartScan)
 {
-	auto redirectNtQueryDirectoryFile = [&](HANDLE fileHandle) -> NTSTATUS
-	{
-		return HookNtQueryDirectoryFile(fileHandle, Event, ApcRoutine, ApcContext, IoStatusBlock, 
+	auto redirect = [&](HANDLE fileHandle) -> NTSTATUS {
+		return HookNtQueryDirectoryFile(fileHandle, Event, ApcRoutine, ApcContext, IoStatusBlock,
 			FileInformation, Length, FileInformationClass, ReturnSingleEntry, FileName, RestartScan);
 	};
 
 	if (!FileName || FileName->Length == 0)
-	{
-		return redirectNtQueryDirectoryFile(FileHandle);
-	}
-	
-	std::filesystem::path fileName = normalize_nt_path(FileName);
+		return redirect(FileHandle);
 
+	std::filesystem::path searchPattern = normalize_nt_path(FileName);
 	std::filesystem::path directoryPath;
 	if (!get_path_from_handle(FileHandle, directoryPath))
-	{
-		return redirectNtQueryDirectoryFile(FileHandle);
-	}
+		return redirect(FileHandle);
 
-	auto candidatePath = (directoryPath / fileName).lexically_normal();
-	candidatePath = remove_substrings_from_path(candidatePath);
-	
-	if (path_has_excluded_component(candidatePath))
-	{
-		return redirectNtQueryDirectoryFile(FileHandle);
-	}
+	auto fullPath = (directoryPath / searchPattern).lexically_normal();
+	auto filteredPath = remove_substrings_from_path(fullPath);
 
-	const auto& redirector = uif::injector::instance().feature<uif::features::file_redirector>();
-	auto patchPath = uif::utils::redirect_to_patch_path(candidatePath, redirector.get_patch_folder_name()).lexically_normal();
+	if (path_has_excluded_component(filteredPath))
+		return redirect(FileHandle);
 
-	if (patchPath != candidatePath && !path_has_excluded_component(patchPath) && std::filesystem::exists(patchPath))
+	auto filteredPattern = filteredPath.filename().wstring();
+	if (filteredPattern != searchPattern.wstring())
 	{
-		HANDLE patchDirHandle = INVALID_HANDLE_VALUE;
-		if (open_directory_handle(patchPath.parent_path(), patchDirHandle))
+		static thread_local wchar_t buffer[BUFFER_SIZE_SMALL];
+		UNICODE_STRING newName;
+		if (init_unicode_string(filteredPattern, newName, buffer, BUFFER_SIZE_SMALL))
 		{
-			NTSTATUS status = redirectNtQueryDirectoryFile(patchDirHandle);
-			CloseHandle(patchDirHandle);
-			return status;
+			return HookNtQueryDirectoryFile(FileHandle, Event, ApcRoutine, ApcContext, IoStatusBlock,
+				FileInformation, Length, FileInformationClass, ReturnSingleEntry, &newName, RestartScan);
 		}
 	}
 
-	return redirectNtQueryDirectoryFile(FileHandle);
+	return redirect(FileHandle);
 }
 
 NTSTATUS __stdcall NtQueryDirectoryFileExHook(
@@ -247,48 +306,38 @@ NTSTATUS __stdcall NtQueryDirectoryFileExHook(
 	ULONG QueryFlags,
 	PUNICODE_STRING FileName)
 {
-	auto redirectNtQueryDirectoryFileEx = [&](HANDLE fileHandle) -> NTSTATUS
-	{
-		return HookNtQueryDirectoryFileEx(fileHandle, Event, ApcRoutine, ApcContext, IoStatusBlock, 
+	auto redirect = [&](HANDLE fileHandle) -> NTSTATUS {
+		return HookNtQueryDirectoryFileEx(fileHandle, Event, ApcRoutine, ApcContext, IoStatusBlock,
 			FileInformation, Length, FileInformationClass, QueryFlags, FileName);
 	};
 
 	if (!FileName || FileName->Length == 0)
-	{
-		return redirectNtQueryDirectoryFileEx(FileHandle);
-	}
-	
-	std::filesystem::path fileName = normalize_nt_path(FileName);
+		return redirect(FileHandle);
 
+	std::filesystem::path searchPattern = normalize_nt_path(FileName);
 	std::filesystem::path directoryPath;
 	if (!get_path_from_handle(FileHandle, directoryPath))
-	{
-		return redirectNtQueryDirectoryFileEx(FileHandle);
-	}
+		return redirect(FileHandle);
 
-	auto candidatePath = (directoryPath / fileName).lexically_normal();
-	candidatePath = remove_substrings_from_path(candidatePath);
-	
-	if (path_has_excluded_component(candidatePath))
-	{
-		return redirectNtQueryDirectoryFileEx(FileHandle);
-	}
+	auto fullPath = (directoryPath / searchPattern).lexically_normal();
+	auto filteredPath = remove_substrings_from_path(fullPath);
 
-	const auto& redirector = uif::injector::instance().feature<uif::features::file_redirector>();
-	auto patchPath = uif::utils::redirect_to_patch_path(candidatePath, redirector.get_patch_folder_name()).lexically_normal();
+	if (path_has_excluded_component(filteredPath))
+		return redirect(FileHandle);
 
-	if (patchPath != candidatePath && !path_has_excluded_component(patchPath) && std::filesystem::exists(patchPath))
+	auto filteredPattern = filteredPath.filename().wstring();
+	if (filteredPattern != searchPattern.wstring())
 	{
-		HANDLE patchDirHandle = INVALID_HANDLE_VALUE;
-		if (open_directory_handle(patchPath.parent_path(), patchDirHandle))
+		static thread_local wchar_t buffer[BUFFER_SIZE_SMALL];
+		UNICODE_STRING newName;
+		if (init_unicode_string(filteredPattern, newName, buffer, BUFFER_SIZE_SMALL))
 		{
-			NTSTATUS status = redirectNtQueryDirectoryFileEx(patchDirHandle);
-			CloseHandle(patchDirHandle);
-			return status;
+			return HookNtQueryDirectoryFileEx(FileHandle, Event, ApcRoutine, ApcContext, IoStatusBlock,
+				FileInformation, Length, FileInformationClass, QueryFlags, &newName);
 		}
 	}
 
-	return redirectNtQueryDirectoryFileEx(FileHandle);
+	return redirect(FileHandle);
 }
 
 NTSTATUS __stdcall NtCreateFileHook(
@@ -304,55 +353,95 @@ NTSTATUS __stdcall NtCreateFileHook(
 	PVOID EaBuffer,
 	ULONG EaLength)
 {
-	auto redirectNtCreateFile = [&](POBJECT_ATTRIBUTES objectAttributes) -> NTSTATUS
-	{
-		return HookNtCreateFile(FileHandle, DesiredAccess, objectAttributes, IoStatusBlock, 
+	auto redirect = [&](POBJECT_ATTRIBUTES objAttrs) -> NTSTATUS {
+		return HookNtCreateFile(FileHandle, DesiredAccess, objAttrs, IoStatusBlock,
 			AllocationSize, FileAttributes, ShareAccess, CreateDisposition, CreateOptions, EaBuffer, EaLength);
 	};
 
 	if (!ObjectAttributes || !ObjectAttributes->ObjectName)
-	{
-		return redirectNtCreateFile(ObjectAttributes);
-	}
+		return redirect(ObjectAttributes);
 
-	std::wstring_view origPathUniView(ObjectAttributes->ObjectName->Buffer, ObjectAttributes->ObjectName->Length / sizeof(wchar_t));
+	auto [originalPathView, filteredPath] = extract_path_context(ObjectAttributes);
 
-	std::wstring normalizedPath = normalize_nt_path(ObjectAttributes->ObjectName);
-	std::filesystem::path candidatePath(normalizedPath);
-	candidatePath = remove_substrings_from_path(candidatePath);
-
-	if (candidatePath.is_relative() || path_has_excluded_component(candidatePath))
-	{
-		return redirectNtCreateFile(ObjectAttributes);
-	}
+	if (filteredPath.is_relative() || path_has_excluded_component(filteredPath))
+		return redirect(ObjectAttributes);
 
 	const auto& redirector = uif::injector::instance().feature<uif::features::file_redirector>();
-	auto redirectedPath = uif::utils::redirect_to_patch_path(candidatePath, redirector.get_patch_folder_name()).lexically_normal();
-	
-	if (redirectedPath.wstring() != candidatePath.wstring())
+	auto patchPath = uif::utils::redirect_to_patch_path(filteredPath, redirector.get_patch_folder_name()).lexically_normal();
+
+	if (patchPath.wstring() != filteredPath.wstring())
 	{
-		static thread_local wchar_t buffer[32768];
-		std::wstring finalPath = redirectedPath.wstring();
-
-		if (origPathUniView.starts_with(L"\\??\\") && !finalPath.starts_with(L"\\??\\"))
-		{
-			finalPath = L"\\??\\" + finalPath;
-		}
-
-		UNICODE_STRING newName;
-		if (init_unicode_string(finalPath, newName, buffer, 32768))
-		{
-			OBJECT_ATTRIBUTES patchObjAttrs = *ObjectAttributes;
-			patchObjAttrs.ObjectName = &newName;
-
-			NTSTATUS redirectStatus = redirectNtCreateFile(&patchObjAttrs);
-			if (NT_SUCCESS(redirectStatus))
-			{
-				return redirectStatus;
-			}
-		}
+		auto finalPath = get_modified_path_if_changed(originalPathView, patchPath, ObjectAttributes);
+		if (auto status = call_with_modified_path(finalPath, ObjectAttributes, redirect); NT_SUCCESS(status))
+			return status;
 	}
-	return redirectNtCreateFile(ObjectAttributes);
+
+	auto finalPath = get_modified_path_if_changed(originalPathView, filteredPath, ObjectAttributes);
+	return call_with_modified_path(finalPath, ObjectAttributes, redirect);
+}
+
+NTSTATUS __stdcall NtOpenFileHook(
+	PHANDLE FileHandle,
+	ACCESS_MASK DesiredAccess,
+	POBJECT_ATTRIBUTES ObjectAttributes,
+	PIO_STATUS_BLOCK IoStatusBlock,
+	ULONG ShareAccess,
+	ULONG OpenOptions)
+{
+	auto redirect = [&](POBJECT_ATTRIBUTES objAttrs) -> NTSTATUS {
+		return HookNtOpenFile(FileHandle, DesiredAccess, objAttrs, IoStatusBlock, ShareAccess, OpenOptions);
+	};
+
+	if (!ObjectAttributes || !ObjectAttributes->ObjectName)
+		return redirect(ObjectAttributes);
+
+	auto [originalPathView, filteredPath] = extract_path_context(ObjectAttributes);
+
+	if (filteredPath.is_relative() || path_has_excluded_component(filteredPath))
+		return redirect(ObjectAttributes);
+
+	auto finalPath = get_modified_path_if_changed(originalPathView, filteredPath, ObjectAttributes);
+	return call_with_modified_path(finalPath, ObjectAttributes, redirect);
+}
+
+NTSTATUS __stdcall NtQueryFullAttributesFileHook(
+	POBJECT_ATTRIBUTES ObjectAttributes,
+	PVOID FileInformation)
+{
+	auto redirect = [&](POBJECT_ATTRIBUTES objAttrs) -> NTSTATUS {
+		return HookNtQueryFullAttributesFile(objAttrs, FileInformation);
+	};
+
+	if (!ObjectAttributes || !ObjectAttributes->ObjectName)
+		return redirect(ObjectAttributes);
+
+	auto [originalPathView, filteredPath] = extract_path_context(ObjectAttributes);
+
+	if (filteredPath.is_relative() || path_has_excluded_component(filteredPath))
+		return redirect(ObjectAttributes);
+
+	auto finalPath = get_modified_path_if_changed(originalPathView, filteredPath, ObjectAttributes);
+	return call_with_modified_path(finalPath, ObjectAttributes, redirect);
+}
+
+NTSTATUS __stdcall NtQueryAttributesFileHook(
+	POBJECT_ATTRIBUTES ObjectAttributes,
+	PVOID FileInformation)
+{
+	auto redirect = [&](POBJECT_ATTRIBUTES objAttrs) -> NTSTATUS {
+		return HookNtQueryAttributesFile(objAttrs, FileInformation);
+	};
+
+	if (!ObjectAttributes || !ObjectAttributes->ObjectName)
+		return redirect(ObjectAttributes);
+
+	auto [originalPathView, filteredPath] = extract_path_context(ObjectAttributes);
+
+	if (filteredPath.is_relative() || path_has_excluded_component(filteredPath))
+		return redirect(ObjectAttributes);
+
+	auto finalPath = get_modified_path_if_changed(originalPathView, filteredPath, ObjectAttributes);
+	return call_with_modified_path(finalPath, ObjectAttributes, redirect);
 }
 
 #pragma endregion
@@ -405,11 +494,17 @@ void uif::features::file_redirector::initialize()
 				HookNtQueryDirectoryFile = reinterpret_cast<NtQueryDirectoryFile_t>(GetProcAddress(GetModuleHandleW(L"ntdll.dll"), "NtQueryDirectoryFile"));
 				HookNtQueryDirectoryFileEx = reinterpret_cast<NtQueryDirectoryFileEx_t>(GetProcAddress(GetModuleHandleW(L"ntdll.dll"), "NtQueryDirectoryFileEx"));
 				HookNtCreateFile = reinterpret_cast<NtCreateFile_t>(GetProcAddress(GetModuleHandleW(L"ntdll.dll"), "NtCreateFile"));
+				HookNtOpenFile = reinterpret_cast<NtOpenFile_t>(GetProcAddress(GetModuleHandleW(L"ntdll.dll"), "NtOpenFile"));
+				HookNtQueryFullAttributesFile = reinterpret_cast<NtQueryFullAttributesFile_t>(GetProcAddress(GetModuleHandleW(L"ntdll.dll"), "NtQueryFullAttributesFile"));
+				HookNtQueryAttributesFile = reinterpret_cast<NtQueryAttributesFile_t>(GetProcAddress(GetModuleHandleW(L"ntdll.dll"), "NtQueryAttributesFile"));
 			}
 
 			uif::hooks::hook_function(this, reinterpret_cast<void*&>(HookNtQueryDirectoryFile), reinterpret_cast<void*>(NtQueryDirectoryFileHook), "NtQueryDirectoryFile");
 			uif::hooks::hook_function(this, reinterpret_cast<void*&>(HookNtQueryDirectoryFileEx), reinterpret_cast<void*>(NtQueryDirectoryFileExHook), "NtQueryDirectoryFileEx");
 			uif::hooks::hook_function(this, reinterpret_cast<void*&>(HookNtCreateFile), reinterpret_cast<void*>(NtCreateFileHook), "NtCreateFile");
+			uif::hooks::hook_function(this, reinterpret_cast<void*&>(HookNtOpenFile), reinterpret_cast<void*>(NtOpenFileHook), "NtOpenFile");
+			uif::hooks::hook_function(this, reinterpret_cast<void*&>(HookNtQueryFullAttributesFile), reinterpret_cast<void*>(NtQueryFullAttributesFileHook), "NtQueryFullAttributesFile");
+			uif::hooks::hook_function(this, reinterpret_cast<void*&>(HookNtQueryAttributesFile), reinterpret_cast<void*>(NtQueryAttributesFileHook), "NtQueryAttributesFile");
 		}
 	}
 }
@@ -419,4 +514,7 @@ void uif::features::file_redirector::finalize()
 	uif::hooks::unhook_function(this, reinterpret_cast<void*&>(HookNtQueryDirectoryFile), reinterpret_cast<void*>(NtQueryDirectoryFileHook), "NtQueryDirectoryFile");
 	uif::hooks::unhook_function(this, reinterpret_cast<void*&>(HookNtQueryDirectoryFileEx), reinterpret_cast<void*>(NtQueryDirectoryFileExHook), "NtQueryDirectoryFileEx");
 	uif::hooks::unhook_function(this, reinterpret_cast<void*&>(HookNtCreateFile), reinterpret_cast<void*>(NtCreateFileHook), "NtCreateFile");
+	uif::hooks::unhook_function(this, reinterpret_cast<void*&>(HookNtOpenFile), reinterpret_cast<void*>(NtOpenFileHook), "NtOpenFile");
+	uif::hooks::unhook_function(this, reinterpret_cast<void*&>(HookNtQueryFullAttributesFile), reinterpret_cast<void*>(NtQueryFullAttributesFileHook), "NtQueryFullAttributesFile");
+	uif::hooks::unhook_function(this, reinterpret_cast<void*&>(HookNtQueryAttributesFile), reinterpret_cast<void*>(NtQueryAttributesFileHook), "NtQueryAttributesFile");
 }
