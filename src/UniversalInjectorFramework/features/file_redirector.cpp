@@ -204,8 +204,11 @@ static std::filesystem::path try_redirect_to_patch_directory(
 	}
 
 	auto fullPath = patchDir / searchPattern;
-	if (std::filesystem::exists(fullPath))
+	WIN32_FIND_DATAW fd;
+	HANDLE hFind = FindFirstFileW(fullPath.c_str(), &fd);
+	if (hFind != INVALID_HANDLE_VALUE)
 	{
+		FindClose(hFind);
 		return patchDir;
 	}
 
@@ -307,13 +310,14 @@ NTSTATUS __stdcall NtQueryDirectoryFileHook(
 	if (!get_path_from_handle(FileHandle, directoryPath))
 		return redirect(FileHandle);
 
-	auto fullPath = (directoryPath / searchPattern).lexically_normal();
-	auto filteredPath = remove_substrings_from_path(fullPath);
+	auto filteredDir = remove_substrings_from_path(directoryPath);
+	auto excludedCheckPath = filteredDir / searchPattern;
 
-	if (path_has_excluded_component(filteredPath))
+	if (path_has_excluded_component(excludedCheckPath))
 		return redirect(FileHandle);
 
-	auto filteredPattern = filteredPath.filename().wstring();
+	std::filesystem::path searchPatternPath(searchPattern);
+	auto filteredPattern = remove_substrings_from_path(searchPatternPath).wstring();
 	if (filteredPattern != searchPattern.wstring())
 	{
 		static thread_local wchar_t buffer[BUFFER_SIZE_SMALL];
@@ -325,7 +329,7 @@ NTSTATUS __stdcall NtQueryDirectoryFileHook(
 		}
 	}
 
-	auto effectiveDir = try_redirect_to_patch_directory(directoryPath, searchPattern);
+	auto effectiveDir = try_redirect_to_patch_directory(filteredDir, searchPattern);
 	if (effectiveDir != directoryPath)
 	{
 		HANDLE patchHandle;
@@ -365,13 +369,14 @@ NTSTATUS __stdcall NtQueryDirectoryFileExHook(
 	if (!get_path_from_handle(FileHandle, directoryPath))
 		return redirect(FileHandle);
 
-	auto fullPath = (directoryPath / searchPattern).lexically_normal();
-	auto filteredPath = remove_substrings_from_path(fullPath);
+	auto filteredDir = remove_substrings_from_path(directoryPath);
+	auto excludedCheckPath = filteredDir / searchPattern;
 
-	if (path_has_excluded_component(filteredPath))
+	if (path_has_excluded_component(excludedCheckPath))
 		return redirect(FileHandle);
 
-	auto filteredPattern = filteredPath.filename().wstring();
+	std::filesystem::path searchPatternPath(searchPattern);
+	auto filteredPattern = remove_substrings_from_path(searchPatternPath).wstring();
 	if (filteredPattern != searchPattern.wstring())
 	{
 		static thread_local wchar_t buffer[BUFFER_SIZE_SMALL];
@@ -383,7 +388,7 @@ NTSTATUS __stdcall NtQueryDirectoryFileExHook(
 		}
 	}
 
-	auto effectiveDir = try_redirect_to_patch_directory(directoryPath, searchPattern);
+	auto effectiveDir = try_redirect_to_patch_directory(filteredDir, searchPattern);
 	if (effectiveDir != directoryPath)
 	{
 		HANDLE patchHandle;
