@@ -6,7 +6,7 @@ namespace uif::features
 	class resource_redirector final : public feature_base
 	{
 	public:
-		explicit resource_redirector(uif::injector& injector) : feature_base(injector, "reallive_manager") {}
+		explicit resource_redirector(uif::injector& injector) : feature_base(injector, "patch_manager") {}
 		void initialize() override;
 		void finalize() override;
 	};
