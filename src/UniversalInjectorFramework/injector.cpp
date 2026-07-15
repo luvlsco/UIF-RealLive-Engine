@@ -17,6 +17,7 @@
 #include "features/locale_emulator.h"
 #include "features/memory_patcher.h"
 #include "features/play_timer.h"
+#include "features/resource_redirector.h"
 #include "features/window_manager.h"
 
 using namespace uif::ansi;
@@ -159,6 +160,7 @@ namespace uif
 		initialize_feature<features::window_manager>();
 		initialize_feature<features::memory_patcher>();
 		initialize_feature<features::play_timer>();
+		initialize_feature<features::resource_redirector>();
 		initialize_feature<features::custom_feature>();
 
 		std::cout << white("[injector]") << green(" Initialization complete\n");

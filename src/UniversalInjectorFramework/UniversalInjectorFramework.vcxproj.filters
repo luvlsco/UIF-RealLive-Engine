@@ -294,4 +294,9 @@
       <Filter>Source Files</Filter>
     </MASM>
   </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="UniversalInjectorFramework.rc">
+      <Filter>Source Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
 </Project>
