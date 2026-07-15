@@ -275,6 +275,7 @@
     <ClInclude Include="features\locale_emulator.h" />
     <ClInclude Include="features\memory_patcher.h" />
     <ClInclude Include="features\play_timer.h" />
+    <ClInclude Include="features\resource_redirector.h" />
     <ClInclude Include="features\start_suspended.h" />
     <ClInclude Include="features\text_processor.h" />
     <ClInclude Include="features\tunnel_decoder.h" />
@@ -313,6 +314,7 @@
     <ClCompile Include="features\locale_emulator.cpp" />
     <ClCompile Include="features\memory_patcher.cpp" />
     <ClCompile Include="features\play_timer.cpp" />
+    <ClCompile Include="features\resource_redirector.cpp" />
     <ClCompile Include="features\start_suspended.cpp" />
     <ClCompile Include="features\text_processor.cpp" />
     <ClCompile Include="features\text_processor.hooks.cpp" />

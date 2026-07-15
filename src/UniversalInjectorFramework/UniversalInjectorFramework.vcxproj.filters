@@ -134,6 +134,9 @@
     <ClInclude Include="features\file_redirector.h">
       <Filter>Header Files\features</Filter>
     </ClInclude>
+    <ClInclude Include="features\resource_redirector.h">
+      <Filter>Header Files\features</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp">
@@ -239,6 +242,9 @@
       <Filter>Source Files\proxies</Filter>
     </ClCompile>
     <ClCompile Include="features\file_redirector.cpp">
+      <Filter>Source Files\features</Filter>
+    </ClCompile>
+    <ClCompile Include="features\resource_redirector.cpp">
       <Filter>Source Files\features</Filter>
     </ClCompile>
   </ItemGroup>
