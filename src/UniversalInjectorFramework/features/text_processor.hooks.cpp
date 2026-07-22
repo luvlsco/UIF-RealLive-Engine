@@ -440,6 +440,22 @@ namespace uif::features
 
 #pragma endregion
 
+#pragma region SetWindowText
+
+		BOOL WINAPI hook_SetWindowTextA(HWND hWnd, LPCSTR lpString)
+		{
+			const auto processed = text_processor().process(lpString, api::SetWindowTextA);
+			return SetWindowTextW(hWnd, c_str(processed));
+		}
+
+		BOOL WINAPI hook_SetWindowTextW(HWND hWnd, LPCWSTR lpString)
+		{
+			const auto processed = text_processor().process(lpString, api::SetWindowTextW);
+			return SetWindowTextW(hWnd, c_str(processed));
+		}
+
+#pragma endregion
+
 #pragma region DrawText
 
 		int WINAPI hook_DrawTextA(HDC hdc, LPCSTR lpchText, int cchText, LPRECT lprc, UINT format)
@@ -753,6 +769,9 @@ namespace uif::features
 		DEFINE_API_FUNC(DefDlgProcA),
 		DEFINE_API_FUNC(DefDlgProcW),
 
+		DEFINE_API_FUNC(SetWindowTextA),
+		DEFINE_API_FUNC(SetWindowTextW),
+
 		DEFINE_API_MSG(NCCREATE),
 		DEFINE_API_MSG(SETTEXT),
 	} };
@@ -772,6 +791,7 @@ namespace uif::features
 		DEFINE_API_SET("SetMenuItemInfo", api::SetMenuItemInfoA, api::SetMenuItemInfoW),
 
 		DEFINE_API_SET("SetDlgItemText", api::SetDlgItemTextA, api::SetDlgItemTextW),
+		DEFINE_API_SET("SetWindowText", api::SetWindowTextA, api::SetWindowTextW),
 
 		DEFINE_API_SET("DrawText", api::DrawTextA, api::DrawTextW),
 		DEFINE_API_SET("DrawTextEx", api::DrawTextExA, api::DrawTextExW),

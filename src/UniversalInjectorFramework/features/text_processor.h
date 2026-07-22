@@ -66,6 +66,9 @@ namespace uif::features
 			DefDlgProcA,
 			DefDlgProcW,
 
+			SetWindowTextA,
+			SetWindowTextW,
+
 			NCCREATE,
 			SETTEXT,
 
