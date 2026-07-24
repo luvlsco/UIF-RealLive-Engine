@@ -44,6 +44,8 @@ namespace uif::features
 
 			SetDlgItemTextA,
 			SetDlgItemTextW,
+			SetWindowTextA,
+			SetWindowTextW,
 
 			DrawTextA,
 			DrawTextW,
@@ -65,9 +67,6 @@ namespace uif::features
 			DefWindowProcW,
 			DefDlgProcA,
 			DefDlgProcW,
-
-			SetWindowTextA,
-			SetWindowTextW,
 
 			NCCREATE,
 			SETTEXT,

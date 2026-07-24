@@ -659,6 +659,8 @@ namespace uif::features
 
 			case WM_SETTEXT:
 				if (text_processor().is_api_enabled(api::SETTEXT) && lParam) {
+					if (std::is_same<TString, LPCSTR>::value) break;
+
 					const auto processed = text_processor().process(reinterpret_cast<TString>(lParam), api::SETTEXT);
 					return wideHandler(hWnd, Msg, wParam, reinterpret_cast<LPARAM>(c_str(processed)));
 				}
@@ -746,6 +748,8 @@ namespace uif::features
 
 		DEFINE_API_FUNC(SetDlgItemTextA),
 		DEFINE_API_FUNC(SetDlgItemTextW),
+		DEFINE_API_FUNC(SetWindowTextA),
+		DEFINE_API_FUNC(SetWindowTextW),
 
 		DEFINE_API_FUNC(DrawTextA),
 		DEFINE_API_FUNC(DrawTextW),
@@ -768,9 +772,6 @@ namespace uif::features
 		DEFINE_API_FUNC(DefWindowProcW),
 		DEFINE_API_FUNC(DefDlgProcA),
 		DEFINE_API_FUNC(DefDlgProcW),
-
-		DEFINE_API_FUNC(SetWindowTextA),
-		DEFINE_API_FUNC(SetWindowTextW),
 
 		DEFINE_API_MSG(NCCREATE),
 		DEFINE_API_MSG(SETTEXT),
