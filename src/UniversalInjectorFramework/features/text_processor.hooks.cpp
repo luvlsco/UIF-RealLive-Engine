@@ -430,13 +430,21 @@ namespace uif::features
 		BOOL WINAPI hook_SetDlgItemTextA(HWND hDlg, int nIDDlgItem, LPCSTR lpString)
 		{
 			const auto processed = text_processor().process(lpString, api::SetDlgItemTextA);
-			return SetDlgItemTextW(hDlg, nIDDlgItem, c_str(processed));
+			HWND hWnd = GetDlgItem(hDlg, nIDDlgItem);
+			if (!hWnd) return FALSE;
+			const auto result = DefWindowProcW(hWnd, WM_SETTEXT, 0, reinterpret_cast<LPARAM>(c_str(processed)));
+			InvalidateRect(hWnd, NULL, TRUE);
+			return result;
 		}
 
 		BOOL WINAPI hook_SetDlgItemTextW(HWND hDlg, int nIDDlgItem, LPCWSTR lpString)
 		{
 			const auto processed = text_processor().process(lpString, api::SetDlgItemTextW);
-			return SetDlgItemTextW(hDlg, nIDDlgItem, c_str(processed));
+			HWND hWnd = GetDlgItem(hDlg, nIDDlgItem);
+			if (!hWnd) return FALSE;
+			const auto result = DefWindowProcW(hWnd, WM_SETTEXT, 0, reinterpret_cast<LPARAM>(c_str(processed)));
+			InvalidateRect(hWnd, NULL, TRUE);
+			return result;
 		}
 
 #pragma endregion
