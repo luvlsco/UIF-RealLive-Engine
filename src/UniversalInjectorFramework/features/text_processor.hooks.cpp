@@ -2,6 +2,7 @@
 #include "text_processor.h"
 
 #include <bitset>
+#include <commctrl.h>
 #include <regex>
 #include <wingdi.h>
 
@@ -442,16 +443,19 @@ namespace uif::features
 
 #pragma region SetWindowText
 
+		// both use DefWindowProcW to skip the ANSI -> Unicode -> ANSI round-trip
+		// that SetWindowTextW does for ANSI windows, when both are enabled,
+		// SetWindowText fires first, so SETTEXT never sees the call
 		BOOL WINAPI hook_SetWindowTextA(HWND hWnd, LPCSTR lpString)
 		{
 			const auto processed = text_processor().process(lpString, api::SetWindowTextA);
-			return SetWindowTextW(hWnd, c_str(processed));
+			return DefWindowProcW(hWnd, WM_SETTEXT, 0, reinterpret_cast<LPARAM>(c_str(processed)));
 		}
 
 		BOOL WINAPI hook_SetWindowTextW(HWND hWnd, LPCWSTR lpString)
 		{
 			const auto processed = text_processor().process(lpString, api::SetWindowTextW);
-			return SetWindowTextW(hWnd, c_str(processed));
+			return DefWindowProcW(hWnd, WM_SETTEXT, 0, reinterpret_cast<LPARAM>(c_str(processed)));
 		}
 
 #pragma endregion
@@ -659,12 +663,187 @@ namespace uif::features
 
 			case WM_SETTEXT:
 				if (text_processor().is_api_enabled(api::SETTEXT) && lParam) {
-					if (std::is_same<TString, LPCSTR>::value) break;
-
-					const auto processed = text_processor().process(reinterpret_cast<TString>(lParam), api::SETTEXT);
-					return wideHandler(hWnd, Msg, wParam, reinterpret_cast<LPARAM>(c_str(processed)));
+					if constexpr (std::is_same<TString, LPCSTR>::value)
+					{
+						const auto ansi = reinterpret_cast<LPCSTR>(lParam);
+						const auto wide = text_processor().convert(std::string(ansi), api::SETTEXT);
+						const auto processed = text_processor().process(wide, api::SETTEXT);
+						return wideHandler(hWnd, Msg, wParam, reinterpret_cast<LPARAM>(processed.c_str()));
+					}
+					else
+					{
+						const auto processed = text_processor().process(reinterpret_cast<TString>(lParam), api::SETTEXT);
+						return wideHandler(hWnd, Msg, wParam, reinterpret_cast<LPARAM>(c_str(processed)));
+					}
 				}
 				break;
+
+			case CB_ADDSTRING:
+			case CB_INSERTSTRING:
+			case LB_ADDSTRING:
+			case LB_INSERTSTRING:
+			{
+				if (!lParam) break;
+				if constexpr (std::is_same<TString, LPCSTR>::value)
+				{
+					const auto ansi = reinterpret_cast<LPCSTR>(lParam);
+					const auto wide = text_processor().convert(std::string(ansi), api::SendMessageA);
+					const auto processed = text_processor().process(wide, api::SendMessageA);
+					return wideHandler(hWnd, Msg, wParam, reinterpret_cast<LPARAM>(processed.c_str()));
+				}
+				else
+				{
+					const auto processed = text_processor().process(reinterpret_cast<LPCWSTR>(lParam), api::SendMessageW);
+					return wideHandler(hWnd, Msg, wParam, reinterpret_cast<LPARAM>(c_str(processed)));
+				}
+			}
+
+			case LVM_SETITEMA:
+			case LVM_SETITEMW:
+			case LVM_INSERTITEMA:
+			case LVM_INSERTITEMW:
+			case LVM_SETITEMTEXTA:
+			case LVM_SETITEMTEXTW:
+			{
+				if (!lParam) break;
+				if constexpr (std::is_same<TString, LPCSTR>::value)
+				{
+					const auto pItem = reinterpret_cast<LPLVITEMA>(lParam);
+					if (pItem && (pItem->mask & LVIF_TEXT) && pItem->pszText)
+					{
+						auto copy = static_cast<LPLVITEMW>(alloca(sizeof(LVITEMW)));
+						memcpy(copy, pItem, sizeof(LVITEMA));
+						const auto wide = text_processor().convert(std::string(pItem->pszText), api::SendMessageA);
+						const auto processed = text_processor().process(wide, api::SendMessageA);
+						copy->pszText = const_cast<LPWSTR>(processed.c_str());
+						const UINT msgW = Msg == LVM_SETITEMA ? LVM_SETITEMW :
+						                  Msg == LVM_INSERTITEMA ? LVM_INSERTITEMW :
+						                  Msg == LVM_SETITEMTEXTA ? LVM_SETITEMTEXTW : Msg;
+						return wideHandler(hWnd, msgW, wParam, reinterpret_cast<LPARAM>(copy));
+					}
+				}
+				else
+				{
+					const auto pItem = reinterpret_cast<LPLVITEMW>(lParam);
+					if (pItem && (pItem->mask & LVIF_TEXT) && pItem->pszText)
+					{
+						auto copy = static_cast<LPLVITEMW>(alloca(sizeof(LVITEMW)));
+						memcpy(copy, pItem, sizeof(LVITEMW));
+						const auto processed = text_processor().process(std::wstring(copy->pszText), api::SendMessageW);
+						copy->pszText = const_cast<LPWSTR>(processed.c_str());
+						return wideHandler(hWnd, Msg, wParam, reinterpret_cast<LPARAM>(copy));
+					}
+				}
+				break;
+			}
+
+			case LVM_SETCOLUMNA:
+			case LVM_SETCOLUMNW:
+			case LVM_INSERTCOLUMNA:
+			case LVM_INSERTCOLUMNW:
+			{
+				if (!lParam) break;
+				if constexpr (std::is_same<TString, LPCSTR>::value)
+				{
+					const auto pCol = reinterpret_cast<LPLVCOLUMNA>(lParam);
+					if (pCol && (pCol->mask & LVCF_TEXT) && pCol->pszText)
+					{
+						auto copy = static_cast<LPLVCOLUMNW>(alloca(sizeof(LVCOLUMNW)));
+						memcpy(copy, pCol, sizeof(LVCOLUMNA));
+						const auto wide = text_processor().convert(std::string(pCol->pszText), api::SendMessageA);
+						const auto processed = text_processor().process(wide, api::SendMessageA);
+						copy->pszText = const_cast<LPWSTR>(processed.c_str());
+						const UINT msgW = Msg == LVM_SETCOLUMNA ? LVM_SETCOLUMNW :
+						                  Msg == LVM_INSERTCOLUMNA ? LVM_INSERTCOLUMNW : Msg;
+						return wideHandler(hWnd, msgW, wParam, reinterpret_cast<LPARAM>(copy));
+					}
+				}
+				else
+				{
+					const auto pCol = reinterpret_cast<LPLVCOLUMNW>(lParam);
+					if (pCol && (pCol->mask & LVCF_TEXT) && pCol->pszText)
+					{
+						auto copy = static_cast<LPLVCOLUMNW>(alloca(sizeof(LVCOLUMNW)));
+						memcpy(copy, pCol, sizeof(LVCOLUMNW));
+						const auto processed = text_processor().process(std::wstring(copy->pszText), api::SendMessageW);
+						copy->pszText = const_cast<LPWSTR>(processed.c_str());
+						return wideHandler(hWnd, Msg, wParam, reinterpret_cast<LPARAM>(copy));
+					}
+				}
+				break;
+			}
+
+			case HDM_SETITEMA:
+			case HDM_SETITEMW:
+			case HDM_INSERTITEMA:
+			case HDM_INSERTITEMW:
+			{
+				if (!lParam) break;
+				if constexpr (std::is_same<TString, LPCSTR>::value)
+				{
+					const auto pItem = reinterpret_cast<LPHDITEMA>(lParam);
+					if (pItem && (pItem->mask & HDI_TEXT) && pItem->pszText)
+					{
+						auto copy = static_cast<LPHDITEMW>(alloca(sizeof(HDITEMW)));
+						memcpy(copy, pItem, sizeof(HDITEMA));
+						const auto wide = text_processor().convert(std::string(pItem->pszText), api::SendMessageA);
+						const auto processed = text_processor().process(wide, api::SendMessageA);
+						copy->pszText = const_cast<LPWSTR>(processed.c_str());
+						const UINT msgW = Msg == HDM_SETITEMA ? HDM_SETITEMW :
+						                  Msg == HDM_INSERTITEMA ? HDM_INSERTITEMW : Msg;
+						return wideHandler(hWnd, msgW, wParam, reinterpret_cast<LPARAM>(copy));
+					}
+				}
+				else
+				{
+					const auto pItem = reinterpret_cast<LPHDITEMW>(lParam);
+					if (pItem && (pItem->mask & HDI_TEXT) && pItem->pszText)
+					{
+						auto copy = static_cast<LPHDITEMW>(alloca(sizeof(HDITEMW)));
+						memcpy(copy, pItem, sizeof(HDITEMW));
+						const auto processed = text_processor().process(std::wstring(copy->pszText), api::SendMessageW);
+						copy->pszText = const_cast<LPWSTR>(processed.c_str());
+						return wideHandler(hWnd, Msg, wParam, reinterpret_cast<LPARAM>(copy));
+					}
+				}
+				break;
+			}
+
+			case TCM_SETITEMA:
+			case TCM_SETITEMW:
+			case TCM_INSERTITEMA:
+			case TCM_INSERTITEMW:
+			{
+				if (!lParam) break;
+				if constexpr (std::is_same<TString, LPCSTR>::value)
+				{
+					const auto pItem = reinterpret_cast<LPTCITEMA>(lParam);
+					if (pItem && (pItem->mask & TCIF_TEXT) && pItem->pszText)
+					{
+						auto copy = static_cast<LPTCITEMW>(alloca(sizeof(TCITEMW)));
+						memcpy(copy, pItem, sizeof(TCITEMA));
+						const auto wide = text_processor().convert(std::string(pItem->pszText), api::SendMessageA);
+						const auto processed = text_processor().process(wide, api::SendMessageA);
+						copy->pszText = const_cast<LPWSTR>(processed.c_str());
+						const UINT msgW = Msg == TCM_SETITEMA ? TCM_SETITEMW :
+						                  Msg == TCM_INSERTITEMA ? TCM_INSERTITEMW : Msg;
+						return wideHandler(hWnd, msgW, wParam, reinterpret_cast<LPARAM>(copy));
+					}
+				}
+				else
+				{
+					const auto pItem = reinterpret_cast<LPTCITEMW>(lParam);
+					if (pItem && (pItem->mask & TCIF_TEXT) && pItem->pszText)
+					{
+						auto copy = static_cast<LPTCITEMW>(alloca(sizeof(TCITEMW)));
+						memcpy(copy, pItem, sizeof(TCITEMW));
+						const auto processed = text_processor().process(std::wstring(copy->pszText), api::SendMessageW);
+						copy->pszText = const_cast<LPWSTR>(processed.c_str());
+						return wideHandler(hWnd, Msg, wParam, reinterpret_cast<LPARAM>(copy));
+					}
+				}
+				break;
+			}
 			}
 
 			return defaultHandler(hWnd, Msg, wParam, lParam);
@@ -694,6 +873,20 @@ namespace uif::features
 		LRESULT WINAPI hook_DefDlgProcW(HWND hWnd, UINT Msg, WPARAM wParam, LPARAM lParam)
 		{
 			return handle_message<LPCWSTR>(hWnd, Msg, wParam, lParam, DefDlgProcW, DefDlgProcW);
+		}
+
+#pragma endregion
+
+#pragma region SendMessage
+
+		LRESULT WINAPI hook_SendMessageA(HWND hWnd, UINT Msg, WPARAM wParam, LPARAM lParam)
+		{
+			return handle_message<LPCSTR>(hWnd, Msg, wParam, lParam, SendMessageA, SendMessageW);
+		}
+
+		LRESULT WINAPI hook_SendMessageW(HWND hWnd, UINT Msg, WPARAM wParam, LPARAM lParam)
+		{
+			return handle_message<LPCWSTR>(hWnd, Msg, wParam, lParam, SendMessageW, SendMessageW);
 		}
 
 #pragma endregion
@@ -772,6 +965,8 @@ namespace uif::features
 		DEFINE_API_FUNC(DefWindowProcW),
 		DEFINE_API_FUNC(DefDlgProcA),
 		DEFINE_API_FUNC(DefDlgProcW),
+		DEFINE_API_FUNC(SendMessageA),
+		DEFINE_API_FUNC(SendMessageW),
 
 		DEFINE_API_MSG(NCCREATE),
 		DEFINE_API_MSG(SETTEXT),
@@ -802,6 +997,8 @@ namespace uif::features
 		DEFINE_API_SET("MessageBox", api::MessageBoxA, api::MessageBoxW),
 		DEFINE_API_SET("MessageBoxEx", api::MessageBoxExA, api::MessageBoxExW),
 		DEFINE_API_SET("MessageBoxIndirect", api::MessageBoxIndirectA, api::MessageBoxIndirectW),
+
+		DEFINE_API_SET("SendMessage", api::SendMessageA, api::SendMessageW),
 
 		DEFINE_API_SET("MSG", api::NCCREATE, api::SETTEXT),
 	};
